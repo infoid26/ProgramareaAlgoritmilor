@@ -1,0 +1,19 @@
+# Materialele originale ale profesorului rămân EXCLUSIV locale.
+/Curs/
+/Laborator/
+/site/exercitii-modul-01.ipynb
+
+# Fișiere temporare Python / IDE / sistem
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
