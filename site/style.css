@@ -235,3 +235,88 @@ footer { margin-top:65px; }
 .learning-points p { margin:2px 0; }
 @media(max-width:1330px) { .inline-mode .practice-layout { grid-template-columns:1fr; } .inline-mode .practice-brief { max-width:none; } }
 @media(max-width:720px) { .lesson-controls { bottom:3px; } .inline-mode #exercise-brief { padding:17px; } .lesson-player.has-editor { padding:12px; } .inline-mode .io-grid { grid-template-columns:1fr; } .inline-mode .example-pair { grid-template-columns:1fr 1fr; } .inline-mode #python-code { min-height:230px; } }
+/* Short guided lessons and chapter paths */
+.road-card { flex-wrap: wrap; }
+.unit-path { flex-basis: 100%; margin: 12px 0 0; border-top: 1px solid #e0e8df; padding-top: 14px; }
+.unit-path summary { cursor: pointer; color: #227044; font-weight: 700; }
+.unit-nodes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 20px 0 4px; }
+.unit-node { display: flex; align-items: center; gap: 14px; padding: 14px; border: 1px solid #dde7d8; border-radius: 15px; color: #294632; background: #fff; text-decoration: none; }
+.unit-node b { display: grid; place-items: center; flex: 0 0 46px; height: 46px; border-radius: 50%; background: #eaf0e5; border-bottom: 4px solid #c6d3bf; font-size: 19px; }
+.unit-node small { display: block; margin-top: 6px; font-size: 12px; color: #637260; }
+.unit-node.unit-current { border-color: #64a945; background: #f4fbeb; }
+.unit-current b, .unit-done b { color: #fff; background: #58a729; border-bottom-color: #378013; }
+.unit-done { border-color: #96b783; }
+.study-notebook { margin-top: 24px; border-top: 1px solid #dbe4d5; padding-top: 18px; }
+.study-notebook summary { font-weight: 700; color: #377742; cursor: pointer; }
+.study-notebook article { border-top: 1px solid #e3e8df; margin-top: 20px; padding-top: 16px; }
+.study-notebook pre { font-size: 14px; padding: 16px; background: #eef3eb; color: #1e3829; white-space: pre-wrap; overflow-wrap: anywhere; border-radius: 12px; }
+#additional-inputs label { display: grid; gap: 8px; margin-top: 18px; text-transform: none; font-size: 14px; }
+#additional-inputs textarea { min-height: 120px; width: 100%; box-sizing: border-box; font-family: Consolas, monospace; }
+.lesson-screen > p { line-height: 1.75; }
+@media (max-width: 700px) { .unit-nodes { grid-template-columns: 1fr; } .unit-node b { flex-basis: 40px; height: 40px; } }
+.unit-path { grid-column: 1 / -1; }
+.logo { letter-spacing: -2px; }
+.inline-mode .practice-brief a[href^="#"] { display: none; }
+#python-stop:disabled { display: none; }
+#python-input.module-code { min-height: 280px; font-family: Consolas, monospace; font-size: 14px; }
+@media (max-width:720px) { .sidebar nav { display:grid; grid-template-columns:1fr 1fr; overflow:visible; gap:6px; } .sidebar nav a { white-space:normal; min-width:0; padding:9px 10px; } }
+/* Un singur traseu, lecții centrate și verificare cu date automate. */
+[hidden] { display:none !important; }
+.sidebar { width:190px; }
+main { margin-left:190px; }
+.dashboard-view .welcome-layout { display:block; padding:25px 30px; }
+.dashboard-view .welcome-visual,.dashboard-view .dashboard-stats { display:none; }
+.dashboard-view h1 { font-size:36px; margin:10px 0; }
+.dashboard-view .lead { margin:10px 0 20px; }
+.unified-map { max-width:700px; margin:25px auto; }
+.path-banner { padding:24px; border-radius:20px; background:var(--purple); color:white; margin:25px 0; }
+.path-banner span { font-size:11px; font-weight:800; letter-spacing:2px; }
+.path-banner h2 { margin:7px 0; font-size:24px; }
+.path-banner p { margin:0; font-size:13px; }
+.unified-map .course-lesson-list { grid-template-columns:1fr; gap:12px; }
+.unified-map .course-card { max-width:550px; margin:0 auto; width:100%; border:0; background:transparent; box-shadow:none; }
+.unified-map .course-number { width:68px; height:68px; border-radius:50%; background:var(--purple); color:white; box-shadow:0 6px 0 #4936a3; }
+.unified-map .course-locked .course-number { background:#dedbe8; color:#858099; box-shadow:0 6px 0 #c1bdce; }
+.unified-map .course-card:nth-child(even) { padding-left:60px; }
+.unified-map .course-card .mini-progress,.unified-map .course-status { display:none; }
+.unified-map .road-card { margin:20px 0; padding:22px; grid-template-columns:40px 1fr; box-shadow:none; }
+.unified-map .road-card > .text-link { grid-column:2; }
+.unified-map .unit-path { border:0; }
+.unified-map .unit-nodes { grid-template-columns:1fr; padding:15px 0; gap:20px; }
+.unified-map .unit-node { max-width:460px; border:0; background:transparent; }
+.unified-map .unit-node:nth-child(even) { margin-left:35px; }
+.unified-map .unit-node b { border-radius:50%; width:60px; height:60px; flex-basis:60px; background:#ebe8f4; box-shadow:0 5px 0 #d4cee6; }
+.unified-map .unit-current b { background:var(--purple); color:white; box-shadow:0 5px 0 #4936a3; }
+.unified-map .unit-done b { background:#46ba98; color:white; box-shadow:0 5px 0 #2b9376; }
+.inline-mode .practice-layout { display:flex; flex-direction:column; max-width:720px; margin:12px auto; gap:12px; }
+.inline-mode .practice-brief,.inline-mode .workspace { width:100%; }
+.inline-mode #exercise-brief { border:0; box-shadow:none; padding:0 10px; background:transparent; }
+.inline-mode #exercise-brief > .source-note,.inline-mode #exercise-brief > .tag { display:none; }
+.inline-mode #exercise-brief > p { margin:5px 0 15px; font-size:16px; }
+.inline-mode #exercise-brief h3 { font-size:14px; margin:12px 0 0; }
+.inline-mode #exercise-brief details { padding:8px 0; }
+.inline-mode #python-code { min-height:200px; }
+#python-run,#python-download,.workspace-help { display:none; }
+#module-download { margin-left:auto; }
+.workspace-actions { padding:12px 16px; }
+#python-check { width:100%; font-size:15px; font-weight:800; padding:12px; box-shadow:0 4px 0 #4936a3; }
+.io-grid,.inline-mode .io-grid { display:flex; flex-direction:column; padding:12px 16px; }
+#custom-input { order:2; padding:10px 0 0; }
+#custom-input summary { font-size:12px; }
+#custom-input label { margin-top:12px; }
+#try-input { margin-top:10px; }
+#python-output { min-height:45px; }
+.no-input-example > div:first-child { display:none; }
+.example-pair.no-input-example { grid-template-columns:1fr; }
+.lesson-player.has-editor { max-width:820px; }
+@media(max-width:720px) { .sidebar { width:auto; } main { margin-left:0; } .sidebar nav { grid-template-columns:1fr; } .sidebar nav a { justify-content:center; } .dashboard-view .welcome-layout { padding:20px; } .dashboard-view h1 { font-size:30px; } .unified-map .course-card:nth-child(even) { padding-left:35px; } .unified-map .road-card { padding:15px; } .unified-map .unit-node:nth-child(even) { margin-left:15px; } }
+/* Navigare fără bară laterală: sigla readuce utilizatorul la traseu. */
+main { margin:0 auto; width:100%; max-width:1160px; padding:0 32px; }
+.topbar { gap:16px; }
+.header-brand { display:flex; align-items:center; gap:12px; color:var(--ink); text-decoration:none; letter-spacing:0; }
+.header-brand strong { font:800 30px Manrope,sans-serif; }
+.header-brand strong span { color:var(--purple); }
+.header-brand small { font-size:10px; color:var(--muted); letter-spacing:1px; }
+.view { margin-left:auto; margin-right:auto; }
+@media(min-width:1600px) { main { padding:0 32px; } }
+@media(max-width:720px) { main { margin:0 auto; padding:0 16px; } .topbar { min-height:65px; } .header-brand { gap:8px; } .header-brand strong { font-size:26px; } .header-brand small { font-size:9px; } }

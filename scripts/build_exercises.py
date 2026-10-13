@@ -164,8 +164,24 @@ add('greedy','Când Greedy nu este optim','Pentru monedele 1, 3, 4, citește sum
 add('dinamica','Subsecvență contiguă maximă','Citește o listă nevidă de întregi. Afișează suma maximă a unui segment contiguu nevid.','La fiecare poziție, alegi între a începe un segment nou sau a prelungi segmentul anterior. Pentru valori negative nu inițializa maximul cu 0.','a = list(map(int, input().split()))\ncurent = maxim = a[0]\nfor x in a[1:]:\n    curent = max(x, curent + x)\n    maxim = max(maxim, curent)\nprint(maxim)', [('-2 1 -3 4 -1 2 1 -5 4','6'),('-8 -3 -5','-3'),('0','0'),('1 2 3','6')], 'Aplicare')
 add('dinamica','Lanț de cuvinte','Citește o linie cu cel mult 100 de cuvinte lowercase. Găsește lungimea maximă a unui subșir de cuvinte, păstrând ordinea, în care ultima literă a fiecărui cuvânt este prima literă a următorului. Lista poate fi goală.','dp[i] este lungimea maximă a unui lanț care se termină cu al i-lea cuvânt; încearcă toate cuvintele anterioare compatibile.','a = input().split()\ndp = [1] * len(a)\nfor i in range(len(a)):\n    for j in range(i):\n        if a[j][-1] == a[i][0]:\n            dp[i] = max(dp[i], dp[j] + 1)\nprint(max(dp, default=0))', [('ana arc car rac','4'),('ab cd ef','1'),('\n','0'),('ab bc cd','3')], 'Aprofundare')
 add('backtracking','Plată cu stoc limitat','Prima linie conține n S (1 ≤ n ≤ 5, 0 ≤ S ≤ 50). Urmează n perechi valoare stoc, cu valori pozitive distincte și stocuri între 0 și 10. Numără modurile de a plăti exact S, fără a depăși stocul; ordinea monedelor nu contează.','La nivelul i alegi câte monede de tipul i folosești, între 0 și stoc.','n, S = map(int, input().split())\na = [tuple(map(int, input().split())) for _ in range(n)]\ndef bkt(i, ramas):\n    if i == n:\n        return int(ramas == 0)\n    v, stoc = a[i]\n    return sum(bkt(i + 1, ramas - k * v) for k in range(min(stoc, ramas // v) + 1))\nprint(bkt(0, S))', [('2 4\n1 2\n2 2','2'),('1 3\n2 5','0'),('2 0\n1 0\n3 2','1')], 'Aprofundare')
+from missing_content import extend_content
+from advanced_content import add_advanced
+from dp_content import add_dp
+from bkt_content import add_bkt
+from extra_content import add_extra
+from study_cards import add_study_cards
+from finishing_content import add_finishing
+original_ids = {item['id'] for item in exercises}
+extend_content(chapters, exercises, add)
+add_advanced(add)
+add_dp(add)
+add_bkt(add)
+add_extra(chapters, add)
+add_finishing(add)
+add_study_cards(chapters)
 exercises.sort(key=lambda item: next(index for index, c in enumerate(chapters) if c['id'] == item['chapter']))
 for item in exercises:
+    item['addedInExpansion'] = item['id'] not in original_ids
     item['solution'] = item['solution'].replace('"\n"', '"\\n"')
     # Referințele la fișierele profesorului nu sunt incluse în platforma publică.
     item['origin'] = 'Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.'
@@ -173,18 +189,29 @@ for item in exercises:
     item['explanation'] = item['hint'] + ' Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.'
     if item.get('requiredFunction'):
         item['starter'] = f'def {item["requiredFunction"]}(' + item['solution'].split('def ' + item['requiredFunction'] + '(')[1].split('\n')[0] + '\n    # Completează corpul funcției.\n    pass\n\n# Citește datele și afișează rezultatul apelului.\n'
+    if item.get('requiredFunctions'):
+        item['starter'] = '\n\n'.join('def ' + name + '(' + item['solution'].split('def ' + name + '(')[1].split('\n')[0] + '\n    pass' for name in item['requiredFunctions']) + '\n\n# Citește datele, apelează funcțiile și afișează rezultatele.\n'
     if item.get('inputFile'):
         item['starter'] = '# Citește date.in și scrie rezultatul în date.out.\n'
 
 payload = dict(chapters=chapters, exercises=exercises)
 (ROOT / 'site/exercises.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
 (ROOT / 'site/exercises.js').write_text('window.PA_CONTENT = ' + json.dumps(payload, ensure_ascii=False) + ';\n', encoding='utf-8')
-coverage = ['# Acoperire tematică', '', 'Exerciții de pregătire create/adaptate pentru grupă. Fișierele profesorului nu fac parte din site. Formatul examenului nu este confirmat.', '', '| Capitol | Exerciții | Cazuri de test |', '| --- | ---: | ---: |']
+coverage = ['# PA — acoperire tematică', '', '14 capitole principale și 2 capitole suplimentare. Lecțiile și exercițiile sunt create/adaptate pentru grupă; materialele originale ale profesorului rămân locale.', '', 'Prezentarea introductivă locală indică 70% examen scris și 30% proiect. Structura exactă a subiectelor nu este precizată în acel slide.', '', '| Capitol | Exerciții | Cazuri de test | Lecții scurte |', '| --- | ---: | ---: | ---: |']
 for item in chapters:
     selected = [e for e in exercises if e['chapter'] == item['id']]
-    coverage.append(f'| {item["title"]} | {len(selected)} | {sum(len(e["tests"]) for e in selected)} |')
+    coverage.append(f'| {item["title"]}{" (suplimentar)" if item.get("supplemental") else ""} | {len(selected)} | {sum(len(e["tests"]) for e in selected)} | {(len(selected) + 2) // 3} |')
 coverage.extend(['', 'Fișele sunt recapitulări originale. Testele nu demonstrează complexitatea și nu verifică folosirea metodei indicate.', ''])
 (ROOT / 'site/coverage.md').write_text('\n'.join(coverage), encoding='utf-8')
+added = [item for item in exercises if item['addedInExpansion']]
+report = ['# Completările aplicației PA', '', f'Banca de materie are {len(exercises)} exerciții, dintre care {len(added)} adăugate după audit. Include {sum(len(e["tests"]) for e in exercises)} cazuri, {sum(len(c["studyCards"]) for c in chapters)} fișe de concepte și {sum((sum(e["chapter"] == c["id"] for e in exercises) + 2) // 3 for c in chapters)} lecții scurte. Cursul introductiv are separat 15 exerciții.', '', 'Completările urmăresc temele și diferențele identificate în materialele locale. Formatele de intrare/ieșire și limitele sunt adaptate pentru învățare în browser. Nu este o transcriere a fiecărui laborator și nici o promisiune privind subiectele examenului.', '', '## Exerciții adăugate', '', '| Capitol | Exercițiu | Identificator | Verificare |', '| --- | --- | --- | --- |']
+for item in added:
+    report.append(f'| {item["chapter"]} | {item["title"]} | {item["id"]} | {"Soluții alternative valide" if item.get("validator") else "Ieșire și erori de execuție"} |')
+report.extend(['', '## Recapitulări extinse', ''])
+for chapter in chapters:
+    report.append(f'- {chapter["title"]}: ' + '; '.join(card['title'] for card in chapter['studyCards']) + '.')
+report.extend(['', '## Limitele verificării', '', 'Testele de rezultat nu demonstrează metoda, complexitatea sau explicația scrisă. Pentru acestea există fișe, exemple și întrebări; studentul trebuie să poată justifica soluția. Problemele constructive verifică fezabilitatea și valoarea optimă cunoscută pentru fiecare caz, fără a impune traseul sau selecția rezolvării de referință.', '', 'Lucrul cu mai multe fișiere are câmpuri separate. Modulul Python scris de student este folosit la toate testele și este reîncărcat separat; modificarea lui retrage marcajul de rezolvare.', '', 'Text3 este o variantă adaptată, cu limite reduse și credit către [enunțul Infoarena](https://www.infoarena.ro/problema/text3). Materialele externe recomandate doar prin link în laborator au cerințele și limitele proprii; banca nu este o copie integrală a acelor arhive.', ''])
+(ROOT / 'site/completari.md').write_text('\n'.join(report), encoding='utf-8')
 print(f'{len(chapters)} capitole, {len(exercises)} exercitii, {sum(len(e["tests"]) for e in exercises)} teste.')
 
 
