@@ -4,57 +4,47 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#17152f">
-<meta name="description" content="Platformă interactivă pentru a învăța Python și algoritmi: lecții, quiz-uri, exerciții, XP și progres local.">
+<meta name="description" content="Platformă interactivă pentru a învăța Python și algoritmi: lecții, quiz-uri, exerciții și progres.">
 <title>PA · INFO ID 26</title>
-<link rel="stylesheet" href="site/style.css">
-<script src="site/exercises.js" defer></script>
-<script src="site/python-course.js" defer></script>
-<script src="site/interactive-content.js" defer></script>
-<script src="site/algorithm-quizzes.js" defer></script>
-<script src="site/algorithm-lessons.js" defer></script>
-<script src="site/app.js" defer></script>
-<script src="site/playground.js" defer></script>
-<script src="site/journey.js" defer></script>
+<link rel="stylesheet" href="site/style.css?v=20261014-clean">
+<script src="site/exercises.js?v=20261014-clean" defer></script>
+<script src="site/python-course.js?v=20261014-clean" defer></script>
+<script src="site/interactive-content.js?v=20261014-clean" defer></script>
+<script src="site/algorithm-quizzes.js?v=20261014-clean" defer></script>
+<script src="site/algorithm-lessons.js?v=20261014-clean" defer></script>
+<script src="site/app.js?v=20261014-clean" defer></script>
+<script src="site/playground.js?v=20261014-clean" defer></script>
+<script src="site/journey.js?v=20261014-clean" defer></script>
+<script src="site/code-editor.js?v=20261014-clean" defer></script>
+<script src="site/auth-config.js?v=20261014-clean" defer></script>
+<script src="site/account.js?v=20261014-clean" defer></script>
 </head>
 <body>
 <a class="skip" href="#continut">Sari la conținut</a>
 
 <main id="continut">
-<header class="topbar"><a class="header-brand" href="#acasa" aria-label="PA — înapoi la traseu"><strong>PA<span>.</span></strong><small>INFO ID 26</small></a><div class="topbar-stats"><span class="stat-pill">🔥 <strong id="header-streak">0</strong> zile</span><span class="stat-pill xp">✦ <strong id="header-xp">0</strong> XP</span></div></header>
+<header class="topbar"><a class="header-brand" href="#acasa" aria-label="PA — înapoi la traseu"><strong>PA<span>.</span></strong><small>INFO ID 26</small></a><div class="topbar-stats"><span class="stat-pill progress-percent" title="Întrebări și exerciții finalizate">Progres <strong id="header-progress">0%</strong></span><div class="account-menu"><button id="account-login" class="secondary" type="button">Conectare Microsoft</button><details id="account-details" hidden><summary id="account-name">Contul meu</summary><p id="account-email"></p><button id="account-sync" type="button">Sincronizează</button><button id="account-import-local" type="button">Copiază progresul local în cont</button><button id="account-remote" type="button" hidden>Încarcă versiunea din cloud</button><button id="account-logout" type="button">Deconectare</button></details><small id="account-status" role="status"></small></div></div></header>
 <section id="acasa" class="view dashboard-view">
-<div class="welcome-layout"><div class="welcome-copy"><div class="eyebrow">ÎNVAȚĂ CÂTE PUȚIN, ÎN FIECARE ZI</div><h1>Scrie cod.<br><em>Prinde curaj.</em></h1><p class="lead">Lecții scurte, întrebări interactive și probleme rezolvate chiar de tine. Începe cu Python, apoi treci la algoritmii de la facultate.</p><a class="button start-learning" id="resume-learning" href="#curs-python">Continuă învățarea <span>→</span></a></div><div class="welcome-visual" aria-hidden="true"><span class="float-label tag-one">✦ +20 XP</span><div class="visual-editor"><div class="visual-editor-head"><i></i><i></i><i></i><span>primul_program.py</span></div><pre><span class="syntax-comment"># Primii pași în Python</span>
-<span class="syntax-blue">nume</span> = <span class="syntax-gold">"INFO ID 26"</span>
-<span class="syntax-blue">print</span>(<span class="syntax-gold">"Salut,"</span>, nume)
-
-<span class="syntax-comment"># Rezultat</span>
-<span class="syntax-output">✓ Salut, INFO ID 26</span></pre></div><span class="float-label tag-two">⚡ Nivel nou</span></div></div>
-<div class="dashboard-stats"><div><span class="mini-icon">⚡</span><strong id="dashboard-level">1</strong><span>Nivelul tău</span></div><div><span class="mini-icon">✦</span><strong id="dashboard-xp">0</strong><span>Experiență (XP)</span></div><div><span class="mini-icon">✓</span><strong id="dashboard-tasks">0</strong><span>Probleme rezolvate</span></div><div><span class="mini-icon">🔥</span><strong id="dashboard-streak">0</strong><span>Zile consecutive</span></div></div>
-<div class="section-heading"><h2>Alege-ți traseul</h2><span>ÎNVAȚĂ · APLICĂ · PROGRESEAZĂ</span></div>
-<div class="paths-grid"><a href="#curs-python" class="path-card path-python"><div class="path-symbol">🐍</div><span class="eyebrow">TRASEUL 01 · PENTRU ÎNCEPĂTORI</span><h3>Python de la zero</h3><p>Pași mici, exemple practice, quiz-uri și 15 provocări de cod.</p><div class="path-meta"><span id="home-python-progress">0/5 lecții finalizate</span><span>Explorează →</span></div><div class="path-meter"><span id="home-python-meter" style="width:0%"></span></div></a><a href="#traseu" class="path-card path-algo"><div class="path-symbol">⌘</div><span class="eyebrow">TRASEUL 02 · FACULTATE</span><h3>Programarea Algoritmilor</h3><p>Lecții scurte, câte trei exerciții și o întrebare. De la bazele Python la materia facultății.</p><div class="path-meta"><span id="home-algo-progress">0 rezolvate</span><span>Explorează →</span></div><div class="path-meter"><span id="home-algo-meter" style="width:0%"></span></div></a></div>
-<div class="dashboard-bottom"><article class="card continue-card"><span class="eyebrow">URMĂTORUL TĂU PAS</span><h3 id="next-step-title">Prima lecție Python</h3><p id="next-step-description">Începe cu afișarea textului și primul tău program.</p><a class="text-link" id="next-step-link" href="#lectie-python/intro-print/0">Începe acum →</a></article><article class="card tip-card"><span class="eyebrow">CUM FUNCȚIONEAZĂ</span><h3>XP câștigat prin practică</h3><p>Primești XP pentru quiz-uri corecte, exerciții trecute și lecții finalizate. Fiecare reușită se punctează o singură dată.</p><small>Progresul rămâne doar în acest browser. Exportă-l ca să faci o copie de siguranță.</small></article></div>
+<div class="welcome-layout"><div class="welcome-copy"><h1>Programarea Algoritmilor</h1><p class="lead">Material de studiu pentru INFO ID 26, organizat după cursurile și laboratoarele profesorului Ceaușescu Ciprian.</p><a class="button start-learning" id="resume-learning" href="#curs-python">Continuă lecția →</a></div></div>
+<div class="section-heading"><h2>Lecții și capitole</h2></div>
 </section>
-<section id="curs-python" class="view"><div class="eyebrow">TRASEUL 01 · PYTHON DE LA ZERO</div><h1>Învață. Testează.<br><em>Avansează.</em></h1><p class="lead">Fiecare lecție conține explicații pe pași, întrebări interactive și exerciții în editorul Python. Lecțiile se deblochează pe măsură ce progresezi.</p><div class="course-summary"><div class="course-summary-info"><strong id="course-progress">0 din 5 lecții</strong><span>Drumul tău prin bazele Python</span></div><div class="path-meter"><span id="course-meter" style="width:0%"></span></div></div><div id="course-lesson-list" class="course-lesson-list"></div></section>
-<section id="lectie-python" class="view"><a class="text-link back-link" href="#curs-python">← Înapoi la traseul Python</a><div id="course-lesson-content"></div></section>
-<section id="traseu" class="view"><div class="eyebrow">TRASEUL 02 · PROBLEME DE ALGORITMICĂ</div><h1>De la bazele Python<br><em>la algoritmi.</em></h1><p class="lead">Câte trei exerciții într-o lecție. Citește explicația, răspunde, scrie cod și apasă „Continuă”. Poți relua orice lecție din traseu.</p><div class="algo-progress"><div><strong id="algo-progress-count">0</strong><span>exerciții rezolvate</span></div><div class="path-meter"><span id="algo-meter" style="width:0%"></span></div></div><div id="roadmap"></div><aside class="notice">Aceasta este o platformă neoficială de pregătire pentru grupă. Temele sunt organizate după materialele locale ale profesorului. Modulele, testarea și obiectele sunt marcate ca suplimentare.</aside><details class="notice"><summary>Ce știm despre evaluare</summary><p>Prezentarea introductivă a profesorului indică 70% examen scris și 30% proiect, cu predare până la 24 ianuarie și prezentare în ziua examenului. Structura exactă a subiectelor nu apare în acel slide. Pregătește-te să scrii cod și să explici metoda și complexitatea.</p></details></section>
+<section id="curs-python" class="view" hidden><div id="course-lesson-list" class="course-lesson-list"></div></section>
+<section id="lectie-python" class="view"><a class="text-link back-link" href="#curs-python">← Lecții</a><div id="course-lesson-content"></div></section>
+<section id="traseu" class="view" hidden><div id="roadmap"></div><aside class="notice">Aceasta este o platformă neoficială de pregătire pentru grupă. Temele sunt organizate după materialele locale ale profesorului. Modulele, testarea și obiectele sunt marcate ca suplimentare.</aside><details class="notice"><summary>Ce știm despre evaluare</summary><p>Prezentarea introductivă a profesorului indică 70% examen scris și 30% proiect, cu predare până la 24 ianuarie și prezentare în ziua examenului. Structura exactă a subiectelor nu apare în acel slide. Pregătește-te să scrii cod și să explici metoda și complexitatea.</p></details></section>
 <section id="exercitii" class="view" hidden>
 <div id="curriculum-summary" class="eyebrow">EXERSEAZĂ ÎN RITMUL TĂU</div><h1>Înțelege.<br><em>Scrie. Verifică.</em></h1><p class="lead">Începe cu bazele și avansează spre probleme complete. Fiecare exercițiu are exemple, indicii și o rezolvare pe care o poți consulta.</p>
 <div class="bank-toolbar"><label>Capitol<select id="chapter-filter"><option value="">Toate capitolele</option></select></label><label>Dificultate<select id="level-filter"><option value="">Toate nivelurile</option><option>Bază</option><option>Aplicare</option><option>Aprofundare</option></select></label><label>Caută un exercițiu<input id="exercise-search" type="search" placeholder="De exemplu: matrice, rucsac, fișiere"></label><label>Progres<select id="progress-filter"><option value="">Toate exercițiile</option><option value="todo">De rezolvat</option><option value="done">Teste trecute</option></select></label></div>
 <div class="section-heading"><p id="bank-count" role="status"></p><button id="progress-export" class="secondary">Descarcă lucrul meu ↓</button></div><p class="source-note">Progresul se păstrează în acest browser. Exportul conține codul și rezultatele tale. <label class="text-link">Restaurează un export <input type="file" id="progress-import" accept="application/json,.json"></label></p><p id="backup-status" role="status"></p><div id="exercise-list" class="exercise-grid"></div>
 </section>
-<section id="capitol" class="view" hidden><a class="text-link" href="#traseu">← Traseul de învățare</a><div id="chapter-content"></div></section>
+<section id="capitol" class="view" hidden><a class="text-link" href="#traseu">← Capitole</a><div id="chapter-content"></div></section>
 <section id="practica" class="view" hidden>
 <div class="exercise-nav"><a id="exercise-back" class="text-link" href="#exercitii">← Toate exercițiile</a><a id="previous-exercise" class="text-link">← Anterior</a><a id="next-exercise" class="text-link">Următorul →</a></div>
 <div class="eyebrow" id="exercise-chapter"></div><h1 class="practice-title" id="exercise-title"></h1>
 <div id="editor-home"><div id="shared-editor"><p id="exercise-progress" class="source-note"></p><div class="practice-layout"><article id="exercise-brief" class="practice-brief card"></article>
-<div class="workspace"><div class="workspace-top"><span id="editor-filename">solutia-mea.py</span><span>PYTHON</span></div><label class="editor-label" for="python-code">Codul tău</label><textarea id="python-code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="editor-help"></textarea><div class="workspace-actions"><button id="python-run" class="button">▷ Rulează</button><button id="python-stop" class="secondary" disabled>Oprește</button><button id="python-check" class="button">Verifică</button><button id="module-download" class="download-code" hidden>Descarcă modulul ↓</button><button id="python-download" class="download-code">Descarcă .py ↓</button></div><p id="editor-help" class="workspace-help">Ctrl + Enter rulează. Tab inserează 4 spații; Escape, apoi Tab iese din editor. Codul se salvează separat pentru fiecare exercițiu.</p><div class="io-grid"><details id="custom-input"><summary>Încearcă date proprii</summary><label id="input-label" for="python-input">DATE DE INTRARE</label><textarea id="python-input" spellcheck="false" aria-describedby="input-help"></textarea><small id="input-help"></small><div id="additional-inputs"></div><button id="try-input" class="secondary" type="button">Rulează cu aceste date</button></details><div><label for="python-output">REZULTAT</label><pre id="python-output" tabindex="0">Rezultatul va apărea aici.</pre></div></div><p id="python-status" role="status">Pregătit când ești și tu.</p><button id="error-line" class="secondary" hidden>Arată linia cu eroarea</button></div></div>
-<div id="test-results" aria-label="Rezultatele verificării"></div></div></div><p class="runtime-note">Python rulează în browser; prima încărcare necesită internet. Fișierele sunt temporare. Verificăm rezultatele și prezența funcției cerute, nu demonstrăm metoda, complexitatea sau corectitudinea pentru orice intrare. Oprire automată după 10 secunde pe test.</p>
+<div class="workspace"><label class="editor-label" for="python-code">Codul tău </label><textarea id="python-code" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea><div class="workspace-actions"><button id="python-run" class="button">▷ Rulează</button><button id="python-stop" class="secondary" disabled>Oprește</button><button id="python-check" class="button">Verifică</button><button id="module-download" class="download-code" hidden>Descarcă modulul ↓</button><button id="python-download" class="download-code">Descarcă .py ↓</button></div><div class="io-grid"><div id="custom-input" hidden><label id="input-label" for="python-input">DATE DE INTRARE</label><textarea id="python-input" spellcheck="false"></textarea><div id="additional-inputs"></div></div><div><label for="python-output">REZULTAT</label><pre id="python-output" tabindex="0"></pre></div></div><p id="python-status" role="status"></p><button id="error-line" class="secondary" hidden>Arată linia cu eroarea</button></div></div>
+<div id="test-results" aria-label="Rezultatele verificării"></div></div></div>
 </section>
-<footer>PA · Creat pentru INFO ID 26 · Învățăm împreună.<br><small>Conținut original de studiu. Progresul este local; nu se sincronizează între dispozitive.</small></footer>
+<footer>Programarea Algoritmilor · INFO ID 26</footer>
 </main>
 </body>
 </html>
-
-
-
-
-

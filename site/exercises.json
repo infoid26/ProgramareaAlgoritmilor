@@ -16,14 +16,15 @@
           "text": "Un nume referă un obiect. Obiectul are identitate, tip și valoare. Atribuirea nu copiază automat obiectul; tipul aparține obiectului, nu unui nume fix. int și str sunt clase, iar None reprezintă absența unei valori.",
           "example": "a = [1]\nb = a\nprint(a == b, a is b)\nprint(type(a).__name__)",
           "quiz": {
-            "question": "Ce verifică is?",
+            "question": "În Python, ce verifică expresia a is b?",
             "options": [
               "Identitatea obiectului",
               "Numai egalitatea valorilor",
               "Tipul variabilei"
             ],
             "correct": 0,
-            "explanation": "Două liste distincte pot fi egale prin == și diferite prin is."
+            "explanation": "Două liste distincte pot fi egale prin == și diferite prin is.",
+            "code": "a = [1]\nb = a\nprint(a == b, a is b)\nprint(type(a).__name__)"
           }
         },
         {
@@ -38,7 +39,8 @@
               "3"
             ],
             "correct": 1,
-            "explanation": "Câtul este rotunjit în jos, spre minus infinit."
+            "explanation": "Câtul este rotunjit în jos, spre minus infinit.",
+            "code": "print(2 ** 3 ** 2)\nprint(-7 // 3, -7 % 3)"
           }
         },
         {
@@ -46,14 +48,15 @@
           "text": "and nu evaluează restul după o valoare falsă; or se oprește după una adevărată. Ele returnează un operand, nu obligatoriu bool. O comparație înlănțuită precum 0<=x<10 exprimă ambele limite.",
           "example": "x = 0\nprint(x != 0 and 10 / x > 1)\nprint(\"\" or \"implicit\")",
           "quiz": {
-            "question": "De ce nu se împarte la zero în exemplu?",
+            "question": "Pentru x = 0, de ce expresia x != 0 and 10 / x > 1 nu produce ZeroDivisionError?",
             "options": [
               "and oprește evaluarea",
               "Python ignoră toate împărțirile",
               "0 devine 1"
             ],
             "correct": 0,
-            "explanation": "Primul operand este fals, deci al doilea nu mai este evaluat."
+            "explanation": "Primul operand este fals, deci al doilea nu mai este evaluat.",
+            "code": "x = 0\nprint(x != 0 and 10 / x > 1)\nprint(\"\" or \"implicit\")"
           }
         }
       ],
@@ -75,13 +78,14 @@
           "text": "if/elif/else execută prima ramură adevărată. == compară și = atribuie. Testează limitele: 0, egalitate, prima și ultima valoare admisă. Pentru o dată calendaristică, luna și anul determină intervalul valid al zilei.",
           "example": "an = 1900\nbisect = an % 400 == 0 or an % 4 == 0 and an % 100 != 0\nprint(bisect)",
           "quiz": {
-            "question": "Este anul 1900 bisect?",
+            "question": "Conform regulii calendarului gregorian din exemplu, este anul 1900 bisect?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Este divizibil cu 100, dar nu cu 400."
+            "explanation": "Este divizibil cu 100, dar nu cu 400.",
+            "code": "an = 1900\nbisect = an % 400 == 0 or an % 4 == 0 and an % 100 != 0\nprint(bisect)"
           }
         },
         {
@@ -89,14 +93,15 @@
           "text": "Corpul unei ramuri este delimitat prin indentare. Un elif aparține aceluiași lanț; două if separate pot executa două corpuri. Într-un calculator simplu, validează operatorul și numitorul înainte de împărțire.",
           "example": "x = 3\nif x > 0:\n    print(\"pozitiv\")\nif x % 2:\n    print(\"impar\")",
           "quiz": {
-            "question": "Câte mesaje se afișează?",
+            "question": "Pentru x = 3, câte linii afișează programul cu cele două instrucțiuni if independente?",
             "options": [
               "Unul",
               "Două",
               "Niciunul"
             ],
             "correct": 1,
-            "explanation": "Cele două if independente pot avea ambele condiții adevărate."
+            "explanation": "Cele două if independente pot avea ambele condiții adevărate.",
+            "code": "x = 3\nif x > 0:\n    print(\"pozitiv\")\nif x % 2:\n    print(\"impar\")"
           }
         }
       ],
@@ -118,28 +123,30 @@
           "text": "for consumă elementele unui iterabil; range exclude limita finală. while repetă cât timp condiția este adevărată. Actualizează starea care controlează oprirea. O santinelă încheie citirea fără să intre în calcul.",
           "example": "s = 0\nx = int(input())\nwhile x != 0:\n    s += x\n    x = int(input())\nprint(s)",
           "quiz": {
-            "question": "Valoarea santinelă 0 face parte din date?",
+            "question": "În programul dat, valoarea 0 oprește citirea. Este ea prelucrată de instrucțiunea s += x?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Ea semnalează oprirea și nu este procesată."
+            "explanation": "Ea semnalează oprirea și nu este procesată.",
+            "code": "s = 0\nx = int(input())\nwhile x != 0:\n    s += x\n    x = int(input())\nprint(s)"
           }
         },
         {
           "title": "break, continue și else",
-          "text": "break termină cea mai apropiată buclă; continue trece la următoarea iterație. else al unui for sau while se execută la terminarea naturală, inclusiv când bucla nu a avut iterații; break îl evită.",
+          "text": "break termină cea mai apropiată buclă; continue trece la următoarea iterație. else atașat unui for sau while se execută la terminarea normală, inclusiv pentru zero iterații. Nu se execută la ieșirea prin break, return sau o excepție care părăsește bucla.",
           "example": "for x in [2, 4, 6]:\n    if x % 2:\n        break\nelse:\n    print(\"toate pare\")",
           "quiz": {
-            "question": "Când se execută else al buclei?",
+            "question": "În Python, când se execută blocul else atașat unei bucle for sau while?",
             "options": [
               "La orice iterație",
-              "Dacă nu s-a executat break",
+              "Când bucla se termină normal, fără întrerupere prin break",
               "Numai când apare break"
             ],
             "correct": 1,
-            "explanation": "else semnalează terminarea fără întrerupere prin break."
+            "explanation": "La for, else se execută după parcurgerea completă; la while, când condiția devine falsă. Se execută și pentru zero iterații. Un break, un return care părăsește funcția sau o excepție care părăsește bucla îl împiedică. else este aliniat cu bucla, nu cu if.",
+            "code": "for x in [2, 4, 6]:\n    if x % 2:\n        break\nelse:\n    print(\"toate pare\")"
           }
         },
         {
@@ -147,14 +154,15 @@
           "text": "Un invariant descrie ce este deja corect înaintea fiecărui pas. Pentru suma unui prefix, s conține suma elementelor procesate. Suma pornește de la 0, produsul de la 1; minimul unei liste nevide pornește dintr-un element real.",
           "example": "s = 0\nfor x in [3, -1, 2]:\n    s += x\nprint(s)",
           "quiz": {
-            "question": "Ce păstrează s după primele două elemente?",
+            "question": "După prelucrarea valorilor 3 și -1 din lista dată, ce valoare are acumulatorul s?",
             "options": [
               "Suma lor, 2",
               "Ultimul element, -1",
               "Lungimea listei"
             ],
             "correct": 0,
-            "explanation": "Invariantul este suma prefixului deja parcurs."
+            "explanation": "Invariantul este suma prefixului deja parcurs.",
+            "code": "s = 0\nfor x in [3, -1, 2]:\n    s += x\nprint(s)"
           }
         }
       ],
@@ -176,14 +184,15 @@
           "text": "s[start:stop:step] exclude stop și acceptă indici negativi; un pas negativ parcurge invers. Șirul nu poate fi modificat prin atribuirea unui caracter. Metodele creează alte șiruri. Nu folosi is pentru a compara texte: interning este un detaliu de implementare.",
           "example": "s = \"abcdef\"\nprint(s[1:5:2])\nprint(s[::-1])",
           "quiz": {
-            "question": "Ce afișează s[1:5:2]?",
+            "question": "Pentru s = \"abcdef\", ce text afișează print(s[1:5:2])?",
             "options": [
               "bd",
               "bdf",
               "ace"
             ],
             "correct": 0,
-            "explanation": "Sunt selectate pozițiile 1 și 3; poziția 5 este exclusă."
+            "explanation": "Sunt selectate pozițiile 1 și 3; poziția 5 este exclusă.",
+            "code": "s = \"abcdef\"\nprint(s[1:5:2])\nprint(s[::-1])"
           }
         },
         {
@@ -191,14 +200,15 @@
           "text": "find returnează -1 la lipsă, index ridică ValueError. count și replace tratează apariții fără suprapunere; replace acceptă un număr maxim de înlocuiri. Un subșir nu este obligatoriu un cuvânt întreg.",
           "example": "print(\"aaaa\".find(\"z\"))\nprint(\"aaaa\".replace(\"aa\", \"x\", 1))",
           "quiz": {
-            "question": "Ce returnează find pentru o potrivire absentă?",
+            "question": "Ce returnează metoda str.find() când subșirul căutat nu apare în șir?",
             "options": [
               "0",
               "-1",
               "None"
             ],
             "correct": 1,
-            "explanation": "index ar produce o excepție, dar find returnează -1."
+            "explanation": "index ar produce o excepție, dar find returnează -1.",
+            "code": "print(\"aaaa\".find(\"z\"))\nprint(\"aaaa\".replace(\"aa\", \"x\", 1))"
           }
         },
         {
@@ -213,7 +223,8 @@
               "3"
             ],
             "correct": 1,
-            "explanation": "Formatarea cere exact două zecimale."
+            "explanation": "Formatarea cere exact două zecimale.",
+            "code": "print(f\"{3.5:.2f}\")\nprint(\"x\".center(5, \".\"))\nprint(\"-\".join(\"a  b\".split()))"
           }
         }
       ],
@@ -235,14 +246,15 @@
           "text": "append adaugă un obiect, extend adaugă elementele unui iterabil, insert schimbă indicii următori. pop elimină și returnează; remove elimină prima valoare și poate ridica eroare. del și atribuirea unei felii pot schimba lungimea. sort/reverse modifică lista și returnează None.",
           "example": "a = [1, 2]\na.extend([3, 4])\ndel a[1:3]\nprint(a)",
           "quiz": {
-            "question": "Ce rămâne în listă?",
+            "question": "După extend și del din exemplu, care este conținutul listei a?",
             "options": [
-              "1 4",
-              "1 2 3 4",
-              "2 3"
+              "[1, 4]",
+              "[1, 2, 3, 4]",
+              "[2, 3]"
             ],
             "correct": 0,
-            "explanation": "Felie 1:3 elimină elementele de pe pozițiile 1 și 2."
+            "explanation": "Felie 1:3 elimină elementele de pe pozițiile 1 și 2.",
+            "code": "a = [1, 2]\na.extend([3, 4])\ndel a[1:3]\nprint(a)"
           }
         },
         {
@@ -250,13 +262,14 @@
           "text": "b=a creează un alt nume pentru același obiect. a.copy() copiază numai containerul exterior; obiectele imbricate rămân partajate. deepcopy copiază recursiv. [[0]*m]*n repetă aceeași linie; construiește fiecare linie separat.",
           "example": "a = [[1], [2]]\nb = a.copy()\nb[0].append(9)\nprint(a)",
           "quiz": {
-            "question": "Copierea superficială separă și listele interioare?",
+            "question": "În exemplu, a.copy() creează și copii independente ale listelor interioare?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "a[0] și b[0] se referă în continuare la aceeași listă."
+            "explanation": "a[0] și b[0] se referă în continuare la aceeași listă.",
+            "code": "a = [[1], [2]]\nb = a.copy()\nb[0].append(9)\nprint(a)"
           }
         },
         {
@@ -264,14 +277,15 @@
           "text": "Tuplul este o secvență imutabilă; o listă aflată în el poate totuși fi modificată. Virgula formează tuplul cu un element: (3,). La despachetare, *rest colectează elementele suplimentare într-o listă.",
           "example": "primul, *mijloc, ultimul = (1, 2, 3, 4)\nprint(primul, mijloc, ultimul)",
           "quiz": {
-            "question": "Ce tip are mijloc?",
+            "question": "După despachetarea primul, *mijloc, ultimul = (1, 2, 3, 4), ce tip are mijloc?",
             "options": [
               "tuple",
               "list",
               "int"
             ],
             "correct": 1,
-            "explanation": "Ținta cu * colectează elementele într-o listă."
+            "explanation": "Ținta cu * colectează elementele într-o listă.",
+            "code": "primul, *mijloc, ultimul = (1, 2, 3, 4)\nprint(primul, mijloc, ultimul)"
           }
         },
         {
@@ -279,14 +293,15 @@
           "text": "O matrice este o listă de linii. Comprehensiunea exprimă transformare și filtrare; ordinea buclelor ei este aceeași ca la bucle imbricate. Pentru prelucrări în loc, evită ștergerea în timp ce înaintezi fără să controlezi indicii.",
           "example": "a = [[i + j for j in range(3)] for i in range(2)]\nprint([max(row) for row in a])",
           "quiz": {
-            "question": "Câte linii are matricea?",
+            "question": "Câte linii construiește comprehensiunea exterioară a matricei a din exemplu?",
             "options": [
               "2",
               "3",
               "6"
             ],
             "correct": 0,
-            "explanation": "Comprehensiunea exterioară construiește câte o linie pentru fiecare i."
+            "explanation": "Comprehensiunea exterioară construiește câte o linie pentru fiecare i.",
+            "code": "a = [[i + j for j in range(3)] for i in range(2)]\nprint([max(row) for row in a])"
           }
         }
       ],
@@ -308,13 +323,14 @@
           "text": "O cheie hashable trebuie să aibă hash stabil și egalitate compatibilă cu hash-ul. int, str și tuplurile de valori hashable pot fi chei; listele și set-urile mutabile nu. Hash-uri egale nu dovedesc egalitatea: pot exista coliziuni. frozenset este o mulțime imutabilă hashable.",
           "example": "d = {frozenset(\"aab\"): 1}\nprint(d[frozenset(\"ab\")])",
           "quiz": {
-            "question": "Pot fi listele chei de dicționar?",
+            "question": "Poate o listă Python obișnuită, precum [1, 2], să fie cheie într-un dicționar?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Listele sunt mutabile și nehashable."
+            "explanation": "Listele sunt mutabile și nehashable.",
+            "code": "d = {frozenset(\"aab\"): 1}\nprint(d[frozenset(\"ab\")])"
           }
         },
         {
@@ -322,14 +338,15 @@
           "text": "| reunește, & intersectează, - scade și ^ calculează diferența simetrică. <= verifică incluziunea. add/update inserează; remove ridică KeyError la lipsă, discard nu. Ordinea unui set nu este un format de ieșire garantat; sortează explicit.",
           "example": "a = {1, 2}\nb = {2, 3}\nprint(sorted(a ^ b))\na.discard(7)",
           "quiz": {
-            "question": "Care este diferența simetrică?",
+            "question": "Pentru a = {1, 2} și b = {2, 3}, ce valori conține a ^ b?",
             "options": [
-              "1 3",
-              "2",
-              "1 2 3"
+              "{1, 3}",
+              "{2}",
+              "{1, 2, 3}"
             ],
             "correct": 0,
-            "explanation": "Ea conține valorile din exact una dintre mulțimi."
+            "explanation": "Ea conține valorile din exact una dintre mulțimi.",
+            "code": "a = {1, 2}\nb = {2, 3}\nprint(sorted(a ^ b))\na.discard(7)"
           }
         },
         {
@@ -337,14 +354,15 @@
           "text": "d[cheie] cere existența cheii; get acceptă o valoare implicită. setdefault poate inițializa un container; pop poate șterge cu valoare implicită. keys/values/items sunt vizualizări ale dicționarului. Pentru cinema sau elevi, alege cheia principală după interogările și actualizările cerute.",
           "example": "d = {}\nd.setdefault(\"Cinema 1\", {})[\"Film\"] = {\"18:00\"}\nprint(d[\"Cinema 1\"][\"Film\"])",
           "quiz": {
-            "question": "Ce permite o cheie principală potrivită?",
+            "question": "În dicționarul din exemplu, ce avantaj oferă folosirea numelui cinematografului drept cheie principală?",
             "options": [
               "Acces direct la înregistrare",
               "Eliminarea tuturor testelor",
               "Sortare automată"
             ],
             "correct": 0,
-            "explanation": "Modelul datelor trebuie să susțină operațiile problemei."
+            "explanation": "Modelul datelor trebuie să susțină operațiile problemei.",
+            "code": "d = {}\nd.setdefault(\"Cinema 1\", {})[\"Film\"] = {\"18:00\"}\nprint(d[\"Cinema 1\"][\"Film\"])"
           }
         },
         {
@@ -352,14 +370,15 @@
           "text": "key întoarce criteriul; tuplurile se compară lexicografic. Pentru numere, semnul minus inversează un criteriu fără a inversa toate celelalte. Sortarea este stabilă: elementele cu chei egale își păstrează ordinea inițială. reverse inversează toate comparațiile cheii.",
           "example": "a = [(\"Ana\", 9), (\"Dan\", 10), (\"Eva\", 9)]\na.sort(key=lambda x: (-x[1], x[0]))\nprint(a)",
           "quiz": {
-            "question": "Care este primul nume?",
+            "question": "După sortarea listei a din exemplu după (-nota, nume), care este numele din primul element?",
             "options": [
               "Ana",
               "Dan",
               "Eva"
             ],
             "correct": 1,
-            "explanation": "Nota este descrescătoare, apoi numele crescător."
+            "explanation": "Nota este descrescătoare, apoi numele crescător.",
+            "code": "a = [(\"Ana\", 9), (\"Dan\", 10), (\"Eva\", 9)]\na.sort(key=lambda x: (-x[1], x[0]))\nprint(a)"
           }
         }
       ],
@@ -381,14 +400,15 @@
           "text": "Parametrul local este un nume pentru obiectul transmis. Modificarea unei liste este vizibilă apelantului, reasignarea parametrului nu schimbă numele apelantului. return transmite o valoare; în lipsa lui funcția întoarce None.",
           "example": "def f(a):\n    a.append(3)\n    a = []\nx = [1]\nf(x)\nprint(x)",
           "quiz": {
-            "question": "Ce conține x la final?",
+            "question": "După apelul f(x) din exemplu, care este conținutul listei x?",
             "options": [
-              "1 3",
-              "Nimic",
-              "1"
+              "[1, 3]",
+              "[]",
+              "[1]"
             ],
             "correct": 0,
-            "explanation": "append modifică obiectul original; a=[] reasignează numai parametrul local."
+            "explanation": "append modifică obiectul original; a=[] reasignează numai parametrul local.",
+            "code": "def f(a):\n    a.append(3)\n    a = []\nx = [1]\nf(x)\nprint(x)"
           }
         },
         {
@@ -396,13 +416,14 @@
           "text": "*args colectează argumente poziționale într-un tuplu, **kwargs argumente numite într-un dict. Parametrii după * sunt keyword-only. Valorile implicite se evaluează la definire: o listă implicită poate fi partajată accidental. Folosește None și creează lista în corp.",
           "example": "def f(a, b=2, *args, c=3, **kwargs):\n    return a + b + c\nprint(f(1, c=4))",
           "quiz": {
-            "question": "Poți transmite c pozițional aici?",
+            "question": "În definiția def f(a, b=2, *args, c=3, **kwargs), poate parametrul c să primească o valoare printr-un argument pozițional?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "c se află după *args și se transmite prin nume."
+            "explanation": "c se află după *args și se transmite prin nume.",
+            "code": "def f(a, b=2, *args, c=3, **kwargs):\n    return a + b + c\nprint(f(1, c=4))"
           }
         },
         {
@@ -410,14 +431,15 @@
           "text": "Căutarea unui nume urmează local, închideri, global, builtins. O atribuire face numele local dacă nu declari global/nonlocal. global se referă la modul; nonlocal la o legătură existentă într-o funcție exterioară. O închidere poate păstra starea după terminarea apelului exterior.",
           "example": "def contor():\n    n = 0\n    def pas():\n        nonlocal n\n        n += 1\n        return n\n    return pas",
           "quiz": {
-            "question": "Ce modifică nonlocal n?",
+            "question": "În funcția pas din exemplu, la ce variabilă n se referă declarația nonlocal n?",
             "options": [
               "Variabila funcției exterioare",
               "O variabilă de sistem",
               "Un nou nume global"
             ],
             "correct": 0,
-            "explanation": "nonlocal cere o legătură existentă în domeniul exterior."
+            "explanation": "nonlocal cere o legătură existentă în domeniul exterior.",
+            "code": "def contor():\n    n = 0\n    def pas():\n        nonlocal n\n        n += 1\n        return n\n    return pas"
           }
         },
         {
@@ -425,14 +447,15 @@
           "text": "Funcțiile pot fi argumente, rezultate și chei de sortare; lambda definește o expresie anonimă. Recursivitatea are caz de bază și reducere. yield suspendă execuția și păstrează starea; next consumă o valoare, iar generatorul e epuizabil.",
           "example": "g = (x * x for x in range(3))\nprint(next(g))\nprint(list(g))",
           "quiz": {
-            "question": "Ce conține list(g) după primul next?",
+            "question": "După un singur next(g), ce elemente conține lista produsă de list(g) în exemplu?",
             "options": [
-              "0 1 4",
-              "1 4",
-              "0"
+              "[0, 1, 4]",
+              "[1, 4]",
+              "[0]"
             ],
             "correct": 1,
-            "explanation": "Valoarea 0 a fost deja consumată."
+            "explanation": "Valoarea 0 a fost deja consumată.",
+            "code": "g = (x * x for x in range(3))\nprint(next(g))\nprint(list(g))"
           }
         }
       ],
@@ -454,14 +477,15 @@
           "text": "r citește un fișier existent, w îl recreează/trunchiază, a adaugă la final, x cere un fișier nou, iar + permite citire și scriere. read citește tot, readline o linie, readlines toate liniile într-o listă. Iterarea procesează câte o linie și economisește memorie.",
           "example": "with open(\"date.in\", encoding=\"utf-8\") as f:\n    for line in f:\n        print(line.rstrip(\"\\n\"))",
           "quiz": {
-            "question": "Ce face deschiderea cu w pentru un fișier existent?",
+            "question": "La deschiderea reușită cu open(nume, \"w\"), ce se întâmplă cu textul deja existent în fișier?",
             "options": [
               "Adaugă la final",
               "Îl trunchiază",
               "Nu îl modifică"
             ],
             "correct": 1,
-            "explanation": "w începe un fișier de ieșire nou, eliminând conținutul anterior."
+            "explanation": "w începe un fișier de ieșire nou, eliminând conținutul anterior.",
+            "code": "with open(\"date.in\", encoding=\"utf-8\") as f:\n    for line in f:\n        print(line.rstrip(\"\\n\"))"
           }
         },
         {
@@ -469,13 +493,14 @@
           "text": "with închide fișierul și dacă apare o eroare în bloc; nu face erorile să dispară. Prinde FileNotFoundError pentru fișier lipsă și ValueError la conversie, în zona potrivită. write nu adaugă newline; print(file=f) îl adaugă implicit.",
           "example": "try:\n    x = int(\"abc\")\nexcept ValueError:\n    print(\"număr invalid\")",
           "quiz": {
-            "question": "with elimină automat FileNotFoundError?",
+            "question": "Instrucțiunea with open(...) tratează automat o eroare FileNotFoundError, astfel încât execuția să continue fără un except?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Gestionarea resursei și tratarea excepției sunt responsabilități diferite."
+            "explanation": "Gestionarea resursei și tratarea excepției sunt responsabilități diferite.",
+            "code": "try:\n    x = int(\"abc\")\nexcept ValueError:\n    print(\"număr invalid\")"
           }
         },
         {
@@ -483,14 +508,15 @@
           "text": "Separă citirea, prelucrarea și scrierea. Normalizează textele la fel înainte de frecvențe, altfel rezultatele nu sunt comparabile. În aplicație, fiecare fișier are un câmp propriu; la verificare, fiecare test primește un director nou.",
           "example": "from collections import Counter\na = Counter(\"mere pere mere\".split())\nprint(a[\"mere\"])",
           "quiz": {
-            "question": "De ce separăm prelucrarea de afișare?",
+            "question": "Ce avantaj are o funcție care calculează rezultatul fără să citească sau să afișeze date?",
             "options": [
               "Pentru testare și reutilizare",
               "Pentru a evita orice funcție",
               "Pentru a impune o singură intrare"
             ],
             "correct": 0,
-            "explanation": "O funcție de calcul poate fi verificată fără citire din fișier."
+            "explanation": "O funcție de calcul poate fi verificată fără citire din fișier.",
+            "code": "from collections import Counter\na = Counter(\"mere pere mere\".split())\nprint(a[\"mere\"])"
           }
         }
       ],
@@ -512,13 +538,14 @@
           "text": "maketrans poate înlocui ori șterge caractere; translate aplică tabela. Regex descrie tipare, nu toate regulile semantice. [0-9] este ASCII, iar \\d poate include alte cifre Unicode. Un model de dată poate accepta 99.99.9999; validarea calendaristică este separată.",
           "example": "import re\nprint(bool(re.fullmatch(r\"[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}\", \"99.99.9999\")))",
           "quiz": {
-            "question": "Potrivirea acestui regex dovedește o dată validă?",
+            "question": "Dacă re.fullmatch din exemplu acceptă textul \"99.99.9999\", înseamnă că acesta reprezintă o dată calendaristică validă?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Regex verifică forma; intervalele și calendarul se validează separat."
+            "explanation": "Regex verifică forma; intervalele și calendarul se validează separat.",
+            "code": "import re\nprint(bool(re.fullmatch(r\"[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}\", \"99.99.9999\")))"
           }
         },
         {
@@ -526,13 +553,14 @@
           "text": "compile reutilizează un tipar. search caută oriunde, match numai la început, fullmatch pe tot șirul. group extrage grupuri, start/end dau intervalul cu end exclus. findall găsește potriviri, split separă, sub înlocuiește. Escapează caracterele speciale când vrei sens literal.",
           "example": "import re\nm = re.search(r\"([A-Z]+)-([0-9]+)\", \"xx AB-12\")\nprint(m.group(1), m.start(), m.end())",
           "quiz": {
-            "question": "end este o poziție inclusă?",
+            "question": "Pentru obiectul Match m din exemplu, m.end() indică poziția ultimului caracter inclus în potrivire?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Intervalul unei potriviri este [start,end)."
+            "explanation": "Intervalul unei potriviri este [start,end).",
+            "code": "import re\nm = re.search(r\"([A-Z]+)-([0-9]+)\", \"xx AB-12\")\nprint(m.group(1), m.start(), m.end())"
           }
         },
         {
@@ -547,7 +575,8 @@
               "3"
             ],
             "correct": 1,
-            "explanation": "2024 este an bisect și februarie are 29 de zile."
+            "explanation": "2024 este an bisect și februarie are 29 de zile.",
+            "code": "from datetime import datetime, timedelta\nd = datetime(2024, 2, 28)\nprint(d + timedelta(days=2))"
           }
         }
       ],
@@ -569,14 +598,15 @@
           "text": "Definește dimensiunea intrării. Adună costurile etapelor; nu ignora citirea și sortarea. Bucle succesive O(n)+O(n) rămân O(n); bucle imbricate nu sunt mereu O(n²), fiindcă numărul total de mutări poate fi liniar. Analizează separat memoria și stiva recursivă.",
           "example": "n = 8\npasi = 0\nwhile n > 1:\n    n //= 2\n    pasi += 1",
           "quiz": {
-            "question": "Ce memorie suplimentară folosește această buclă?",
+            "question": "Considerând un cost constant pentru stocarea fiecărui întreg, ce memorie suplimentară folosește bucla din exemplu în funcție de valoarea inițială n?",
             "options": [
               "O(1)",
               "O(n)",
               "O(n²)"
             ],
             "correct": 0,
-            "explanation": "Păstrează doar un număr constant de variabile."
+            "explanation": "Păstrează doar un număr constant de variabile.",
+            "code": "n = 8\npasi = 0\nwhile n > 1:\n    n //= 2\n    pasi += 1"
           }
         },
         {
@@ -584,14 +614,15 @@
           "text": "Căutarea în listă este O(n). Accesul prin indice este O(1); inserarea la început deplasează elemente și este O(n). append are cost amortizat O(1). Căutarea în set/dict este în medie O(1), dar coliziunile pot produce O(n) în caz nefavorabil. Sortarea generală are O(n log n).",
           "example": "a = [1, 2, 3]\nprint(3 in a)\ns = set(a)\nprint(3 in s)",
           "quiz": {
-            "question": "Costul mediu al căutării în set este?",
+            "question": "Pentru un set Python cu n elemente, care este costul mediu al testului x in s, presupunând hash și comparații cu cost constant?",
             "options": [
               "O(1)",
               "O(n²)",
               "O(log n) obligatoriu"
             ],
             "correct": 0,
-            "explanation": "Este cost mediu; nu o garanție pentru orice caz."
+            "explanation": "Este cost mediu; nu o garanție pentru orice caz.",
+            "code": "a = [1, 2, 3]\nprint(3 in a)\ns = set(a)\nprint(3 in s)"
           }
         },
         {
@@ -599,14 +630,15 @@
           "text": "Pentru o singură jumătate: T(n)=T(n/2)+O(1), deci O(log n). Pentru două jumătăți și combinare liniară: 2T(n/2)+O(n), deci O(n log n). Recursia naivă Fibonacci repetă subprobleme și are cost exponențial. Unitățile de cost trebuie explicate, mai ales pentru întregi foarte mari.",
           "example": "def f(n):\n    if n <= 1:\n        return\n    f(n // 2)\n    f(n // 2)",
           "quiz": {
-            "question": "Câte apeluri recursive directe are un apel neterminal?",
+            "question": "În funcția f din exemplu, câte apeluri directe f(n // 2) execută un apel pentru care n > 1?",
             "options": [
               "Unul",
               "Două",
               "n"
             ],
             "correct": 1,
-            "explanation": "Ambele jumătăți sunt rezolvate, nu numai una."
+            "explanation": "Ambele jumătăți sunt rezolvate, nu numai una.",
+            "code": "def f(n):\n    if n <= 1:\n        return\n    f(n // 2)\n    f(n // 2)"
           }
         }
       ],
@@ -628,14 +660,15 @@
           "text": "Precizează cazul direct, cum scade dimensiunea și cum combini rezultatele. Căutarea binară rezolvă o singură jumătate; merge sort le rezolvă pe ambele. Felierea copiază elemente: nu presupune că ea are cost constant.",
           "example": "def putere(a, n):\n    if n == 0:\n        return 1\n    p = putere(a, n // 2)\n    return p * p if n % 2 == 0 else p * p * a",
           "quiz": {
-            "question": "De ce memorăm p?",
+            "question": "În funcția putere din exemplu, de ce calculăm putere(a, n // 2) o singură dată și păstrăm rezultatul în p?",
             "options": [
               "Pentru a evita două apeluri identice",
               "Pentru sortare",
               "Pentru a opri toate calculele"
             ],
             "correct": 0,
-            "explanation": "Recalcularea aceleiași jumătăți ar schimba recurența costului."
+            "explanation": "Recalcularea aceleiași jumătăți ar schimba recurența costului.",
+            "code": "def putere(a, n):\n    if n == 0:\n        return 1\n    p = putere(a, n // 2)\n    return p * p if n % 2 == 0 else p * p * a"
           }
         },
         {
@@ -643,13 +676,14 @@
           "text": "Quickselect partiționează în <pivot, =pivot și >pivot și continuă în partea rangului căutat. Pivot aleator: O(n) în medie, O(n²) nefavorabil. BFPRT alege mediana medianelor unor grupuri de 5; reduce suficient partea mare pentru O(n) în cazul nefavorabil.",
           "example": "a = [5, 1, 3, 3, 9]\np = 3\nprint([x for x in a if x < p])\nprint([x for x in a if x == p])",
           "quiz": {
-            "question": "Trebuie rezolvate recursiv ambele părți la selecție?",
+            "question": "În Quickselect, după partiționare, trebuie apelată recursiv selecția în ambele părți pentru a găsi un singur element de rang k?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Rangul dorit se află într-o singură parte sau în zona egală pivotului."
+            "explanation": "Rangul dorit se află într-o singură parte sau în zona egală pivotului.",
+            "code": "a = [5, 1, 3, 3, 9]\np = 3\nprint([x for x in a if x < p])\nprint([x for x in a if x == p])"
           }
         },
         {
@@ -657,14 +691,15 @@
           "text": "La două liste sortate, caută o separare în care jumătatea stângă conține numărul corect de valori și niciun element stâng nu depășește unul drept. Mediana ponderată folosește ponderea cumulată, nu numărul valorilor. Precizează convenția la exact jumătate.",
           "example": "a = [1, 3]\nb = [2, 4]\nprint((2 + 3) / 2)",
           "quiz": {
-            "question": "Mediana interclasării este?",
+            "question": "Pentru listele a = [1, 3] și b = [2, 4], care este mediana celor patru valori reunite, folosind media celor două valori centrale?",
             "options": [
               "2",
               "2.5",
               "3"
             ],
             "correct": 1,
-            "explanation": "Pentru lungime pară se face media celor două valori centrale."
+            "explanation": "Pentru lungime pară se face media celor două valori centrale.",
+            "code": "a = [1, 3]\nb = [2, 4]\nprint((2 + 3) / 2)"
           }
         },
         {
@@ -672,14 +707,15 @@
           "text": "O tablă 2^n se împarte în patru cadrane. La tromino, o piesă centrală creează câte o gaură pentru trei cadrane, păstrând condiția subproblemei. La dreptunghi fără găuri, încearcă tăieturi printr-o gaură; alte soluții optime pot avea coordonate diferite.",
           "example": "print(2 ** 3, 4 ** 3)",
           "quiz": {
-            "question": "Câte celule are tabla pentru n=3?",
+            "question": "O tablă pătrată are latura 2**n celule. Pentru n = 3, câte celule are întreaga tablă?",
             "options": [
               "8",
               "64",
               "32"
             ],
             "correct": 1,
-            "explanation": "Tabla are 8×8=64 celule."
+            "explanation": "Tabla are 8×8=64 celule.",
+            "code": "print(2 ** 3, 4 ** 3)"
           }
         }
       ],
@@ -701,13 +737,14 @@
           "text": "O alegere locală cere justificare. Pentru activități, înlocuiește primul interval al unei soluții optime cu cel care se termină mai devreme: restul rămâne fezabil. Repetând argumentul, obții optimul Greedy. Contraexemplele disting un criteriu bun de unul intuitiv dar greșit.",
           "example": "monede = [1, 3, 4]\nprint(\"Greedy pentru 6: 4+1+1; optim: 3+3\")",
           "quiz": {
-            "question": "Greedy cu cea mai mare monedă este optim aici?",
+            "question": "Pentru suma 6 și monede nelimitate de valori 1, 3 și 4, alegerea repetată a celei mai mari monede posibile minimizează numărul monedelor?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Are trei monede, iar soluția optimă are două."
+            "explanation": "Are trei monede, iar soluția optimă are două.",
+            "code": "monede = [1, 3, 4]\nprint(\"Greedy pentru 6: 4+1+1; optim: 3+3\")"
           }
         },
         {
@@ -715,14 +752,15 @@
           "text": "Durate mici mai întâi minimizează așteptarea totală neponderată. Pentru suma ponderată, sortează durată/prioritate. EDD ordonează după termen pentru întârziere maximă minimă. Joburile de durată 1 cu profit cer selecție; când duratele diferă, această regulă nu mai este suficientă.",
           "example": "a = [(3, 1), (1, 2)]\nprint(sorted(a, key=lambda x: x[0] / x[1]))",
           "quiz": {
-            "question": "Ce criteriu folosește EDD?",
+            "question": "Regula EDD (Earliest Due Date) ordonează lucrările crescător după ce criteriu?",
             "options": [
               "Profitul",
               "Termenul limită",
               "Culoarea"
             ],
             "correct": 1,
-            "explanation": "Earliest Due Date ordonează după cel mai apropiat termen."
+            "explanation": "Earliest Due Date ordonează după cel mai apropiat termen.",
+            "code": "a = [(3, 1), (1, 2)]\nprint(sorted(a, key=lambda x: x[0] / x[1]))"
           }
         },
         {
@@ -730,13 +768,14 @@
           "text": "Heapul minim permite accesul la minim în O(1) și inserare/extragere O(log n); heapify este O(n). heapq lucrează pe o listă și nu o sortează complet. queue.PriorityQueue oferă o interfață sincronizată cu put/get; pentru algoritmi locali heapq este adesea suficient.",
           "example": "import heapq\nh = [5, 2, 8]\nheapq.heapify(h)\nprint(heapq.heappop(h))",
           "quiz": {
-            "question": "Heapul este obligatoriu complet sortat?",
+            "question": "După heapq.heapify(h), elementele listei h sunt garantat ordonate complet crescător?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Doar relația de heap este garantată, nu sortarea globală."
+            "explanation": "Doar relația de heap este garantată, nu sortarea globală.",
+            "code": "import heapq\nh = [5, 2, 8]\nheapq.heapify(h)\nprint(heapq.heappop(h))"
           }
         },
         {
@@ -744,13 +783,14 @@
           "text": "Cu laturi distincte, sortarea descrescătoare permite alegerea celui mai mare cub din blocul unei culori. Cu laturi repetate, alegerile pot afecta continuarea și trebuie revizuită justificarea; DP poate calcula înălțimea și numărul turnurilor. Pentru joc cu număr par de elemente, paritatea pozițiilor oferă o strategie cu scor cel puțin egal.",
           "example": "a = [(10, 1), (9, 1), (8, 2), (5, 1)]\nprint(10 + 8 + 5)",
           "quiz": {
-            "question": "Laturi repetate păstrează automat aceeași demonstrație?",
+            "question": "Dacă o demonstrație Greedy pentru turnuri de cuburi presupune laturi distincte, poate fi aplicată automat, fără verificări, și când laturile se repetă?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Ipotezele demonstrației trebuie reverificate."
+            "explanation": "Ipotezele demonstrației trebuie reverificate.",
+            "code": "a = [(10, 1), (9, 1), (8, 2), (5, 1)]\nprint(10 + 8 + 5)"
           }
         }
       ],
@@ -772,14 +812,15 @@
           "text": "Definește sensul exact al dp înainte de cod. Arată ultima decizie a unei soluții optime și subproblema rămasă. Stabilește bazele și o ordine în care toate dependențele sunt cunoscute. Memoizarea de sus în jos și calculul de jos în sus evită repetarea subproblemelor.",
           "example": "dp = [0, 1]\nfor i in range(2, 6):\n    dp.append(dp[i - 1] + dp[i - 2])\nprint(dp[5])",
           "quiz": {
-            "question": "De ce nu folosim o stare încă necalculată?",
+            "question": "În calculul iterativ al programării dinamice, de ce trebuie calculate întâi stările de care depinde starea curentă?",
             "options": [
               "Dependența trebuie cunoscută",
               "Pentru că lista nu poate crește",
               "Pentru sortare"
             ],
             "correct": 0,
-            "explanation": "Ordinea trebuie să respecte relațiile de recurență."
+            "explanation": "Ordinea trebuie să respecte relațiile de recurență.",
+            "code": "dp = [0, 1]\nfor i in range(2, 6):\n    dp.append(dp[i - 1] + dp[i - 2])\nprint(dp[5])"
           }
         },
         {
@@ -787,14 +828,15 @@
           "text": "Valoarea optimă nu este soluția efectivă. Memorează predecesorul ori decizia; pornește din starea finală și revino spre bază. Pentru număr de soluții optime: la un optim mai bun înlocuiești numărul, la egalitate îl aduni, fără a dubla aceleași soluții.",
           "example": "best = [0, 3, 5]\npred = [-1, 0, 1]\ni = 2\nwhile i != -1:\n    print(i)\n    i = pred[i]",
           "quiz": {
-            "question": "La egalitate de valoare optimă, ce faci cu numărul variantelor?",
+            "question": "O nouă tranziție produce același optim și soluții distincte de cele deja numărate. Cum actualizezi numărul soluțiilor optime?",
             "options": [
               "Îl aduni",
               "Îl resetezi la 0",
               "Ignori toate variantele"
             ],
             "correct": 0,
-            "explanation": "Soluțiile distincte din ramurile compatibile contribuie la același optim."
+            "explanation": "Soluțiile distincte din ramurile compatibile contribuie la același optim.",
+            "code": "best = [0, 3, 5]\npred = [-1, 0, 1]\ni = 2\nwhile i != -1:\n    print(i)\n    i = pred[i]"
           }
         },
         {
@@ -802,14 +844,15 @@
           "text": "La LIS strict folosești <, la subșir nedescrescător ≤. Pentru O(n log n), tails păstrează cel mai mic final pentru fiecare lungime; el singur nu este obligatoriu o soluție în ordinea intrării. Indicii și predecesorii permit reconstrucția. Lanțurile pe două litere au alte condiții decât cele pe una.",
           "example": "a = [2, 2, 2]\nprint(\"LIS strict: 1; nedescrescător: 3\")",
           "quiz": {
-            "question": "Care este lungimea maximă nedescrescătoare?",
+            "question": "Pentru a = [2, 2, 2], care este lungimea maximă a unui subșir nedescrescător, în care egalitatea este permisă?",
             "options": [
               "1",
               "2",
               "3"
             ],
             "correct": 2,
-            "explanation": "Valorile egale sunt permise în varianta nedescrescătoare."
+            "explanation": "Valorile egale sunt permise în varianta nedescrescătoare.",
+            "code": "a = [2, 2, 2]\nprint(\"LIS strict: 1; nedescrescător: 3\")"
           }
         },
         {
@@ -817,14 +860,15 @@
           "text": "La 0/1 ori subset sum fiecare obiect se folosește cel mult o dată: capacitățile se parcurg descrescător. Pentru monede nelimitate poți reutiliza tipul. La exact un element din fiecare vector, tranzițiile pornesc din nivelul anterior, nu din nivelul curent.",
           "example": "dp = [True, False, False, False]\nx = 2\nfor s in range(3, x - 1, -1):\n    dp[s] = dp[s] or dp[s - x]",
           "quiz": {
-            "question": "De ce mergem descrescător în varianta 0/1?",
+            "question": "În DP cu un singur vector pentru rucsacul 0/1, de ce parcurgem capacitățile descrescător când procesăm un obiect?",
             "options": [
               "Ca obiectul să nu fie refolosit",
               "Pentru sortarea numerelor",
               "Pentru a evita orice listă"
             ],
             "correct": 0,
-            "explanation": "Starea sursă trebuie să fie cea dinainte de obiectul curent."
+            "explanation": "Starea sursă trebuie să fie cea dinainte de obiectul curent.",
+            "code": "dp = [True, False, False, False]\nx = 2\nfor s in range(3, x - 1, -1):\n    dp[s] = dp[s] or dp[s - x]"
           }
         },
         {
@@ -832,14 +876,15 @@
           "text": "Robotul și pătratele de 1 folosesc vecini deja calculați. Jocul pe secvență are dp[l][r] ca diferență garantată pentru jucătorul curent; alegerea unui capăt scade optimul adversarului. Joburile cu durate folosesc timpul drept stare. Precizează timp și memorie pentru fiecare tabel.",
           "example": "print(\"Joc: dp[l][r] = max(a[l]-dp[l+1][r], a[r]-dp[l][r-1])\")",
           "quiz": {
-            "question": "În joc, de ce se scade starea intervalului rămas?",
+            "question": "În jocul în care alegem un capăt, dp[l][r] reprezintă avantajul jucătorului curent față de adversar. De ce scădem dp-ul intervalului rămas din valoarea aleasă?",
             "options": [
               "Următorul jucător este adversarul",
               "Pentru a sorta lista",
               "Ca suma să fie mereu negativă"
             ],
             "correct": 0,
-            "explanation": "Starea se exprimă din perspectiva jucătorului care urmează."
+            "explanation": "Starea se exprimă din perspectiva jucătorului care urmează.",
+            "code": "print(\"Joc: dp[l][r] = max(a[l]-dp[l+1][r], a[r]-dp[l][r-1])\")"
           }
         }
       ],
@@ -861,14 +906,15 @@
           "text": "Definește componentele soluției, domeniul fiecăreia, condiția de continuare și condiția de acceptare. După recursie anulează exact alegerea făcută. O tăiere este corectă numai dacă ramura eliminată nu poate conține o soluție validă.",
           "example": "path = []\npath.append(1)\n# apel recursiv\npath.pop()",
           "quiz": {
-            "question": "Ce face pop la revenire?",
+            "question": "După path.append(1) și explorarea ramurii, ce rol are path.pop() în exemplul de backtracking?",
             "options": [
               "Anulează ultima alegere",
               "Șterge toate soluțiile",
               "Oprește recursia"
             ],
             "correct": 0,
-            "explanation": "Restabilește starea pentru următoarea ramură."
+            "explanation": "Restabilește starea pentru următoarea ramură.",
+            "code": "path = []\npath.append(1)\n# apel recursiv\npath.pop()"
           }
         },
         {
@@ -876,13 +922,14 @@
           "text": "Permutarea folosește toate valorile distincte într-o ordine. Aranjamentul alege k valori și ordinea contează. Combinarea alege k și ordinea nu contează: impune indici crescători. Anagramele cu litere repetate au nevoie de frecvențe sau reguli contra duplicatelor.",
           "example": "print(\"C(3,2): (1,2), (1,3), (2,3)\")",
           "quiz": {
-            "question": "Sunt (1,2) și (2,1) combinări diferite?",
+            "question": "La alegerea unei combinări de două elemente din {1, 2, 3}, reprezintă (1, 2) și (2, 1) alegeri diferite?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Ordinea nu contează la combinări."
+            "explanation": "Ordinea nu contează la combinări.",
+            "code": "print(\"C(3,2): (1,2), (1,3), (2,3)\")"
           }
         },
         {
@@ -890,13 +937,14 @@
           "text": "Numărul de soluții și lista tuturor soluțiilor sunt cerințe diferite. La monede, cantitățile pe tip elimină permutările aceleiași plăți. Limita stocului și limita totală M trebuie verificate separat. La submulțimi, tratează și mulțimea vidă și elementul 0.",
           "example": "print(\"S=4, monede 1,2: (4,0), (2,1), (0,2)\")",
           "quiz": {
-            "question": "Stocul limitat impune automat maximum M monede?",
+            "question": "Dacă fiecare tip de monedă are un stoc limitat, este garantată și o limită totală M aleasă separat, fără să mai verificăm suma cantităților?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "M este o restricție suplimentară asupra sumei cantităților."
+            "explanation": "M este o restricție suplimentară asupra sumei cantităților.",
+            "code": "print(\"S=4, monede 1,2: (4,0), (2,1), (0,2)\")"
           }
         },
         {
@@ -904,14 +952,15 @@
           "text": "O soluție pentru regine poate fi vectorul coloanelor pe linii: coloane distincte și |c[i]-c[j]| != |i-j|. La deranjamente exclude valoarea egală poziției. Pentru echipe, chestionare și cifre, formulează numărul elementelor și suma înainte de generare.",
           "example": "cols = [2, 4, 1, 3]\nprint(all(abs(cols[i] - cols[j]) != abs(i - j) for i in range(4) for j in range(i)))",
           "quiz": {
-            "question": "Două regine se atacă diagonal când?",
+            "question": "Pentru două regine aflate pe poziții distincte (r1, c1) și (r2, c2), când se atacă pe diagonală?",
             "options": [
               "Diferențele absolute de linii și coloane sunt egale",
               "Sunt în coloane diferite",
               "Suma coloanelor este pară"
             ],
             "correct": 0,
-            "explanation": "Pantele diagonalelor sunt ±1."
+            "explanation": "Pantele diagonalelor sunt ±1.",
+            "code": "cols = [2, 4, 1, 3]\nprint(all(abs(cols[i] - cols[j]) != abs(i - j) for i in range(4) for j in range(i)))"
           }
         }
       ],
@@ -935,14 +984,15 @@
           "text": "Un modul propriu este un fișier Python. import nume păstrează accesul prin nume.funcție; from nume import f aduce numele f în spațiul curent. __name__ este __main__ pentru programul rulat direct. Pachetele organizează module în directoare; __init__.py poate inițializa un pachet obișnuit.",
           "example": "import math\nprint(math.isqrt(10))",
           "quiz": {
-            "question": "Ce este un modul propriu?",
+            "question": "În organizarea obișnuită a unui proiect Python, ce este un modul propriu care conține funcții reutilizabile?",
             "options": [
               "Un fișier .py",
               "Un cont online",
               "O variabilă globală obligatorie"
             ],
             "correct": 0,
-            "explanation": "Funcțiile reutilizabile pot fi definite într-un fișier separat."
+            "explanation": "Funcțiile reutilizabile pot fi definite într-un fișier separat.",
+            "code": "import math\nprint(math.isqrt(10))"
           }
         },
         {
@@ -950,13 +1000,14 @@
           "text": "Scrie intrările admise, rezultatul și cazurile-limită. În TDD: un test care eșuează, implementarea minimă, toate testele, apoi refactorizare. Un test trecut nu demonstrează toate intrările. Refactorizarea schimbă structura internă păstrând comportamentul observabil.",
           "example": "def patrat(x):\n    return x * x\nassert patrat(-3) == 9",
           "quiz": {
-            "question": "Refactorizarea trebuie să schimbe rezultatul?",
+            "question": "La refactorizare, trebuie schimbat comportamentul observabil al programului pentru aceleași intrări?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 1,
-            "explanation": "Ea păstrează comportamentul și îmbunătățește organizarea."
+            "explanation": "Ea păstrează comportamentul și îmbunătățește organizarea.",
+            "code": "def patrat(x):\n    return x * x\nassert patrat(-3) == 9"
           }
         },
         {
@@ -964,14 +1015,15 @@
           "text": "Un decorator primește o funcție și întoarce un comportament nou. wrapper(*args,**kwargs) poate delega apelul păstrând argumentele; return transmite rezultatul. Separă măsurarea sau jurnalizarea de calculul efectiv.",
           "example": "def identitate(f):\n    def wrapper(*args, **kwargs):\n        return f(*args, **kwargs)\n    return wrapper",
           "quiz": {
-            "question": "Ce trebuie să facă wrapper cu rezultatul lui f?",
+            "question": "În decoratorul din exemplu, cum păstrează wrapper valoarea returnată de funcția f?",
             "options": [
               "Să îl returneze dacă interfața îl cere",
               "Să îl piardă mereu",
               "Să îl sorteze"
             ],
             "correct": 0,
-            "explanation": "Altfel funcția decorată ar returna None în locul rezultatului."
+            "explanation": "Altfel funcția decorată ar returna None în locul rezultatului.",
+            "code": "def identitate(f):\n    def wrapper(*args, **kwargs):\n        return f(*args, **kwargs)\n    return wrapper"
           }
         }
       ]
@@ -994,13 +1046,14 @@
           "text": "__init__ configurează instanța și nu returnează obiectul. self referă instanța apelului. Atributele create pe self sunt ale instanței; o listă mutabilă declarată pe clasă poate fi partajată. Metodele grupează comportamentul și regulile datelor.",
           "example": "class Cutie:\n    def __init__(self):\n        self.elemente = []",
           "quiz": {
-            "question": "Listele self.elemente sunt independente pentru două obiecte?",
+            "question": "După a = Cutie() și b = Cutie(), sunt a.elemente și b.elemente două liste distincte?",
             "options": [
               "Da",
               "Nu"
             ],
             "correct": 0,
-            "explanation": "Fiecare inițializare construiește o listă nouă."
+            "explanation": "Fiecare inițializare construiește o listă nouă.",
+            "code": "class Cutie:\n    def __init__(self):\n        self.elemente = []"
           }
         },
         {
@@ -1015,7 +1068,8 @@
               "2"
             ],
             "correct": 1,
-            "explanation": "Metoda suprascrisă reutilizează baza și aplică reducerea."
+            "explanation": "Metoda suprascrisă reutilizează baza și aplică reducerea.",
+            "code": "class Baza:\n    def cost(self):\n        return 10\nclass Redus(Baza):\n    def cost(self):\n        return super().cost() - 2"
           }
         },
         {
@@ -1023,14 +1077,15 @@
           "text": "Separă interfața, serviciile/regulile, entitățile și repository-ul. O entitate are identitate; un obiect valoare se descrie prin conținut. Un DTO transportă date fără a concentra toate regulile. Un agregat păstrează invarianta unui grup de obiecte; operațiile externe trec prin rădăcina lui.",
           "example": "print(\"Interfață → Serviciu → Repository\")",
           "quiz": {
-            "question": "Unde grupăm căutarea și păstrarea înregistrărilor?",
+            "question": "În arhitectura prezentată, ce componentă izolează operațiile de căutare și stocare a înregistrărilor?",
             "options": [
               "În repository",
               "În fiecare print",
               "În denumirea fișierului HTML"
             ],
             "correct": 0,
-            "explanation": "Repository-ul izolează modul de stocare de restul aplicației."
+            "explanation": "Repository-ul izolează modul de stocare de restul aplicației.",
+            "code": "print(\"Interfață → Serviciu → Repository\")"
           }
         }
       ]
@@ -1046,7 +1101,7 @@
       "solution": "a = int(input())\nb = int(input())\nprint(a + b, a * b)",
       "explanation": "Citește cu int(input()). print poate afișa două expresii separate prin spațiu. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n5",
@@ -1078,7 +1133,7 @@
       "solution": "a = int(input())\nprint(2 * a)",
       "explanation": "Înmulțește numărul cu 2. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "7",
@@ -1106,7 +1161,7 @@
       "solution": "a, b = map(int, input().split())\nprint(2 * (a + b), a * b)",
       "explanation": "Perimetrul este 2 * (a + b), iar aria este a * b. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 5",
@@ -1134,7 +1189,7 @@
       "solution": "a, b = map(int, input().split())\nprint(a // b, a % b)",
       "explanation": "Folosește // și %. Verifică relația a = b * cât + rest. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "17 5",
@@ -1162,7 +1217,7 @@
       "solution": "n = int(input())\nprint(n // 3600, n % 3600 // 60, n % 60)",
       "explanation": "O oră are 3600 de secunde; o minută are 60. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3661",
@@ -1190,7 +1245,7 @@
       "solution": "a, b, c = map(float, input().split())\nprint(f\"{(a + b + c) / 3:.2f}\")",
       "explanation": "Formatarea :.2f păstrează două cifre după punct. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3",
@@ -1218,7 +1273,7 @@
       "solution": "a, b = map(int, input().split())\na, b = b, a\nprint(a, b)",
       "explanation": "Atribuirea a, b = b, a schimbă valorile. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 7",
@@ -1246,7 +1301,7 @@
       "solution": "a, b = map(int, input().split())\nprint(a & b, a | b, a ^ b)",
       "explanation": "& păstrează biții comuni, | reunește biții, ^ păstrează biții diferiți. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "5 3",
@@ -1274,7 +1329,7 @@
       "solution": "a, b = map(int, input().split())\nx, y = map(float, input().split())\nc, d = input().split()\nprint(a, f\"{x:.2f}\", c, b, f\"{y:.2f}\", d)",
       "explanation": "Convertește fiecare pereche potrivit tipului ei. Formatează fiecare real prin :.2f. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2\n3.5 4\na b",
@@ -1302,7 +1357,7 @@
       "solution": "a = list(map(int, input().split()))\nb = a\nc = a.copy()\nprint(a == b, a is b, a == c, a is c)",
       "explanation": "== compară conținutul listelor; is verifică dacă numele se referă la același obiect. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2",
@@ -1330,7 +1385,7 @@
       "solution": "n = int(input())\nprint(\"PAR\" if n % 2 == 0 else \"IMPAR\")",
       "explanation": "Testează restul împărțirii la 2. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "8",
@@ -1358,7 +1413,7 @@
       "solution": "n = int(input())\nif n < 0:\n    print(\"NEGATIV\")\nelif n == 0:\n    print(\"ZERO\")\nelse:\n    print(\"POZITIV\")",
       "explanation": "Tratează separat n < 0, n == 0 și n > 0. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "-1",
@@ -1386,7 +1441,7 @@
       "solution": "a, b, c = map(int, input().split())\nm = a\nif b > m:\n    m = b\nif c > m:\n    m = c\nprint(m)",
       "explanation": "Inițializează maximul cu prima valoare; compară cu celelalte. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 7 3",
@@ -1414,7 +1469,7 @@
       "solution": "a = int(input())\nprint(\"DA\" if a % 400 == 0 or a % 4 == 0 and a % 100 != 0 else \"NU\")",
       "explanation": "Divizibil cu 400 sau divizibil cu 4 și nedivizibil cu 100. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2000",
@@ -1446,7 +1501,7 @@
       "solution": "a, b, c = sorted(map(int, input().split()))\nprint(\"DA\" if a + b > c else \"NU\")",
       "explanation": "Cea mai mare latură trebuie să fie strict mai mică decât suma celorlalte. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 4 5",
@@ -1474,7 +1529,7 @@
       "solution": "a, b, c = map(int, input().split())\nif 0 <= a < 24 and 0 <= b < 60 and 0 <= c < 60:\n    print(f\"{a:02d}:{b:02d}:{c:02d}\")\nelse:\n    print(\"INVALID\")",
       "explanation": "Folosește condițiile înlănțuite și formatarea :02d. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 3 4",
@@ -1506,7 +1561,7 @@
       "solution": "x, op, y = input().split()\nx, y = float(x), float(y)\nif op == \"+\":\n    r = x + y\nelif op == \"-\":\n    r = x - y\nelif op == \"*\":\n    r = x * y\nelif op == \"/\" and y != 0:\n    r = x / y\nelse:\n    r = None\nprint(\"INVALID\" if r is None else f\"{r:.3f}\")",
       "explanation": "Alege operația prin if/elif; nu folosi eval pe textul citit. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 + 3",
@@ -1538,7 +1593,7 @@
       "solution": "z, l, a = map(int, input().split())\nzile = [31, 29 if a % 400 == 0 or a % 4 == 0 and a % 100 != 0 else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\nz += 1\nif z > zile[l - 1]:\n    z = 1\n    l += 1\nif l == 13:\n    l = 1\n    a += 1\nprint(f\"{z}.{l}.{a}\")",
       "explanation": "Calculează mai întâi numărul zilelor din februarie, apoi tratează trecerea lunii și a anului. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "28 2 2000",
@@ -1566,7 +1621,7 @@
       "solution": "n = int(input())\ns = 0\nfor i in range(1, n + 1):\n    s += i\nprint(s)",
       "explanation": "range(1, n + 1) include n. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3",
@@ -1594,7 +1649,7 @@
       "solution": "n = int(input())\np = 1\nfor i in range(2, n + 1):\n    p *= i\nprint(p)",
       "explanation": "Inițializează produsul cu 1. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "5",
@@ -1622,7 +1677,7 @@
       "solution": "n = int(input())\ns = 0\nwhile n:\n    s += n % 10\n    n //= 10\nprint(s)",
       "explanation": "Ultima cifră este n % 10. Elimin-o prin n //= 10. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1203",
@@ -1650,7 +1705,7 @@
       "solution": "n = int(input())\na = n\nr = 0\nwhile a:\n    r = r * 10 + a % 10\n    a //= 10\nprint(\"DA\" if r == n else \"NU\")",
       "explanation": "Construiește inversul cifră cu cifră și păstrează originalul. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "121",
@@ -1678,7 +1733,7 @@
       "solution": "a, b = map(int, input().split())\nwhile b:\n    a, b = b, a % b\nprint(a)",
       "explanation": "În algoritmul lui Euclid înlocuiești (a,b) cu (b,a%b) până când b este 0. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "440 280",
@@ -1706,7 +1761,7 @@
       "solution": "n = int(input())\nprim = n >= 2\nd = 2\nwhile d * d <= n and prim:\n    if n % d == 0:\n        prim = False\n    d += 1\nprint(\"DA\" if prim else \"NU\")",
       "explanation": "0 și 1 nu sunt prime. Caută divizori până la rădăcina pătrată. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2",
@@ -1738,7 +1793,7 @@
       "solution": "s = 0\nwhile True:\n    x = int(input())\n    if x == 0:\n        break\n    s += x\nprint(s)",
       "explanation": "Citește în while; oprește-te la santinelă. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\n-1\n3\n0",
@@ -1766,7 +1821,7 @@
       "solution": "from math import gcd\nL1, L2 = map(int, input().split())\nd = gcd(L1, L2)\nprint((L1 // d) * (L2 // d), d)",
       "explanation": "Latura maximă este CMMDC(L1,L2). Numărul plăcilor este (L1/latură)*(L2/latură). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "440 280",
@@ -1794,7 +1849,7 @@
       "solution": "a = list(map(int, input().split()))\nx = int(input())\nfor i in range(len(a)):\n    if a[i] == x:\n        print(i)\n        break\nelse:\n    print(-1)",
       "explanation": "else de după for se execută dacă bucla nu a fost oprită prin break. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 7 2\n2",
@@ -1817,12 +1872,12 @@
       "id": "bucle-10",
       "chapter": "bucle",
       "title": "Ignoră multiplii lui 3",
-      "statement": "Citește n între 0 și 100. Afișează pe o linie numerele de la 1 la n care nu sunt multipli de 3. Exersează continue.",
-      "hint": "continue sare peste restul iterației curente, fără a termina bucla.",
+      "statement": "Citește un număr întreg n (0 ≤ n ≤ 100). Parcurge numerele întregi de la 1 până la n inclusiv. Omite numerele care se împart exact la 3 (3, 6, 9, ...), iar pe celelalte afișează-le în ordine crescătoare, pe o singură linie, separate prin câte un spațiu. Pentru n = 7, omitem 3 și 6, deci afișăm 1 2 4 5 7. Pentru n = 0, afișează o linie goală. Scopul exercițiului este să folosești continue pentru a trece peste numerele omise.",
+      "hint": "i % 3 este restul împărțirii lui i la 3. Dacă i % 3 == 0, numărul se împarte exact la 3: execută continue înainte de a-l adăuga la rezultat. continue trece la următorul număr din buclă; nu oprește bucla.",
       "solution": "n = int(input())\na = []\nfor i in range(1, n + 1):\n    if i % 3 == 0:\n        continue\n    a.append(i)\nprint(*a)",
-      "explanation": "continue sare peste restul iterației curente, fără a termina bucla. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
+      "explanation": "i % 3 este restul împărțirii lui i la 3. Dacă i % 3 == 0, numărul se împarte exact la 3: execută continue înainte de a-l adăuga la rezultat. continue trece la următorul număr din buclă; nu oprește bucla. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "7",
@@ -1850,7 +1905,7 @@
       "solution": "s = int(input())\na = list(map(int, input().split()))\ntotal = 0\nfor i, x in enumerate(a, 1):\n    total += x\n    if total >= s:\n        print(i, f\"{total / i:.3f}\", total - s)\n        break",
       "explanation": "Oprește adunarea la prima sumă ≥ s; media se calculează numai pentru zilele folosite. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "10\n3 4 5 8",
@@ -1878,7 +1933,7 @@
       "solution": "a, b = map(int, input().split())\nx, y = 0, 1\nwhile x < a:\n    x, y = y, x + y\nprint(x if x <= b else \"NU\")",
       "explanation": "Generează termeni până când primul atinge a, apoi compară cu b. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "10 20",
@@ -1906,7 +1961,7 @@
       "solution": "n = int(input())\nfor i in range(1, n + 1):\n    print(*range(1, i + 1))",
       "explanation": "Bucla exterioară alege linia; cea interioară generează valorile ei. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3",
@@ -1934,7 +1989,7 @@
       "solution": "s = sorted(input())\ni = next(i for i, c in enumerate(s) if c != \"0\")\ns[0], s[i] = s[i], s[0]\nprint(\"\".join(s), \"\".join(sorted(s, reverse=True)))",
       "explanation": "După sortare crescătoare, mută prima cifră nenulă înaintea zerourilor. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "812383",
@@ -1962,7 +2017,7 @@
       "solution": "a = list(map(int, input().split()))\nm = a[0]\nnr = 0\nfor x in a:\n    if x < m:\n        m, nr = x, 1\n    elif x == m:\n        nr += 1\nprint(m, nr)",
       "explanation": "La un minim nou, resetează contorul la 1; la egalitate, îl crești. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 1 2 1",
@@ -1990,7 +2045,7 @@
       "solution": "a, b = map(int, input().split())\np = 1\nv = []\nwhile p <= b:\n    if p >= a:\n        v.append(p)\n    p *= 2\nprint(*v if v else [\"NU\"])",
       "explanation": "Începe cu 1 și dublează până depășești b. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "10 100",
@@ -2018,7 +2073,7 @@
       "solution": "n = int(input())\nwhile n >= 10:\n    n = sum(map(int, str(n)))\nprint(n)",
       "explanation": "O singură sumă nu ajunge mereu: pentru 99 obții întâi 18, apoi 9. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "99",
@@ -2046,7 +2101,7 @@
       "solution": "n = int(input())\nd = 1\nnr = 0\nwhile d * d <= n:\n    if n % d == 0:\n        nr += 1 if d * d == n else 2\n    d += 1\nprint(nr)",
       "explanation": "Divizorii vin în perechi d, n//d; rădăcina exactă se numără o singură dată. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1",
@@ -2074,7 +2129,7 @@
       "solution": "n = int(input())\ns = 0\nwhile n:\n    n //= 5\n    s += n\nprint(s)",
       "explanation": "Numără factorii 5: n//5 + n//25 + ... . Factorii 2 sunt suficienți. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "25",
@@ -2102,7 +2157,7 @@
       "solution": "n = int(input())\na = [tuple(map(int, input().split())) for _ in range(n)]\nl = max(x[0] for x in a)\nr = min(x[1] for x in a)\nprint(l, r) if l <= r else print(\"NU\")",
       "explanation": "Maximul capetelor stângi și minimul capetelor drepte determină intervalul comun. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n1 8\n3 7\n2 5",
@@ -2130,7 +2185,7 @@
       "solution": "s = input()\nprint(s[::-1])",
       "explanation": "Felierea cu pas -1 inversează șirul. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "abc",
@@ -2158,7 +2213,7 @@
       "solution": "s = input().lower()\nprint(sum(c in \"aeiou\" for c in s))",
       "explanation": "Convertește la litere mici și verifică apartenența la aeiou. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "Ana ARE mere",
@@ -2186,7 +2241,7 @@
       "solution": "print(\" \".join(input().split()))",
       "explanation": "Combină split() și join(). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "  Ana   are  mere  ",
@@ -2214,7 +2269,7 @@
       "solution": "s = input().lower()\nprint(\"DA\" if s == s[::-1] else \"NU\")",
       "explanation": "Compară șirul trecut în lowercase cu inversul lui. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "Ana",
@@ -2242,7 +2297,7 @@
       "solution": "s = input()\nt = input()\na = []\np = s.find(t)\nwhile p != -1:\n    a.append(p)\n    p = s.find(t, p + len(t))\nprint(*a if a else [-1])",
       "explanation": "După o apariție la p, reia căutarea de la p + len(t). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "aaaaa\naa",
@@ -2270,7 +2325,7 @@
       "solution": "s = input()\nk = int(input())\nprint(\"\".join(chr((ord(c) - 97 + k) % 26 + 97) if c != \" \" else c for c in s))",
       "explanation": "Folosește ord, chr și restul modulo 26. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "abc xyz\n3",
@@ -2298,7 +2353,7 @@
       "solution": "print(max(input().split(), key=len))",
       "explanation": "max cu key=len păstrează primul element dintre cele cu cheie egală. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "ana are mere",
@@ -2326,7 +2381,7 @@
       "solution": "s = input()\nprint(\"\".join(c + \"p\" + c if c in \"aeiou\" else c for c in s))",
       "explanation": "Construiește un șir nou; nu modifica șirul în timp ce îl parcurgi. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "ana",
@@ -2354,7 +2409,7 @@
       "solution": "s = input()\na = []\ni = 0\nwhile i < len(s):\n    j = i + 1\n    while j < len(s) and s[j] == s[i]:\n        j += 1\n    a.append(s[i] + str(j - i))\n    i = j\nprint(\"\".join(a))",
       "explanation": "Ține minte litera curentă și numără până la următoarea schimbare. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "aaabbc",
@@ -2382,7 +2437,7 @@
       "solution": "s = input()\nwhile s:\n    print(s.center(10))\n    s = s[1:-1]",
       "explanation": "center(10) returnează un șir nou; s[1:-1] elimină marginile. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "abcd",
@@ -2410,7 +2465,7 @@
       "solution": "s = input()\nt = input()\na = []\np = s.find(t)\nwhile p != -1:\n    a.append(p)\n    p = s.find(t, p + len(t))\nprint(*a if a else [-1])",
       "explanation": "După o potrivire la p, reia find de la p+len(t). index ar ridica ValueError dacă nu există. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "abccabcababc\nabc",
@@ -2438,7 +2493,7 @@
       "solution": "s = input()\ngresit = input()\ncorect = input()\np = int(input())\nprint(s.replace(gresit, corect, p))\nprint(\"OK\" if s.count(gresit) <= p else \"LIMITA\")",
       "explanation": "replace(gresit, corect, p) limitează înlocuirile; count numără potrivirile fără suprapunere. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "aa aa aa\naa\nb\n2",
@@ -2466,7 +2521,7 @@
       "solution": "import re\ns = input()\na = input()\nb = input()\nprint(\"\".join(b if x == a else x for x in re.split(r\"([ ,.!?;]+)\", s)))",
       "explanation": "Separă textul cu un grup capturant pentru separatori; înlocuiește numai tokenurile egale. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "ana banana, ana!\nana\nEva",
@@ -2494,7 +2549,7 @@
       "solution": "s = input()\nk = int(input()) % 26\na = []\nfor c in s:\n    if \"a\" <= c <= \"z\" or \"A\" <= c <= \"Z\":\n        baza = ord(\"a\") if c.islower() else ord(\"A\")\n        c = chr((ord(c) - baza - k) % 26 + baza)\n    a.append(c)\nprint(\"\".join(a))",
       "explanation": "Folosește modulo 26, cu baze separate pentru A și a. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "Def ABC!\n3",
@@ -2522,7 +2577,7 @@
       "solution": "s = input()\na = []\ni = 0\nwhile i < len(s):\n    a.append(s[i])\n    i += 3 if s[i] in \"aeiouAEIOU\" else 1\nprint(\"\".join(a))",
       "explanation": "Copiază litera; după o vocală sari peste cele două caractere inserate. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "Apa",
@@ -2550,7 +2605,7 @@
       "solution": "a = list(map(int, input().split()))\nprint(*(x * x for x in a if x % 2 == 0))",
       "explanation": "Folosește comprehensiune cu filtrul x % 2 == 0. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 -4 3",
@@ -2578,7 +2633,7 @@
       "solution": "a = sorted(set(map(int, input().split())))\nprint(a[-2] if len(a) >= 2 else \"NU\")",
       "explanation": "Elimină duplicatele înainte de a căuta penultimul element sortat. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "5 5 3 1",
@@ -2606,7 +2661,7 @@
       "solution": "a = list(map(int, input().split()))\nk = int(input()) % len(a)\nprint(*(a[-k:] + a[:-k] if k else a))",
       "explanation": "Redu k modulo lungimea listei; combină ultimele k elemente cu restul. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3 4\n1",
@@ -2634,7 +2689,7 @@
       "solution": "a = list(map(int, input().split()))\ns = 0\nb = []\nfor x in a:\n    s += x\n    b.append(s)\nprint(*b)",
       "explanation": "Menține o sumă și adaugă rezultatul după fiecare element. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3",
@@ -2662,7 +2717,7 @@
       "solution": "n = int(input())\na = [list(map(int, input().split())) for _ in range(n)]\nprint(sum(a[i][i] for i in range(n)))",
       "explanation": "Elementele de pe diagonală au indicii i == j. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\n1 2\n3 4",
@@ -2690,7 +2745,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nfor j in range(m):\n    print(*(a[i][j] for i in range(n)))",
       "explanation": "Coloana j din matrice devine linia j a transpusei. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 3\n1 2 3\n4 5 6",
@@ -2718,7 +2773,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nprint(max(range(n), key=lambda i: sum(a[i])))",
       "explanation": "Compară sumele liniilor; actualizează numai pentru o sumă strict mai mare. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 2\n1 2\n3 4",
@@ -2746,7 +2801,7 @@
       "solution": "a = list(map(int, input().split()))\nx = int(input())\nb = a.copy()\nb[0] = x\nprint(*a)\nprint(*b)",
       "explanation": "b = a copiază referința. Folosește a.copy() pentru lista simplă. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2\n9",
@@ -2774,7 +2829,7 @@
       "solution": "n = int(input())\na = []\nfor _ in range(n):\n    nume, nota = input().split()\n    a.append((nume, int(nota)))\nnume, nota = min(a, key=lambda x: (-x[1], x[0]))\nprint(nume, nota)",
       "explanation": "Un tuplu poate păstra numele și nota; cheia de sortare este (-nota, nume). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\nAna 8\nDan 10\nBob 10",
@@ -2802,7 +2857,7 @@
       "solution": "n = int(input())\na = list(map(float, input().split()))\ni = max(range(n - 1), key=lambda k: a[k + 1] - a[k])\nprint(i + 1, i + 2, f\"{a[i + 1] - a[i]:.2f}\")",
       "explanation": "Compară a[i+1]-a[i]; actualizează numai pentru o diferență strict mai mare. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "6\n4.25 4.05 4.25 4.48 4.30 4.40",
@@ -2830,7 +2885,7 @@
       "solution": "a = list(map(int, input().split()))\ni = 1\nwhile i < len(a) and a[i] >= a[i - 1]:\n    i += 1\nwhile i < len(a) and a[i] <= a[i - 1]:\n    i += 1\nprint(\"DA\" if i == len(a) else \"NU\")",
       "explanation": "După prima scădere, nu mai poate apărea o creștere. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 3 3 2 1",
@@ -2858,7 +2913,7 @@
       "solution": "a = list(map(int, input().split()))\nk = int(input())\ns = best = sum(a[:k])\nst = 0\nfor i in range(k, len(a)):\n    s += a[i] - a[i - k]\n    if s < best:\n        best, st = s, i - k + 1\ndel a[st:st + k]\nprint(*a)",
       "explanation": "Menține suma unei ferestre glisante, apoi folosește del a[st:st+k]. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "5 1 2 9\n2",
@@ -2886,7 +2941,7 @@
       "solution": "a = list(map(int, input().split()))\nfor i in range(len(a) - 1, -1, -1):\n    if a[i] < 0:\n        a.insert(i + 1, 0)\nprint(*a)",
       "explanation": "Parcurge de la dreapta la stânga pentru ca inserarea să nu schimbe indicii încă neprelucrați. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "-1 2 -3",
@@ -2914,7 +2969,7 @@
       "solution": "n = int(input())\na = [True] * (n + 1)\np = 2\nwhile p * p <= n:\n    if a[p]:\n        for j in range(p * p, n + 1, p):\n            a[j] = False\n    p += 1\nb = [i for i in range(2, n + 1) if a[i]]\nprint(*b if b else [\"NU\"])",
       "explanation": "Marchează multiplii fiecărui prim p, începând de la p*p. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "10",
@@ -2942,7 +2997,7 @@
       "solution": "f = [0] * 100\nfor x in map(int, input().split()):\n    f[x] += 1\nprint(sum(x // 2 for x in f))",
       "explanation": "Pentru o valoare care apare f ori poți forma f//2 perechi. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 1 1 2 2",
@@ -2970,7 +3025,7 @@
       "solution": "n = int(input())\na = [1]\nfor _ in range(n):\n    print(*a)\n    a = [1] + [a[i] + a[i + 1] for i in range(len(a) - 1)] + [1]",
       "explanation": "Marginile sunt 1; fiecare valoare interioară este suma celor două valori de deasupra. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4",
@@ -2998,7 +3053,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nk = int(input())\na.insert(k, [0] * m)\nfor row in a:\n    print(*row)",
       "explanation": "Construiește o linie nouă independentă și folosește insert. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 2\n1 2\n3 4\n1",
@@ -3026,7 +3081,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nb = []\nfor i, row in enumerate(a):\n    b.extend(row if i % 2 == 0 else row[::-1])\nprint(*b)",
       "explanation": "Alege row sau row[::-1] după paritatea indicelui liniei. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 3\n1 2 3\n4 5 6",
@@ -3054,7 +3109,7 @@
       "solution": "from copy import deepcopy\nn, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nb = deepcopy(a)\nb[0][0] = 999\nfor row in a:\n    print(*row)",
       "explanation": "O copie superficială copiază lista exterioară, dar păstrează referințele la linii. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 2\n1 2\n3 4",
@@ -3082,7 +3137,7 @@
       "solution": "a = list(map(int, input().split()))\nb = list(map(int, input().split()))\na[::2] = b[::2]\nprint(*a)\nprint(*(x for i, x in enumerate(a) if x % 2 == i % 2))",
       "explanation": "a[::2]=b[::2] atribuie o felie cu pas; comprehensiunea poate folosi enumerate. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3 4\n8 9 6 7",
@@ -3110,7 +3165,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nk = int(input()) % m\nfor row in a:\n    print(*(row[-k:] + row[:-k] if k else row))\nprint(*(max(row) for row in a))",
       "explanation": "Redu k modulo m; rotirea liniilor realizează rotirea coloanelor. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 3\n1 2 3\n4 5 6\n1",
@@ -3138,7 +3193,7 @@
       "solution": "print(*sorted(set(map(int, input().split()))))",
       "explanation": "Aplică set, apoi sorted. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 1 3 2",
@@ -3166,7 +3221,7 @@
       "solution": "a = set(map(int, input().split()))\nb = set(map(int, input().split()))\nprint(*sorted(a & b))",
       "explanation": "Operatorul & calculează intersecția mulțimilor. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3\n2 3 4",
@@ -3194,7 +3249,7 @@
       "solution": "a = set(map(int, input().split()))\nb = set(map(int, input().split()))\nprint(*sorted(a - b))",
       "explanation": "Folosește diferența a - b. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3\n2",
@@ -3222,7 +3277,7 @@
       "solution": "d = {}\nfor x in input().split():\n    d[x] = d.get(x, 0) + 1\nfor x in sorted(d):\n    print(x, d[x])",
       "explanation": "Crește d[cuvânt] pentru fiecare apariție. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "mere pere mere",
@@ -3250,7 +3305,7 @@
       "solution": "from collections import Counter\na = input()\nb = input()\nprint(\"DA\" if Counter(a) == Counter(b) else \"NU\")",
       "explanation": "Egalitatea mulțimilor nu ajunge: trebuie comparate și frecvențele. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "mere\nreme",
@@ -3278,7 +3333,7 @@
       "solution": "print(*sorted(input().split(), key=lambda x: (len(x), x)))",
       "explanation": "Cheia este tuplul (len(cuvânt), cuvânt). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "mere a pere an",
@@ -3306,7 +3361,7 @@
       "solution": "a = list(map(int, input().split()))\nprint(*sorted(a, key=str))",
       "explanation": "În ordinea textelor, 10 precede 2. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 10 1",
@@ -3334,7 +3389,7 @@
       "solution": "a = list(map(int, input().split()))\nprint(*sorted(a, key=lambda x: (len(str(x)), -x)))",
       "explanation": "Cheia poate fi (len(str(x)), -x). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 10 9 21",
@@ -3362,7 +3417,7 @@
       "solution": "d = {}\nfor cuvant in input().split():\n    d[cuvant[0]] = d.get(cuvant[0], 0) + 1\nfor litera in sorted(d):\n    print(litera, d[litera])",
       "explanation": "Folosește un dicționar de contoare, cu prima literă drept cheie. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "mere ana mere apa",
@@ -3390,7 +3445,7 @@
       "solution": "a = list(map(int, input().split()))\na.sort(key=lambda x: (sum(map(int, str(x))), -x))\nprint(*a)",
       "explanation": "Cheia este (suma_cifrelor(x), -x). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "11 45 20 810 179 81 1000",
@@ -3418,7 +3473,7 @@
       "solution": "a = list(map(int, input().split()))\na.sort(key=lambda x: (x % 2 == 0, x if x % 2 else -x))\nprint(*a)",
       "explanation": "Primul criteriu separă cele două grupuri, al doilea are semn diferit în fiecare grup. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4 3 2 1 6",
@@ -3446,7 +3501,7 @@
       "solution": "a = set(map(int, input().split()))\nb = set(map(int, input().split()))\nprint(*sorted(a | b))\nprint(*sorted(a ^ b))",
       "explanation": "A|B conține toate valorile; A^B conține valorile din exact una dintre mulțimi. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2\n2 3",
@@ -3474,7 +3529,7 @@
       "solution": "p = int(input())\nd = {}\nfor x in input().split():\n    d.setdefault(x[-p:], []).append(x)\nfor key in sorted(d, key=lambda k: (-len(d[k]), k)):\n    print(*sorted(d[key], reverse=True))",
       "explanation": "Folosește un dicționar cu sufixul drept cheie; sortarea are criterii pentru grupuri și pentru cuvinte. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\nana dana mere pere prune bune",
@@ -3502,7 +3557,7 @@
       "solution": "d = {}\nfor x in input().split():\n    d.setdefault(frozenset(x), []).append(x)\nfor key in sorted(d, key=lambda k: (-len(k), \"\".join(sorted(k)))):\n    if len(d[key]) >= 2:\n        print(*sorted(d[key], key=lambda x: (len(x), x)))",
       "explanation": "frozenset poate fi cheie de dicționar; aici aab și ab aparțin aceluiași grup. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "aab ab abc cba x",
@@ -3530,7 +3585,7 @@
       "solution": "from collections import Counter\nk = int(input())\ns = input().lower().translate(str.maketrans({c: \" \" for c in \",.!?;:\"}))\nd = Counter(s.split())\nfor x in sorted((x for x in d if d[x] >= k), key=lambda x: (-d[x], -len(x), x)):\n    print(x, d[x])",
       "explanation": "Construiește Counter după normalizare; cheia de sortare are trei componente. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\nAna, mere! ana mere pere pere pere",
@@ -3558,7 +3613,7 @@
       "solution": "n = int(input())\nd = {}\nfor _ in range(n):\n    cod, nume, *note = input().split()\n    d[cod] = [nume, list(map(int, note))]\ncod = input()\nif cod in d:\n    d[cod][1][0] = min(10, d[cod][1][0] + 1)\na = [(nume, sum(note) / len(note)) for nume, note in d.values()]\nfor nume, medie in sorted(a, key=lambda x: (-x[1], x[0])):\n    print(nume, f\"{medie:.2f}\")",
       "explanation": "Un dicționar indexat prin cod permite actualizarea directă; sortarea raportului folosește (-medie,nume). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\n1 Ana 8 9\n2 Dan 9 9\n1",
@@ -3586,7 +3641,7 @@
       "solution": "a = set(map(int, input().split()))\nx = int(input())\na.discard(x)\nprint(*sorted(a))\nd = {x: 1}\nprint(d.pop(x, 0), d.get(x, 0))",
       "explanation": "discard nu ridică eroare pentru un element absent; pop poate avea o valoare implicită. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2\n1",
@@ -3759,7 +3814,7 @@
       "solution": "a = map(int, input().split())\nprint(*map(lambda x: x * x, filter(lambda x: x > 0, a)))",
       "explanation": "filter selectează, map transformă; lambda poate descrie operația. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "-2 3 0 4",
@@ -4411,7 +4466,7 @@
       "solution": "from collections import Counter\nfrom math import sqrt\nwith open(\"text1.in\") as f:\n    a = Counter(f.read().split())\nwith open(\"text2.in\") as f:\n    b = Counter(f.read().split())\nd = sqrt(sum(x * x for x in a.values()) * sum(x * x for x in b.values()))\ns = sum(a[x] * b[x] for x in a) / d if d else 0\nwith open(\"date.out\", \"w\") as f:\n    print(f\"{s:.2f}\", file=f)",
       "explanation": "Counter construiește vectorii; produsul scalar se împarte la produsul normelor. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "{\"text1.in\": \"a a b\", \"text2.in\": \"a b b\"}",
@@ -4508,7 +4563,7 @@
       "solution": "s = input()\nprint(s.translate(str.maketrans(\",.;:\", \"    \")))",
       "explanation": "str.maketrans poate mapa fiecare separator la spațiu. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "a,b.c;d:e",
@@ -4536,7 +4591,7 @@
       "solution": "import re\nprint(*re.findall(r\"[0-9]+\", input()))",
       "explanation": "Modelul [0-9]+ găsește grupuri nevide de cifre. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "a12 b003",
@@ -4564,7 +4619,7 @@
       "solution": "import re\nprint(\"DA\" if re.fullmatch(r\"[A-Z]{2}-[0-9]{3}\", input()) else \"NU\")",
       "explanation": "Folosește re.fullmatch; o potrivire parțială nu este suficientă. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "AB-123",
@@ -4596,7 +4651,7 @@
       "solution": "from datetime import date, timedelta\nd = date.fromisoformat(input())\nprint(d + timedelta(days=1))",
       "explanation": "Adaugă timedelta(days=1). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2024-02-28",
@@ -4624,7 +4679,7 @@
       "solution": "from datetime import date\na = date.fromisoformat(input())\nb = date.fromisoformat(input())\nprint((b - a).days)",
       "explanation": "Scăderea datelor produce un timedelta; folosește days. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2024-02-28\n2024-03-01",
@@ -4652,7 +4707,7 @@
       "solution": "from datetime import datetime, timedelta\nd = datetime.strptime(input(), \"%Y-%m-%d %H:%M\")\nm = int(input())\nprint((d + timedelta(minutes=m)).strftime(\"%Y-%m-%d %H:%M\"))",
       "explanation": "timedelta(minutes=...) gestionează trecerea peste miezul nopții. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2024-12-31 23:30\n90",
@@ -4680,7 +4735,7 @@
       "solution": "import re\ns = input()\nprint(\"DA\" if re.fullmatch(r\"[A-Z]{3}-[0-9]{4}\", s) else \"NU\")",
       "explanation": "re.fullmatch verifică întregul șir, spre deosebire de o căutare parțială. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "ABC-1234",
@@ -4712,7 +4767,7 @@
       "solution": "import re\nn = int(input())\nd = {}\nfor _ in range(n):\n    m = re.fullmatch(r\"(.+) \\(([^()]+)\\) \\[([^\\]]+)\\]: .+\", input())\n    if m:\n        d.setdefault(m.group(1), []).append(m.group(3))\nprint(sum(map(len, d.values())))\nfor name in sorted(d):\n    print(name + \": \" + \"; \".join(d[name]))",
       "explanation": "Un regex cu grupuri numite extrage numele și coordonata temporală numai pentru liniile cu email între paranteze. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\nAna (a@x.ro) [2026-01-01 10:00]: start\nAutomation Task [2026-01-01 11:00]: backup\nAna (a@x.ro) [2026-01-02 12:00]: stop",
@@ -4740,7 +4795,7 @@
       "solution": "from datetime import datetime\nref = datetime.strptime(input(), \"%Y-%m-%d\").date()\nn = int(input())\nfor _ in range(n):\n    name, text = input().split(\", \")\n    d = datetime.strptime(text, \"%Y-%m-%d %H:%M\")\n    days = (d.date() - ref).days\n    state = str(days) if days >= 0 else \"TRECUT\"\n    print(name + \" | \" + d.strftime(\"%d/%m/%Y %H:%M\") + \" | \" + state)",
       "explanation": "Data de referință este intrare, ca rezultatul testelor să nu depindă de ziua rulării. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2026-01-01\n2\nConcert, 2026-01-03 18:00\nTest, 2025-12-31 10:00",
@@ -4768,7 +4823,7 @@
       "solution": "from datetime import datetime, timedelta\nref = datetime.strptime(input(), \"%Y-%m-%d %H:%M\")\nn = int(input())\na = []\nfor _ in range(n):\n    name, text, duration = input().split(\", \")\n    start = datetime.strptime(text, \"%Y-%m-%d %H:%M\")\n    a.append((name, start, start + timedelta(minutes=int(duration))))\nfor i, (name, start, end) in enumerate(a):\n    others = sorted(x[0] for j, x in enumerate(a) if i != j and max(start, x[1]) < min(end, x[2]))\n    state = \"VIITOR\" if ref < start else \"TRECUT\" if ref >= end else \"ACTIV\"\n    print(name + \" | \" + end.strftime(\"%Y-%m-%d %H:%M\") + \" | \" + state + \" | \" + (\" \".join(others) or \"-\"))",
       "explanation": "Două intervale se suprapun dacă max(start1,start2)<min(final1,final2); compară momente complete, inclusiv data. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2026-01-01 10:30\n2\nAna, 2026-01-01 10:00, 60\nDan, 2026-01-01 10:45, 30",
@@ -4796,7 +4851,7 @@
       "solution": "import re\np = re.compile(r\"([A-Z]+)-([0-9]+)\")\nm = p.search(input())\nprint(m.group(1), m.group(2), m.start(), m.end()) if m else print(\"NU\")",
       "explanation": "search poate găsi în interiorul textului; match cere începutul, fullmatch întregul text. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "xx AB-123 zz",
@@ -4824,7 +4879,7 @@
       "solution": "import re\ns = input()\np = r\"\\b[0-9]+(?=\\s+lei\\b)\"\nprint(re.sub(p, \"[SUMA]\", s))\nprint(sum(map(int, re.findall(p, s))))",
       "explanation": "Folosește lookahead pentru context și sub pentru înlocuire; findall calculează suma. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "5 lei si 10 lei, 3 euro",
@@ -4852,7 +4907,7 @@
       "solution": "import re\ns = input()\na = s.split(\".\")\nok = len(a) == 4 and all(re.fullmatch(r\"[0-9]{1,3}\", x) and (x == \"0\" or not x.startswith(\"0\")) and int(x) <= 255 for x in a)\nprint(\"DA\" if ok else \"NU\")",
       "explanation": "Regex verifică forma; conversia și regulile de interval verifică valorile. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "127.0.0.1",
@@ -4880,7 +4935,7 @@
       "solution": "import re\ns = input()\nq = chr(34)\na = re.findall(r\"([A-Za-z_]+)\\s*=\\s*\" + q + \"[^\" + q + \"]*\" + q, s)\nprint(*sorted(set(a)))",
       "explanation": "Un regex cu grup capturant găsește numele înainte de = și valoarea între ghilimele. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "<a href=\"https://x.ro\" title=\"X\">",
@@ -4938,7 +4993,7 @@
       "solution": "n = int(input())\nr = 0\nwhile n > 1:\n    n //= 2\n    r += 1\nprint(r)",
       "explanation": "Fiecare pas reduce aproximativ la jumătate valoarea. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "8",
@@ -4966,7 +5021,7 @@
       "solution": "n = int(input())\nprint(n * (n - 1) // 2)",
       "explanation": "Numărul este 0 + 1 + ... + (n-1). Formula se calculează în număr constant de operații aritmetice. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4",
@@ -4994,7 +5049,7 @@
       "solution": "a = list(map(int, input().split()))\nx = int(input())\np = -1\nc = 0\nfor i, v in enumerate(a):\n    c += 1\n    if v == x:\n        p = i\n        break\nprint(p, c)",
       "explanation": "Oprește căutarea la prima apariție. În cazul cel mai rău compari toate elementele. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 7 3\n3",
@@ -5022,7 +5077,7 @@
       "solution": "a = list(map(int, input().split()))\ns = int(input())\ni, j = 0, len(a) - 1\nnr = 0\nwhile i < j:\n    t = a[i] + a[j]\n    if t == s:\n        nr += 1\n        i += 1\n        j -= 1\n    elif t < s:\n        i += 1\n    else:\n        j -= 1\nprint(nr)",
       "explanation": "Folosește doi indici la capete; mărește stânga când suma e mică și micșorează dreapta când e mare. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3 4 5\n6",
@@ -5050,7 +5105,7 @@
       "solution": "a = list(map(int, input().split()))\np = [0]\nfor x in a:\n    p.append(p[-1] + x)\nq = int(input())\nfor _ in range(q):\n    l, r = map(int, input().split())\n    print(p[r + 1] - p[l])",
       "explanation": "Construiește prefixe p cu p[0]=0; suma pe [l,r] este p[r+1]-p[l]. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3\n2\n0 2\n1 1",
@@ -5078,7 +5133,7 @@
       "solution": "a = list(map(int, input().split()))\nprint(\"DA\" if len(a) != len(set(a)) else \"NU\")",
       "explanation": "Compară lungimea listei cu numărul de valori distincte. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 1",
@@ -5106,7 +5161,7 @@
       "solution": "vazute = set()\nfor x in map(int, input().split()):\n    if x in vazute:\n        print(x)\n        break\n    vazute.add(x)\nelse:\n    print(\"NU\")",
       "explanation": "După fiecare element, mulțimea conține valorile deja parcurse. Operațiile pe set au cost mediu constant, nu garantat în orice caz. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 2 2 3",
@@ -5138,7 +5193,7 @@
       "solution": "n = int(input())\nprint(n * (n + 1) // 2)",
       "explanation": "Adună n+(n-1)+...+1; costul nu este estimat din timpul măsurat. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4",
@@ -5166,7 +5221,7 @@
       "solution": "a = list(map(int, input().split()))\nx = int(input())\nl, r = 0, len(a) - 1\np = -1\nwhile l <= r:\n    m = (l + r) // 2\n    if a[m] == x:\n        p = m\n        break\n    if a[m] < x:\n        l = m + 1\n    else:\n        r = m - 1\nprint(p)",
       "explanation": "La fiecare pas compară cu mijlocul intervalului rămas. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 3 5 7\n5",
@@ -5223,7 +5278,7 @@
       "solution": "a = list(map(int, input().split()))\nl, r = 0, len(a) - 1\nwhile l < r:\n    m = (l + r) // 2\n    if a[m] < a[m + 1]:\n        l = m + 1\n    else:\n        r = m\nprint(a[l])",
       "explanation": "Compară a[m] cu a[m+1] ca să alegi jumătatea. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4 8 10 11 5",
@@ -5255,7 +5310,7 @@
       "solution": "def putere(a, n):\n    if n == 0:\n        return 1\n    p = putere(a, n // 2)\n    return p * p if n % 2 == 0 else p * p * a\na, n = map(int, input().split())\nprint(putere(a, n))",
       "explanation": "Calculează o singură dată puterea pentru n//2. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 10",
@@ -5283,7 +5338,7 @@
       "solution": "a = list(map(int, input().split()))\nb = list(map(int, input().split()))\ni = j = 0\nc = []\nwhile i < len(a) and j < len(b):\n    if a[i] <= b[j]:\n        c.append(a[i])\n        i += 1\n    else:\n        c.append(b[j])\n        j += 1\nprint(*(c + a[i:] + b[j:]))",
       "explanation": "Compară primele elemente neconsumate și copiază-l pe cel mai mic. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 3\n2 4",
@@ -5311,7 +5366,7 @@
       "solution": "def sortare(a):\n    if len(a) < 2:\n        return a\n    m = len(a) // 2\n    x, y = sortare(a[:m]), sortare(a[m:])\n    i = j = 0\n    b = []\n    while i < len(x) and j < len(y):\n        if x[i] <= y[j]:\n            b.append(x[i])\n            i += 1\n        else:\n            b.append(y[j])\n            j += 1\n    return b + x[i:] + y[j:]\nprint(*sortare(list(map(int, input().split()))))",
       "explanation": "O listă cu cel mult un element e sortată. Interclasarea combină cele două rezultate. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 1 2 1",
@@ -5339,7 +5394,7 @@
       "solution": "def inv(a):\n    if len(a) < 2:\n        return a, 0\n    m = len(a) // 2\n    x, p = inv(a[:m])\n    y, q = inv(a[m:])\n    i = j = 0\n    z = []\n    s = p + q\n    while i < len(x) and j < len(y):\n        if x[i] <= y[j]:\n            z.append(x[i])\n            i += 1\n        else:\n            z.append(y[j])\n            j += 1\n            s += len(x) - i\n    return z + x[i:] + y[j:], s\nprint(inv(list(map(int, input().split())))[1])",
       "explanation": "Când alegi un element din dreapta la interclasare, toate elementele rămase în stânga formează inversiuni cu el. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 2 1",
@@ -5371,7 +5426,7 @@
       "solution": "n = int(input())\nl, r = 0, n\np = 0\nwhile l <= r:\n    m = (l + r) // 2\n    if m * m <= n:\n        p = m\n        l = m + 1\n    else:\n        r = m - 1\nprint(p)",
       "explanation": "Caută ultima valoare pentru care condiția x*x ≤ n este adevărată. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "15",
@@ -5432,7 +5487,7 @@
       "solution": "def select(a, k):\n    p = a[len(a) // 2]\n    low = [x for x in a if x < p]\n    equal = [x for x in a if x == p]\n    if k < len(low):\n        return select(low, k)\n    if k < len(low) + len(equal):\n        return p\n    return select([x for x in a if x > p], k - len(low) - len(equal))\na = list(map(int, input().split()))\nk = int(input())\nprint(select(a, k - 1))",
       "explanation": "Partiționează în valori mai mici, egale și mai mari decât pivotul; continuă numai în partea care conține rangul. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "5 1 4 1 3\n2",
@@ -5489,7 +5544,7 @@
       "solution": "a = list(map(int, input().split()))\nb = list(map(int, input().split()))\nif len(a) > len(b):\n    a, b = b, a\nn, m = len(a), len(b)\nl, r = 0, n\nwhile l <= r:\n    i = (l + r) // 2\n    j = (n + m + 1) // 2 - i\n    al = a[i - 1] if i else float(\"-inf\")\n    ar = a[i] if i < n else float(\"inf\")\n    bl = b[j - 1] if j else float(\"-inf\")\n    br = b[j] if j < m else float(\"inf\")\n    if al <= br and bl <= ar:\n        v = max(al, bl) if (n + m) % 2 else (max(al, bl) + min(ar, br)) / 2\n        print(f\"{v:.2f}\")\n        break\n    if al > br:\n        r = i - 1\n    else:\n        l = i + 1",
       "explanation": "Partiționează lista mai scurtă. Maximele din stânga trebuie să fie ≤ minimele din dreapta. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 12 15 16 38\n2 13 17 30 45",
@@ -5517,7 +5572,7 @@
       "solution": "n = int(input())\na = [tuple(map(int, input().split())) for _ in range(n)]\nt = sum(w for x, w in a) / 2\nwhile True:\n    p = a[len(a) // 2][0]\n    low = [(x, w) for x, w in a if x < p]\n    wlow = sum(w for x, w in low)\n    wp = next(w for x, w in a if x == p)\n    if wlow >= t:\n        a = low\n    elif wlow + wp >= t:\n        print(p)\n        break\n    else:\n        t -= wlow + wp\n        a = [(x, w) for x, w in a if x > p]",
       "explanation": "Compară ponderea din stânga cu pragul; când mergi în dreapta, scade ponderile eliminate. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n1 1\n5 3\n9 1",
@@ -5545,7 +5600,7 @@
       "solution": "N = int(input())\na = [[0] * (2 ** N) for _ in range(2 ** N)]\ndef fill(r, c, size, start):\n    if size == 1:\n        a[r][c] = start\n        return\n    h = size // 2\n    for index, (rr, cc) in enumerate([(r, c + h), (r + h, c), (r, c), (r + h, c + h)]):\n        fill(rr, cc, h, start + index * h * h)\nfill(0, 0, 2 ** N, 1)\nfor row in a:\n    print(*row)",
       "explanation": "Deplasează originea și adaugă un sfert din numărul celulelor la valoarea de început. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "0",
@@ -5573,7 +5628,7 @@
       "solution": "n, hr, hc = map(int, input().split())\na = [[0] * (2 ** n) for _ in range(2 ** n)]\nlabel = 0\ndef tile(r, c, size, hr, hc):\n    global label\n    if size == 1:\n        return\n    h = size // 2\n    origins = [(r, c), (r, c + h), (r + h, c), (r + h, c + h)]\n    centers = [(r + h - 1, c + h - 1), (r + h - 1, c + h), (r + h, c + h - 1), (r + h, c + h)]\n    q = (2 if hr >= r + h else 0) + (1 if hc >= c + h else 0)\n    label += 1\n    for i, (rr, cc) in enumerate(centers):\n        if i != q:\n            a[rr][cc] = label\n    for i, (rr, cc) in enumerate(origins):\n        gr, gc = (hr, hc) if i == q else centers[i]\n        tile(rr, cc, h, gr, gc)\ntile(0, 0, 2 ** n, hr - 1, hc - 1)\nfor row in a:\n    print(*row)",
       "explanation": "Pune un tromino în centrul celor trei cadrane fără gaură, apoi tratează celula sa drept gaură pentru recursie. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "0 1 1",
@@ -5602,7 +5657,7 @@
       "solution": "from functools import lru_cache\nouter = tuple(map(int, input().split()))\nn = int(input())\nholes = [tuple(map(int, input().split())) for _ in range(n)]\n@lru_cache(None)\ndef solve(l, b, r, t):\n    p = next(((x, y) for x, y in holes if l < x < r and b < y < t), None)\n    if p is None:\n        return ((r - l) * (t - b), (l, b, r, t))\n    x, y = p\n    return max([solve(l, b, x, t), solve(x, b, r, t), solve(l, b, r, y), solve(l, y, r, t)], key=lambda v: v[0])\narea, rect = solve(*outer)\nprint(area)\nprint(*rect)",
       "explanation": "Încearcă cele patru părți ale dreptunghiului date de tăieturi printr-o gaură interioară. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "0 0 4 4\n1\n2 2",
@@ -5631,7 +5686,7 @@
       "solution": "a = list(map(int, input().split()))\nS = int(input())\nl, r = 0, len(a) - 1\nfound = False\nwhile l < r:\n    s = a[l] + a[r]\n    if s == S:\n        print(a[l], a[r])\n        found = True\n        l += 1\n        r -= 1\n    elif s < S:\n        l += 1\n    else:\n        r -= 1\nif not found:\n    print(\"NU\")",
       "explanation": "Suma prea mică mută stânga, suma prea mare mută dreapta; la egalitate mută ambele. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 5 7 8 10 12 15 17 25\n20",
@@ -5689,7 +5744,7 @@
       "solution": "n = int(input())\na = sorted(tuple(map(int, input().split())) for _ in range(n))\ndef solve(a):\n    if len(a) <= 3:\n        return min(((x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 for i, x in enumerate(a) for y in a[i + 1:]), default=float(\"inf\"))\n    m = len(a) // 2\n    mid = a[m][0]\n    d = min(solve(a[:m]), solve(a[m:]))\n    strip = sorted((p for p in a if (p[0] - mid) ** 2 < d), key=lambda p: p[1])\n    for i, p in enumerate(strip):\n        for q in strip[i + 1:i + 8]:\n            d = min(d, (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2)\n    return d\nprint(solve(a))",
       "explanation": "Rezolvă jumătățile după x, apoi verifică punctele apropiate de separator; în bandă nu ai nevoie de toate perechile. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n0 0\n3 4\n1 1",
@@ -5718,7 +5773,7 @@
       "solution": "a, b = map(int, input().split())\nc, d = map(int, input().split())\ne, f = map(int, input().split())\ng, h = map(int, input().split())\np1 = (a + d) * (e + h)\np2 = (c + d) * e\np3 = a * (f - h)\np4 = d * (g - e)\np5 = (a + b) * h\np6 = (c - a) * (e + f)\np7 = (b - d) * (g + h)\nprint(p1 + p4 - p5 + p7, p3 + p5)\nprint(p2 + p4, p1 - p2 + p3 + p6)",
       "explanation": "Produsele celor șapte expresii combină apoi cele patru elemente ale rezultatului. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2\n3 4\n5 6\n7 8",
@@ -5747,7 +5802,7 @@
       "solution": "s = int(input())\nn = 0\nfor v in [25, 10, 5, 1]:\n    n += s // v\n    s %= v\nprint(n)",
       "explanation": "Pentru acest sistem, ia succesiv cât mai multe monede mari. Nu generaliza la orice sistem. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "30",
@@ -5775,7 +5830,7 @@
       "solution": "n = int(input())\na = [tuple(map(int, input().split())) for _ in range(n)]\na.sort(key=lambda x: x[1])\nfinal = -1\nnr = 0\nfor s, f in a:\n    if s >= final:\n        nr += 1\n        final = f\nprint(nr)",
       "explanation": "Sortează după final și alege fiecare activitate care începe după sau la finalul ultimei alese. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n0 2\n1 3\n2 4",
@@ -5803,7 +5858,7 @@
       "solution": "n = int(input())\na = sorted([tuple(map(int, input().split())) for _ in range(n)], key=lambda x: x[1])\np = None\nnr = 0\nfor l, r in a:\n    if p is None or l > p:\n        p = r\n        nr += 1\nprint(nr)",
       "explanation": "Sortează după capătul drept. Dacă ultimul punct nu aparține intervalului, alege capătul său drept. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n1 3\n2 4\n5 6",
@@ -5831,7 +5886,7 @@
       "solution": "a = sorted(map(int, input().split()))\nh = int(input())\ni = nr = 0\nwhile i + 1 < len(a):\n    if a[i + 1] - a[i] < h:\n        nr += 1\n        i += 2\n    else:\n        i += 1\nprint(nr)",
       "explanation": "După sortare, împerechează cei mai mici doi compatibili; altfel elimină cel mai mic. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "172 162 190 183 170 188 165 210\n10",
@@ -5859,7 +5914,7 @@
       "solution": "import heapq\na = list(map(int, input().split()))\nheapq.heapify(a)\ns = 0\nwhile len(a) > 1:\n    x = heapq.heappop(a) + heapq.heappop(a)\n    s += x\n    heapq.heappush(a, x)\nprint(s)",
       "explanation": "Unește mereu cele mai scurte două șiruri, folosind un heap. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "20 30 20 35",
@@ -5891,7 +5946,7 @@
       "solution": "import heapq\nn = int(input())\na = sorted(tuple(map(int, input().split())) for _ in range(n))\nh = []\nr = 0\nfor s, f in a:\n    while h and h[0] <= s:\n        heapq.heappop(h)\n    heapq.heappush(h, f)\n    r = max(r, len(h))\nprint(r)",
       "explanation": "Sortează după început și păstrează într-un heap finalurile spectacolelor active. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n0 2\n1 3\n2 4",
@@ -5919,7 +5974,7 @@
       "solution": "n, G = map(int, input().split())\na = [tuple(map(int, input().split())) for _ in range(n)]\na.sort(key=lambda x: x[1] / x[0], reverse=True)\ns = 0.0\nfor g, v in a:\n    luat = min(G, g)\n    s += luat * v / g\n    G -= luat\nprint(f\"{s:.2f}\")",
       "explanation": "Sortează descrescător după valoare/greutate. Ultimul obiect poate fi luat parțial. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 50\n10 60\n20 100\n30 120",
@@ -5947,7 +6002,7 @@
       "solution": "n = int(input())\na = [tuple(map(int, input().split())) for _ in range(n)]\na.sort(key=lambda x: x[1], reverse=True)\nliber = [True] * 101\ns = 0\nfor d, p in a:\n    for t in range(d, 0, -1):\n        if liber[t]:\n            liber[t] = False\n            s += p\n            break\nprint(s)",
       "explanation": "Alege în ordinea descrescătoare a profitului și pune fiecare lucrare în ultimul interval liber dinaintea termenului. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4\n3 4\n1 1\n1 2\n3 5",
@@ -5975,7 +6030,7 @@
       "solution": "S = int(input())\ns = S\ng = 0\nfor c in [4, 3, 1]:\n    g += s // c\n    s %= c\ndp = [0] + [S + 1] * S\nfor s in range(1, S + 1):\n    dp[s] = 1 + min(dp[s - c] for c in [1, 3, 4] if c <= s)\nprint(g, dp[S])",
       "explanation": "Pentru S=6, Greedy ia 4+1+1, dar optim este 3+3. Calculează optimul prin programare dinamică; revino la problemă după capitolul următor. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "6",
@@ -6007,7 +6062,7 @@
       "solution": "n = int(input())\na = [(*map(int, input().split()), i + 1) for i in range(n)]\na.sort(key=lambda x: x[1])\nend = -1\nb = []\nfor s, f, i in a:\n    if s >= end:\n        b.append(i)\n        end = f\nprint(len(b))\nprint(*b)",
       "explanation": "Sortează după final și alege următoarea activitate compatibilă. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n0 2\n1 3\n2 4",
@@ -6036,7 +6091,7 @@
       "solution": "import heapq\nn = int(input())\na = [(*map(int, input().split()), i) for i in range(n)]\na.sort()\nh = []\nresult = [0] * n\nrooms = 0\nfor s, f, i in a:\n    if h and h[0][0] <= s:\n        end, room = heapq.heappop(h)\n    else:\n        rooms += 1\n        room = rooms\n    result[i] = room\n    heapq.heappush(h, (f, room))\nprint(rooms)\nprint(*result)",
       "explanation": "Un heap cu (final,sala) permite reutilizarea sălii eliberate prima. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n0 2\n1 3\n2 4",
@@ -6065,7 +6120,7 @@
       "solution": "n = int(input())\na = sorted([tuple(map(int, input().split())) for _ in range(n)], key=lambda x: x[1])\nb = []\nfor l, r in a:\n    if not b or b[-1] < l:\n        b.append(r)\nprint(len(b))\nprint(*b)",
       "explanation": "Alege cel mai mic capăt drept al unui interval încă neacoperit. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n1 3\n2 4\n5 7",
@@ -6094,7 +6149,7 @@
       "solution": "n = int(input())\na = [(*map(int, input().split()), i + 1) for i in range(n)]\na.sort(reverse=True)\nb = []\nheight = 0\ncolor = None\nfor side, c, i in a:\n    if c != color:\n        b.append(i)\n        height += side\n        color = c\nprint(height)\nprint(*b)",
       "explanation": "Din fiecare bloc consecutiv de aceeași culoare în ordinea laturilor, păstrează cel mai mare cub. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4\n5 1\n10 1\n9 1\n8 2",
@@ -6123,7 +6178,7 @@
       "solution": "n = int(input())\na = [(*map(int, input().split()), i + 1) for i in range(n)]\na.sort(key=lambda x: (x[1], x[2]))\nt = 0\nb = []\nfor duration, deadline, i in a:\n    b.append((i, t, t + duration, max(0, t + duration - deadline)))\n    t += duration\nprint(max((r[3] for r in b), default=0))\nfor row in b:\n    print(*row)",
       "explanation": "Regula EDD ordonează după termen. Demonstreaz-o prin schimbarea a două activități inversate. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n1 3\n2 2\n3 3",
@@ -6151,7 +6206,7 @@
       "solution": "from functools import cmp_to_key\nn = int(input())\na = [(*map(int, input().split()), i + 1) for i in range(n)]\na.sort(key=cmp_to_key(lambda x, y: (x[0] * y[1] > y[0] * x[1]) - (x[0] * y[1] < y[0] * x[1])))\nt = total = 0\nfor duration, weight, i in a:\n    t += duration\n    total += t * weight\nprint(total)\nprint(*(i for duration, weight, i in a))",
       "explanation": "Sortează după durată/prioritate. Compară rapoartele prin înmulțire încrucișată. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n5 25\n1 25\n5 50",
@@ -6180,7 +6235,7 @@
       "solution": "n = int(input())\na = [(*map(int, input().split()), i + 1) for i in range(n)]\na.sort(reverse=True)\nslots = [None] * (n + 1)\nfor p, d, i in a:\n    for t in range(d, 0, -1):\n        if slots[t] is None:\n            slots[t] = (p, i)\n            break\nb = [x for x in slots if x is not None]\nprint(sum(p for p, i in b))\nprint(*(i for p, i in b))",
       "explanation": "Rezervă ultimul slot liber admis în ordinea profitului descrescător; apoi elimină pauzele. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4\n4 3\n1 1\n2 1\n5 3",
@@ -6209,7 +6264,7 @@
       "solution": "a = sorted(map(int, input().split()))\nt = total = 0\nfor x in a:\n    total += t\n    t += x\nprint(total)\nprint(*a)",
       "explanation": "Schimbarea a doi clienți vecini inversați reduce așteptarea totală. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 1 2",
@@ -6237,7 +6292,7 @@
       "solution": "n = int(input())\na = [(*map(int, input().split()), i + 1) for i in range(n)]\na.sort(reverse=True)\nparent = list(range(n + 1))\nslots = {}\ndef find(x):\n    r = x\n    while parent[r] != r:\n        r = parent[r]\n    while parent[x] != x:\n        old = parent[x]\n        parent[x] = r\n        x = old\n    return r\nfor p, d, i in a:\n    t = find(d)\n    if t:\n        slots[t] = (p, i)\n        parent[t] = find(t - 1)\nprint(sum(p for p, i in slots.values()))\nprint(*(slots[t][1] for t in sorted(slots)))",
       "explanation": "parent[t] conduce la cel mai apropiat slot liber ≤ t; compresia drumului accelerează căutările repetate. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4\n4 3\n1 1\n2 1\n5 3",
@@ -6266,7 +6321,7 @@
       "solution": "a = list(map(int, input().split()))\nopp = input()\nparity = 0 if sum(a[::2]) >= sum(a[1::2]) else 1\nl, r = 0, len(a) - 1\ns1 = s2 = 0\nmoves = []\nfor move in opp:\n    if l % 2 == parity:\n        s1 += a[l]\n        l += 1\n        moves.append(\"S\")\n    else:\n        s1 += a[r]\n        r -= 1\n        moves.append(\"D\")\n    if move == \"S\":\n        s2 += a[l]\n        l += 1\n    else:\n        s2 += a[r]\n        r -= 1\nprint(s1, s2)\nprint(\"\".join(moves))",
       "explanation": "După fiecare mutare a adversarului, primul poate alege din nou un capăt cu paritatea dorită. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 1 4 3\nSS",
@@ -6294,7 +6349,7 @@
       "solution": "import heapq\nn = int(input())\na = [(*map(int, input().split()), i) for i in range(n)]\na.sort()\nh = []\nresult = [0] * n\nrooms = 0\nfor s, f, i in a:\n    if h and h[0][0] < s:\n        end, room = heapq.heappop(h)\n    else:\n        rooms += 1\n        room = rooms\n    result[i] = room\n    heapq.heappush(h, (f, room))\nprint(rooms)\nprint(*result)",
       "explanation": "Reutilizează o sală numai dacă finalul ei este strict mai mic decât începutul următor. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\n0 1\n1 2",
@@ -6323,7 +6378,7 @@
       "solution": "n = int(input())\na = [(*map(int, input().split()), i + 1) for i in range(n)]\na.sort(key=lambda x: x[1])\nend = None\nb = []\nfor s, f, i in a:\n    if end is None or s > end:\n        b.append(i)\n        end = f\nprint(len(b))\nprint(*b)",
       "explanation": "Ordonează după final și cere start > finalul ultimei alegeri. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\n0 1\n1 2",
@@ -6352,7 +6407,7 @@
       "solution": "n = int(input())\na, b = 0, 1\nfor _ in range(n):\n    a, b = b, a + b\nprint(a)",
       "explanation": "Păstrează ultimii doi termeni; evită recursia care repetă calculele. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "0",
@@ -6380,7 +6435,7 @@
       "solution": "n = int(input())\na, b = 1, 1\nfor _ in range(n):\n    a, b = b, a + b\nprint(a)",
       "explanation": "dp[n] = dp[n-1] + dp[n-2], cu dp[0]=dp[1]=1. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Bază",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "0",
@@ -6408,7 +6463,7 @@
       "solution": "a = list(map(int, input().split()))\ns = int(input())\ndp = [0] + [s + 1] * s\nfor t in range(1, s + 1):\n    for v in a:\n        if v <= t:\n            dp[t] = min(dp[t], 1 + dp[t - v])\nprint(dp[s] if dp[s] <= s else -1)",
       "explanation": "dp[s] este minimul dintre 1+dp[s-v] pentru monedele v ≤ s. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 3 4\n6",
@@ -6436,7 +6491,7 @@
       "solution": "a = list(map(int, input().split()))\ndp = [1] * len(a)\nfor i in range(len(a)):\n    for j in range(i):\n        if a[j] < a[i]:\n            dp[i] = max(dp[i], dp[j] + 1)\nprint(max(dp, default=0))",
       "explanation": "dp[i] este lungimea maximă a unei subsecvențe terminate în i. Folosește a[j] < a[i], nu ≤. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 1 2 5 4",
@@ -6464,7 +6519,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nfor i in range(n):\n    for j in range(m):\n        if i or j:\n            a[i][j] += max(a[i - 1][j] if i else -1, a[i][j - 1] if j else -1)\nprint(a[-1][-1])",
       "explanation": "dp[i][j] adună valoarea celulei la maximul dintre vecinul de sus și cel din stânga. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 3\n2 1 4\n1 3 2\n1 6 1",
@@ -6492,7 +6547,7 @@
       "solution": "n = int(input())\na = [list(map(int, input().split())) for _ in range(n)]\nfor i in range(n - 2, -1, -1):\n    for j in range(i + 1):\n        a[i][j] += max(a[i + 1][j], a[i + 1][j + 1])\nprint(a[0][0])",
       "explanation": "Lucrează de jos în sus: fiecare celulă adună maximul celor doi copii. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n1\n2 3\n4 5 6",
@@ -6520,7 +6575,7 @@
       "solution": "n, G = map(int, input().split())\ndp = [0] * (G + 1)\nfor _ in range(n):\n    g, v = map(int, input().split())\n    for c in range(G, g - 1, -1):\n        dp[c] = max(dp[c], dp[c - g] + v)\nprint(dp[G])",
       "explanation": "Parcurge capacitățile descrescător pentru fiecare obiect. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 5\n2 3\n3 4\n4 5",
@@ -6548,7 +6603,7 @@
       "solution": "a = input()\nb = input()\ndp = [[0] * (len(b) + 1) for _ in range(len(a) + 1)]\nfor i in range(1, len(a) + 1):\n    for j in range(1, len(b) + 1):\n        dp[i][j] = dp[i - 1][j - 1] + 1 if a[i - 1] == b[j - 1] else max(dp[i - 1][j], dp[i][j - 1])\nprint(dp[-1][-1])",
       "explanation": "Pentru caractere egale, ia diagonala +1; altfel maximul dintre starea de sus și cea din stânga. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "abcde\nace",
@@ -6576,7 +6631,7 @@
       "solution": "a = list(map(int, input().split()))\ncurent = maxim = a[0]\nfor x in a[1:]:\n    curent = max(x, curent + x)\n    maxim = max(maxim, curent)\nprint(maxim)",
       "explanation": "La fiecare poziție, alegi între a începe un segment nou sau a prelungi segmentul anterior. Pentru valori negative nu inițializa maximul cu 0. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "-2 1 -3 4 -1 2 1 -5 4",
@@ -6608,7 +6663,7 @@
       "solution": "a = input().split()\ndp = [1] * len(a)\nfor i in range(len(a)):\n    for j in range(i):\n        if a[j][-1] == a[i][0]:\n            dp[i] = max(dp[i], dp[j] + 1)\nprint(max(dp, default=0))",
       "explanation": "dp[i] este lungimea maximă a unui lanț care se termină cu al i-lea cuvânt; încearcă toate cuvintele anterioare compatibile. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "ana arc car rac",
@@ -6640,7 +6695,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\ndp = [[0] * m for _ in range(n)]\npred = {}\nfor i in range(n):\n    for j in range(m):\n        if i == j == 0:\n            dp[i][j] = a[i][j]\n        else:\n            options = [(dp[r][c], r, c) for r, c in [(i - 1, j), (i, j - 1)] if r >= 0 and c >= 0]\n            v, r, c = max(options)\n            dp[i][j] = a[i][j] + v\n            pred[i, j] = (r, c)\npath = [(n - 1, m - 1)]\nwhile path[-1] != (0, 0):\n    path.append(pred[path[-1]])\nprint(dp[-1][-1])\nfor r, c in reversed(path):\n    print(r + 1, c + 1)",
       "explanation": "Memorează vecinul ales și urmărește predecesorii din destinație spre start. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 2\n1 2\n3 4",
@@ -6669,7 +6724,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\ndp = [[0] * m for _ in range(n)]\nways = [[0] * m for _ in range(n)]\nfor i in range(n):\n    for j in range(m):\n        if i == j == 0:\n            dp[i][j], ways[i][j] = a[i][j], 1\n        else:\n            prev = [(r, c) for r, c in [(i - 1, j), (i, j - 1)] if r >= 0 and c >= 0]\n            v = max(dp[r][c] for r, c in prev)\n            dp[i][j] = v + a[i][j]\n            ways[i][j] = sum(ways[r][c] for r, c in prev if dp[r][c] == v)\nprint(dp[-1][-1], ways[-1][-1])",
       "explanation": "Memorează și numărul de moduri. La egalitate adună numerele traseelor. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 2\n1 1\n1 1",
@@ -6697,7 +6752,7 @@
       "solution": "n = int(input())\na = [list(map(int, input().split())) for _ in range(n)]\ndp = [row[:] for row in a]\npred = {}\nfor i in range(n - 2, -1, -1):\n    for j in range(i + 1):\n        k = j if dp[i + 1][j] >= dp[i + 1][j + 1] else j + 1\n        dp[i][j] += dp[i + 1][k]\n        pred[i, j] = k\nj = 0\npath = [0]\nfor i in range(n - 1):\n    j = pred[i, j]\n    path.append(j)\nprint(dp[0][0])\nprint(*path)",
       "explanation": "Calculează de jos în sus și memorează copilul ales. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n1\n2 3\n4 5 6",
@@ -6726,7 +6781,7 @@
       "solution": "a = list(map(int, input().split()))\ndp = [1] * len(a)\npred = [-1] * len(a)\nfor i in range(len(a)):\n    for j in range(i):\n        if a[j] <= a[i] and dp[j] + 1 > dp[i]:\n            dp[i], pred[i] = dp[j] + 1, j\nk = max(range(len(a)), key=lambda i: dp[i]) if a else -1\npath = []\nwhile k != -1:\n    path.append(a[k])\n    k = pred[k]\nprint(len(path))\nprint(*reversed(path))",
       "explanation": "Folosește ≤, nu <, și păstrează indicele predecesorului. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 2 1 3",
@@ -6755,7 +6810,7 @@
       "solution": "from bisect import bisect_left\na = list(map(int, input().split()))\ntails = []\nindices = []\npred = [-1] * len(a)\nfor i, x in enumerate(a):\n    k = bisect_left(tails, x)\n    if k:\n        pred[i] = indices[k - 1]\n    if k == len(tails):\n        tails.append(x)\n        indices.append(i)\n    else:\n        tails[k], indices[k] = x, i\npath = []\ni = indices[-1] if indices else -1\nwhile i != -1:\n    path.append(a[i])\n    i = pred[i]\nprint(len(path))\nprint(*reversed(path))",
       "explanation": "tails[k] păstrează cel mai mic final pentru lungimea k+1; tails singur nu este mereu un subșir valid. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 1 2 2 5",
@@ -6784,7 +6839,7 @@
       "solution": "a = input().split()\ndp = [1] * len(a)\npred = [-1] * len(a)\nfor i in range(len(a)):\n    for j in range(i):\n        if a[j][-2:] == a[i][:2] and dp[j] + 1 > dp[i]:\n            dp[i], pred[i] = dp[j] + 1, j\ni = max(range(len(a)), key=lambda i: dp[i]) if a else -1\npath = []\nwhile i != -1:\n    path.append(a[i])\n    i = pred[i]\nprint(len(path))\nprint(*reversed(path))",
       "explanation": "dp[i] este lungimea lanțului terminat la i; folosește a[j][-2:] == a[i][:2]. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "masa carte sac teatru tema rustic sare",
@@ -6813,7 +6868,7 @@
       "solution": "a = list(map(int, input().split()))\nS = int(input())\ndp = [0] + [S + 1] * S\npred = [0] * (S + 1)\nfor s in range(1, S + 1):\n    for c in a:\n        if c <= s and dp[s - c] + 1 < dp[s]:\n            dp[s], pred[s] = dp[s - c] + 1, c\nif dp[S] > S:\n    print(-1)\nelse:\n    print(dp[S])\n    path = []\n    while S:\n        path.append(pred[S])\n        S -= pred[S]\n    print(*path)",
       "explanation": "Memorează moneda aleasă la fiecare sumă și scade-o la reconstrucție. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 3 4\n6",
@@ -6842,7 +6897,7 @@
       "solution": "n, G = map(int, input().split())\na = [tuple(map(int, input().split())) for _ in range(n)]\ndp = [[0] * (G + 1) for _ in range(n + 1)]\nfor i, (g, v) in enumerate(a, 1):\n    for c in range(G + 1):\n        dp[i][c] = max(dp[i - 1][c], dp[i - 1][c - g] + v if g <= c else 0)\nprint(dp[n][G])\npath = []\nc = G\nfor i in range(n, 0, -1):\n    if dp[i][c] != dp[i - 1][c]:\n        path.append(i)\n        c -= a[i - 1][0]\nprint(*reversed(path))",
       "explanation": "Compară liniile succesive dp[i][c] pentru reconstrucție. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 5\n2 3\n3 4\n4 5",
@@ -6871,7 +6926,7 @@
       "solution": "a = list(map(int, input().split()))\ncur = best = a[0]\nstart = left = right = 0\nfor i in range(1, len(a)):\n    if a[i] > cur + a[i]:\n        cur, start = a[i], i\n    else:\n        cur += a[i]\n    if cur > best:\n        best, left, right = cur, start, i\nprint(best)\nprint(left, right)",
       "explanation": "Kadane alege între un început nou și prelungirea segmentului; păstrează începutul curent. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 -2 3 -1 5 2 -6 1 3",
@@ -6900,7 +6955,7 @@
       "solution": "a = list(map(int, input().split()))\nS = int(input())\ndp = [True] + [False] * S\nfor x in a:\n    for s in range(S, x - 1, -1):\n        dp[s] = dp[s] or dp[s - x]\nprint(\"DA\" if dp[S] else \"NU\")",
       "explanation": "Parcurge sumele descrescător pentru fiecare element. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "12 1 3 4 5 7\n14",
@@ -6928,7 +6983,7 @@
       "solution": "a = list(map(int, input().split()))\ntotal = sum(a)\nM = total // 2\ndp = [True] + [False] * M\npred = {}\nfor i, x in enumerate(a, 1):\n    for s in range(M, x - 1, -1):\n        if not dp[s] and dp[s - x]:\n            dp[s] = True\n            pred[s] = (s - x, i)\ns = max(i for i in range(M + 1) if dp[i])\nprint(total - 2 * s)\npath = []\nwhile s:\n    s, i = pred[s]\n    path.append(i)\nprint(*reversed(path))",
       "explanation": "Găsește suma maximă ≤ total//2 prin subset sum și predecesori. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "28 7 11 8 9 7 27",
@@ -6957,7 +7012,7 @@
       "solution": "n = int(input())\na = sorted(tuple(map(int, input().split())) for _ in range(n))\ndp = [s for s, c in a]\nways = [1] * n\nfor i in range(n):\n    for j in range(i):\n        if a[j][0] < a[i][0] and a[j][1] != a[i][1]:\n            v = a[i][0] + dp[j]\n            if v > dp[i]:\n                dp[i], ways[i] = v, ways[j]\n            elif v == dp[i]:\n                ways[i] += ways[j]\nbest = max(dp, default=0)\nprint(best, sum(ways[i] for i in range(n) if dp[i] == best) if n else 1)",
       "explanation": "Cu laturi repetate folosește DP. La egalitate de înălțime adună numărul variantelor. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3\n3 1\n2 2\n2 2",
@@ -6985,7 +7040,7 @@
       "solution": "from bisect import bisect_left\na = list(map(int, input().split()))\ncost = list(map(int, input().split()))\ndp = [0] * (len(a) + 1)\nfor i, day in enumerate(a, 1):\n    dp[i] = min(dp[bisect_left(a, day - length + 1, 0, i)] + c for length, c in zip([1, 7, 30], cost))\nprint(dp[-1])",
       "explanation": "Compară cele trei abonamente care pot acoperi ziua curentă. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 4 6 7 8 20\n2 7 15",
@@ -7013,7 +7068,7 @@
       "solution": "n, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\ndp = [[0] * (m + 1) for _ in range(n + 1)]\nfor i in range(1, n + 1):\n    for j in range(1, m + 1):\n        if a[i - 1][j - 1]:\n            dp[i][j] = 1 + min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1])\nprint(sum(map(sum, dp)))",
       "explanation": "La o celulă 1, dimensiunea maximă este 1+min(sus,stânga,diagonală); starea numără și pătratele mai mici. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 2\n1 1\n1 1",
@@ -7041,7 +7096,7 @@
       "solution": "n = int(input())\na = [tuple(map(int, input().split())) for _ in range(n)]\na.sort(key=lambda x: x[1])\nT = max((d for p, d, l in a), default=0)\ndp = [0] + [-10 ** 9] * T\nfor p, d, l in a:\n    for t in range(d, l - 1, -1):\n        dp[t] = max(dp[t], dp[t - l] + p)\nprint(max(dp))",
       "explanation": "Sortează după termen și actualizează descrescător timpul exact ocupat, limitat de termen. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4\n3 5 3\n2 2 1\n3 2 2\n5 4 3",
@@ -7069,7 +7124,7 @@
       "solution": "a = list(map(int, input().split()))\nn = len(a)\ndp = [[0] * n for _ in range(n)]\nfor i in range(n):\n    dp[i][i] = a[i]\nfor length in range(2, n + 1):\n    for l in range(n - length + 1):\n        r = l + length - 1\n        dp[l][r] = max(a[l] - dp[l + 1][r], a[r] - dp[l][r - 1])\nprint(dp[0][-1] if a else 0)",
       "explanation": "dp[l][r]=max(a[l]-dp[l+1][r],a[r]-dp[l][r-1]); semnul se schimbă odată cu jucătorul. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 1 4 3",
@@ -7097,7 +7152,7 @@
       "solution": "n, k = map(int, input().split())\nreachable = {0}\nfor _ in range(n):\n    a = list(map(int, input().split()))\n    reachable = {s + x for s in reachable for x in a if s + x <= k}\nprint(\"DA\" if k in reachable else \"NU\")",
       "explanation": "La un nivel nou pornești numai din sumele nivelului anterior. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 11\n3 5 10 8\n4 3 7\n6 8 2 9",
@@ -7157,7 +7212,7 @@
       "solution": "a = list(map(int, input().split()))\nS = int(input())\ndp = [True] + [False] * S\npred = {}\nfor i, x in enumerate(a, 1):\n    for s in range(S, x - 1, -1):\n        if not dp[s] and dp[s - x]:\n            dp[s] = True\n            pred[s] = (s - x, i)\nif not dp[S]:\n    print(-1)\nelse:\n    print(S)\n    path = []\n    while S:\n        S, i = pred[S]\n        path.append(i)\n    print(*reversed(path))",
       "explanation": "Memorează pentru fiecare sumă nouă suma anterioară și indicele obiectului. Parcurge descrescător. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "12 1 3 4 5 7\n14",
@@ -7186,7 +7241,7 @@
       "solution": "n, k = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nreachable = {0}\npred = []\nfor row in a:\n    p = {}\n    for s in reachable:\n        for x in row:\n            if s + x <= k:\n                p.setdefault(s + x, (s, x))\n    pred.append(p)\n    reachable = set(p)\nif k not in reachable:\n    print(0)\nelse:\n    print(1)\n    path = []\n    for p in reversed(pred):\n        k, x = p[k]\n        path.append(x)\n    print(*reversed(path))",
       "explanation": "Păstrează pentru fiecare nivel și sumă perechea (suma_anterioară,valoare_aleasă). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 11\n3 5 10 8\n4 3 7\n6 8 2 9",
@@ -7215,7 +7270,7 @@
       "solution": "a = input().split()\nbest = {}\ndp = [0] * len(a)\npred = [-1] * len(a)\nfor i, w in enumerate(a):\n    length, j = best.get(w[:2], (0, -1))\n    dp[i], pred[i] = length + 1, j\n    if dp[i] > best.get(w[-2:], (0, -1))[0]:\n        best[w[-2:]] = (dp[i], i)\ni = max(range(len(a)), key=lambda i: dp[i]) if a else -1\npath = []\nwhile i != -1:\n    path.append(a[i])\n    i = pred[i]\nprint(len(path))\nprint(*reversed(path))",
       "explanation": "Pentru cuvântul curent, caută cel mai bun lanț al cărui sufix coincide cu prefixul curent; actualizează cheia sufixului. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "masa carte sac teatru tema rustic sare",
@@ -7244,7 +7299,7 @@
       "solution": "def bkt(s, n):\n    if len(s) == n:\n        print(s)\n        return\n    bkt(s + \"0\", n)\n    bkt(s + \"1\", n)\nbkt(\"\", int(input()))",
       "explanation": "Încearcă 0 înainte de 1 la fiecare poziție. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1",
@@ -7272,7 +7327,7 @@
       "solution": "n = int(input())\na = []\ndef bkt():\n    if len(a) == n:\n        print(*a)\n        return\n    for x in range(1, n + 1):\n        if x not in a:\n            a.append(x)\n            bkt()\n            a.pop()\nbkt()",
       "explanation": "La fiecare pas încearcă valorile încă nefolosite. Elimină ultima alegere la revenire. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1",
@@ -7300,7 +7355,7 @@
       "solution": "n, k = map(int, input().split())\na = []\ndef bkt(st):\n    if len(a) == k:\n        print(*a)\n        return\n    for x in range(st, n + 1):\n        a.append(x)\n        bkt(x + 1)\n        a.pop()\nbkt(1)",
       "explanation": "Următoarea valoare trebuie să fie strict mai mare decât ultima aleasă. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 2",
@@ -7328,7 +7383,7 @@
       "solution": "n = int(input())\ndef bkt(s):\n    if len(s) == n:\n        print(s)\n        return\n    bkt(s + \"0\")\n    if not s.endswith(\"1\"):\n        bkt(s + \"1\")\nbkt(\"\")",
       "explanation": "Poți adăuga 1 numai dacă șirul este gol sau se termină în 0. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1",
@@ -7356,7 +7411,7 @@
       "solution": "a = list(map(int, input().split()))\nS = int(input())\ndef bkt(i, s):\n    if i == len(a):\n        return int(s == S)\n    return bkt(i + 1, s) + bkt(i + 1, s + a[i])\nprint(bkt(0, 0))",
       "explanation": "Pentru fiecare element alegi includere sau excludere. La final compari suma cu S. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3\n3",
@@ -7384,7 +7439,7 @@
       "solution": "n = int(input())\na = []\ndef bkt():\n    r = len(a)\n    if r == n:\n        return 1\n    s = 0\n    for c in range(n):\n        if all(c != a[i] and abs(c - a[i]) != r - i for i in range(r)):\n            a.append(c)\n            s += bkt()\n            a.pop()\n    return s\nprint(bkt())",
       "explanation": "Pune o regină pe fiecare linie; coloanele și diagonalele trebuie să fie libere. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1",
@@ -7416,7 +7471,7 @@
       "solution": "a = list(map(int, input().split()))\nS = int(input())\ndef bkt(i, rest):\n    if i == len(a):\n        return int(rest == 0)\n    return sum(bkt(i + 1, rest - k * a[i]) for k in range(rest // a[i] + 1))\nprint(bkt(0, S))",
       "explanation": "Alege numărul de monede din fiecare tip, apoi treci la următorul tip. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2\n4",
@@ -7444,7 +7499,7 @@
       "solution": "n = int(input())\ndef bkt(s, a, b):\n    if b == n:\n        print(s)\n        return\n    if a < n:\n        bkt(s + \"(\", a + 1, b)\n    if b < a:\n        bkt(s + \")\", a, b + 1)\nbkt(\"\", 0, 0)",
       "explanation": "Poți închide o paranteză numai dacă ai mai multe deschise decât închise. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1",
@@ -7472,7 +7527,7 @@
       "solution": "n, S = map(int, input().split())\na = [tuple(map(int, input().split())) for _ in range(n)]\ndef bkt(i, ramas):\n    if i == n:\n        return int(ramas == 0)\n    v, stoc = a[i]\n    return sum(bkt(i + 1, ramas - k * v) for k in range(min(stoc, ramas // v) + 1))\nprint(bkt(0, S))",
       "explanation": "La nivelul i alegi câte monede de tipul i folosești, între 0 și stoc. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 4\n1 2\n2 2",
@@ -7500,7 +7555,7 @@
       "solution": "n, S, M = map(int, input().split())\na = [tuple(map(int, input().split())) for _ in range(n)]\npath = []\nfound = False\ndef bkt(i, rest, left):\n    global found\n    if i == n:\n        if rest == 0:\n            found = True\n            print(*path)\n        return\n    v, stoc = a[i]\n    for k in range(min(stoc, rest // v, left) + 1):\n        path.append(k)\n        bkt(i + 1, rest - k * v, left - k)\n        path.pop()\nbkt(0, S, M)\nif not found:\n    print(\"NU\")",
       "explanation": "La nivelul i alegi 0..min(stoc,suma_rămasă//valoare,monede_rămase). Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 4 2\n1 4\n2 2",
@@ -7529,7 +7584,7 @@
       "solution": "a = list(map(int, input().split()))\nS = int(input())\npath = []\nfound = False\ndef bkt(i, s):\n    global found\n    if i == len(a):\n        if s == S:\n            found = True\n            print(*path if path else [\"VID\"])\n        return\n    bkt(i + 1, s)\n    path.append(i + 1)\n    bkt(i + 1, s + a[i])\n    path.pop()\nbkt(0, 0)\nif not found:\n    print(\"NU\")",
       "explanation": "Alege includere/excludere și verifică suma după toate elementele. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2 3\n3",
@@ -7558,7 +7613,7 @@
       "solution": "from collections import Counter\ns = input()\nf = Counter(s)\ndef bkt(path):\n    if len(path) == len(s):\n        print(path)\n        return\n    for c in sorted(f):\n        if f[c]:\n            f[c] -= 1\n            bkt(path + c)\n            f[c] += 1\nbkt(\"\")",
       "explanation": "Counter evită duplicatele în timpul generării, fără a memora toate permutările. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "aab",
@@ -7586,7 +7641,7 @@
       "solution": "n, m, k = map(int, input().split())\na = []\nfound = False\ndef bkt(start):\n    global found\n    if len(a) == k:\n        if any(x <= n for x in a) and any(x > n for x in a):\n            print(*a)\n            found = True\n        return\n    for x in range(start, n + m + 1):\n        a.append(x)\n        bkt(x + 1)\n        a.pop()\nbkt(1)\nif not found:\n    print(\"NU\")",
       "explanation": "Generează combinări și verifică ambele categorii. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 1 2",
@@ -7615,7 +7670,7 @@
       "solution": "n, S = map(int, input().split())\nfound = False\ndef bkt(text, rest):\n    global found\n    if len(text) == n:\n        if rest == 0:\n            print(text)\n            found = True\n        return\n    for c in range(1 if not text else 0, 10):\n        if 0 <= rest - c <= 9 * (n - len(text) - 1):\n            bkt(text + str(c), rest - c)\nbkt(\"\", S)\nif not found:\n    print(\"NU\")",
       "explanation": "Prima cifră este 1..9, celelalte 0..9. Elimină ramurile cu suma rămasă imposibilă. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2 2",
@@ -7643,7 +7698,7 @@
       "solution": "n = int(input())\nprimes = [x for x in range(2, n + 1) if all(x % d for d in range(2, int(x ** .5) + 1))]\na = []\ndef bkt(start, rest):\n    if rest == 0:\n        print(*a)\n        return\n    for i in range(start, len(primes)):\n        if primes[i] <= rest:\n            a.append(primes[i])\n            bkt(i, rest - primes[i])\n            a.pop()\nbkt(0, n)",
       "explanation": "Următorul prim începe de la cel precedent, eliminând permutările aceleiași sume. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "5",
@@ -7672,7 +7727,7 @@
       "solution": "n = int(input())\na = [list(map(int, input().split())) for _ in range(n)]\npath = []\nfound = False\ndef bkt(i):\n    global found\n    if i == n:\n        found = True\n        print(*path)\n        return\n    for x in a[i]:\n        path.append(x)\n        bkt(i + 1)\n        path.pop()\nbkt(0)\nif not found:\n    print(\"NU\")",
       "explanation": "Nivelul i alege un element din mulțimea i. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\n1 4\n2 6",
@@ -7701,7 +7756,7 @@
       "solution": "n, k, S = map(int, input().split())\na = list(map(int, input().split()))\npath = []\nfound = False\ndef bkt(start, s):\n    global found\n    if len(path) == k:\n        if s == S:\n            print(*path)\n            found = True\n        return\n    for i in range(start, n):\n        path.append(i + 1)\n        bkt(i + 1, s + a[i])\n        path.pop()\nbkt(0, 0)\nif not found:\n    print(\"NU\")",
       "explanation": "Generează combinări cu un contor de întrebări și suma curentă. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4 2 5\n1 4 2 3",
@@ -7730,7 +7785,7 @@
       "solution": "n = int(input())\na = []\nfound = False\ndef bkt():\n    global found\n    if len(a) == n:\n        print(*a)\n        found = True\n        return\n    for x in range(1, n + 1):\n        if x not in a and x != len(a) + 1:\n            a.append(x)\n            bkt()\n            a.pop()\nbkt()\nif not found:\n    print(\"NU\")",
       "explanation": "La nivelul i exclude valorile folosite și valoarea i. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3",
@@ -7758,7 +7813,7 @@
       "solution": "n = int(input())\na = []\ndef bkt(start, k):\n    if len(a) == k:\n        print(*a)\n        return\n    for x in range(start, n + 1):\n        a.append(x)\n        bkt(x + 1, k)\n        a.pop()\nfor k in range(1, n + 1, 2):\n    bkt(1, k)",
       "explanation": "Generează combinări pentru k=1,3,5,... . Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3",
@@ -7787,7 +7842,7 @@
       "solution": "a = list(map(int, input().split()))\nS = int(input())\npath = []\nfound = False\ndef bkt(i, rest):\n    global found\n    if i == len(a):\n        if rest == 0:\n            found = True\n            print(*path)\n        return\n    for k in range(rest // a[i] + 1):\n        path.append(k)\n        bkt(i + 1, rest - k * a[i])\n        path.pop()\nbkt(0, S)\nif not found:\n    print(\"NU\")",
       "explanation": "Alege cantitatea fiecărui tip o singură dată; astfel ordinea monedelor plătite nu produce duplicate. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "1 2\n4",
@@ -7816,7 +7871,7 @@
       "solution": "n, k = map(int, input().split())\na = []\ndef bkt():\n    if len(a) == k:\n        print(*a)\n        return\n    for x in range(1, n + 1):\n        if x not in a:\n            a.append(x)\n            bkt()\n            a.pop()\nbkt()",
       "explanation": "Alege orice valoare încă nefolosită, fără a impune ordine crescătoare. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3 2",
@@ -7844,7 +7899,7 @@
       "solution": "n = int(input())\na = []\nfound = False\ndef bkt():\n    global found\n    r = len(a)\n    if r == n:\n        print(*(x + 1 for x in a))\n        found = True\n        return\n    for c in range(n):\n        if all(c != a[i] and abs(c - a[i]) != r - i for i in range(r)):\n            a.append(c)\n            bkt()\n            a.pop()\nbkt()\nif not found:\n    print(\"NU\")",
       "explanation": "Coloanele diferă, iar diferențele absolute de linie și coloană nu sunt egale. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "4",
@@ -7872,7 +7927,7 @@
       "solution": "from algoritmi_elementari import nr_cifre, invers, cmmdc\nn, a, b = map(int, input().split())\nprint(nr_cifre(n), invers(n), cmmdc(a, b))",
       "explanation": "nr_cifre(0)=1; invers(120)=21. La Euclid: cmmdc(a,b)=cmmdc(b,a%b), cu oprire b=0. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "{\"algoritmi_elementari.py\": \"def nr_cifre(n):\\n    return 1 if n < 10 else 1 + nr_cifre(n // 10)\\ndef invers(n):\\n    def rec(n, r):\\n        return r if n == 0 else rec(n // 10, r * 10 + n % 10)\\n    return rec(n, 0)\\ndef cmmdc(a, b):\\n    return a if b == 0 else cmmdc(b, a % b)\\n\", \"_stdin\": \"120 18 24\"}",
@@ -7967,7 +8022,7 @@
       "solution": "method = input()\na = list(map(int, input().split()))\nif method == \"selectie\":\n    for i in range(len(a)):\n        j = min(range(i, len(a)), key=lambda k: a[k])\n        a[i], a[j] = a[j], a[i]\nelif method == \"insertie\":\n    for i in range(1, len(a)):\n        x = a[i]\n        j = i - 1\n        while j >= 0 and a[j] > x:\n            a[j + 1] = a[j]\n            j -= 1\n        a[j + 1] = x\nelse:\n    for end in range(len(a) - 1, 0, -1):\n        for j in range(end):\n            if a[j] > a[j + 1]:\n                a[j], a[j + 1] = a[j + 1], a[j]\nprint(*a)",
       "explanation": "Selecția mută minimul; inserția deplasează elementele mai mari; bulele schimbă vecini inversați. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "selectie\n3 1 2",
@@ -7996,7 +8051,7 @@
       "solution": "class Cont:\n    def __init__(self, sold):\n        self.sold = sold\n    def depune(self, s):\n        self.sold += s\n    def retrage(self, s):\n        if s > self.sold:\n            return False\n        self.sold -= s\n        return True\na, b, c = map(int, input().split())\ncont = Cont(a)\ncont.depune(b)\nprint(cont.retrage(c), cont.sold)",
       "explanation": "Metodele modifică self.sold; return și afișarea sunt operații distincte. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "10 5 12",
@@ -8024,7 +8079,7 @@
       "solution": "class Produs:\n    def __init__(self, pret):\n        self.pret = pret\n    def cost(self):\n        return self.pret\nclass ProdusRedus(Produs):\n    def __init__(self, pret, reducere):\n        super().__init__(pret)\n        self.reducere = reducere\n    def cost(self):\n        return self.pret * (1 - self.reducere / 100)\np, r = map(float, input().split())\nprint(f\"{Produs(p).cost():.2f}\", f\"{ProdusRedus(p, r).cost():.2f}\")",
       "explanation": "super().__init__ reutilizează inițializarea; metoda suprascrisă folosește aceeași interfață. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aplicare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "100 25",
@@ -8052,7 +8107,7 @@
       "solution": "class Repository:\n    def __init__(self):\n        self.date = {}\n    def adauga(self, cod, valoare):\n        self.date[cod] = valoare\n    def sterge(self, cod):\n        self.date.pop(cod, None)\n    def cauta(self, cod):\n        return self.date.get(cod, \"NU\")\nr = Repository()\nn = int(input())\nfor _ in range(n):\n    c, v = input().split()\n    r.adauga(c, v)\nr.sterge(input())\nprint(r.cauta(input()))",
       "explanation": "Dicționarul este ascuns în obiect; operațiile de stocare sunt grupate separat de citire/afișare. Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.",
       "level": "Aprofundare",
-      "starter": "# Scrie soluția ta aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "2\na 1\nb 2\na\nb",

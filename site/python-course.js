@@ -7,11 +7,11 @@ window.PA_BEGINNER = {
       "duration": "10–15 min",
       "lesson": [
         "Python execută instrucțiunile de sus în jos. Prima funcție utilă este print(), care afișează un rezultat.",
-        "Textul se scrie între ghilimele: print(\"Salut!\"). Numerele se pot afișa fără ghilimele: print(42).",
+        "Textul se scrie între ghilimele: print(\"Hello World\"). Numerele se pot afișa fără ghilimele: print(42).",
         "Un apel print() adaugă implicit un rând nou. Poți folosi mai multe apeluri pentru mai multe linii."
       ],
-      "example": "print(\"Salut, Python!\")\nprint(2 + 3)",
-      "explain": "Prima linie afișează textul. A doua calculează suma înainte de afișare. Obții două linii: Salut, Python! și 5."
+      "example": "print(\"Hello World\")\nprint(2 + 3)",
+      "explain": "Prima linie afișează textul. A doua calculează suma înainte de afișare. Obții două linii: Hello World și 5."
     },
     {
       "id": "intro-variabile",
@@ -34,10 +34,10 @@ window.PA_BEGINNER = {
       "lesson": [
         "input() citește o linie și o returnează ca text (str). Poți salva răspunsul într-o variabilă: nume = input().",
         "Pentru calcule cu întregi folosești int(input()). Dacă uiți int(), \"2\" + \"3\" devine \"23\", nu 5.",
-        "În editor, câmpul „Date de intrare” simulează tastatura. Fiecare apel input() citește următoarea linie."
+        "Fiecare apel input() citește următoarea linie. La verificare, aplicația furnizează automat liniile de intrare ale exercițiului."
       ],
-      "example": "nume = input()\nprint(\"Salut,\", nume)",
-      "explain": "Pentru intrarea Ana, rezultatul este Salut, Ana. print() pune implicit un spațiu între argumente."
+      "example": "nume = input()\nprint(\"User:\", nume)",
+      "explain": "Pentru intrarea Ana, rezultatul este User: Ana. print() pune implicit un spațiu între argumente."
     },
     {
       "id": "intro-conditii",
@@ -49,8 +49,8 @@ window.PA_BEGINNER = {
         "Instrucțiunile din interiorul unui if sau else trebuie indentate consecvent, de obicei cu patru spații.",
         "Folosește if/else când ai două variante. elif te ajută să verifici alternative suplimentare."
       ],
-      "example": "varsta = int(input())\nif varsta >= 18:\n    print(\"Major\")\nelse:\n    print(\"Minor\")",
-      "explain": "Pentru 18 afișează Major, iar pentru 17 afișează Minor. Operatorul >= include valoarea 18."
+      "example": "varsta = int(input())\nif varsta >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Minor\")",
+      "explain": "Pentru 18 afișează Adult, iar pentru 17 afișează Minor. Operatorul >= include valoarea 18."
     },
     {
       "id": "intro-bucle",
@@ -70,17 +70,17 @@ window.PA_BEGINNER = {
     {
       "id": "intro-print-01",
       "chapter": "intro-print",
-      "title": "Salut, Python!",
-      "statement": "Afișează exact mesajul Salut, Python! pe o singură linie. Nu se citesc date de intrare.",
+      "title": "Mesaj de stare",
+      "statement": "Afișează exact textul `Hello World` pe o singură linie. Nu se citesc date de intrare.",
       "hint": "Folosește print() cu text între ghilimele.",
-      "solution": "print(\"Salut, Python!\")",
+      "solution": "print(\"Hello World\")",
       "explanation": "Folosește print() cu text între ghilimele.",
       "level": "Începător",
-      "starter": "print(\"...\")\n",
+      "starter": "",
       "tests": [
         {
           "input": "",
-          "expected": "Salut, Python!"
+          "expected": "Hello World"
         }
       ],
       "compare": "lines",
@@ -90,16 +90,16 @@ window.PA_BEGINNER = {
       "id": "intro-print-02",
       "chapter": "intro-print",
       "title": "Două mesaje",
-      "statement": "Afișează pe prima linie Încep să programez, iar pe a doua linie Pas cu pas. Nu citi date.",
+      "statement": "Afișează exact textul `Connection established` pe prima linie și `Access granted` pe a doua linie. Nu se citesc date de intrare.",
       "hint": "Apelează print() de două ori.",
-      "solution": "print(\"Încep să programez\")\nprint(\"Pas cu pas\")",
+      "solution": "print(\"Connection established\")\nprint(\"Access granted\")",
       "explanation": "Apelează print() de două ori.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "",
-          "expected": "Încep să programez\nPas cu pas"
+          "expected": "Connection established\nAccess granted"
         }
       ],
       "compare": "lines",
@@ -114,7 +114,7 @@ window.PA_BEGINNER = {
       "solution": "print((7 + 5) * 2)",
       "explanation": "Calculează expresia în apelul print().",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "",
@@ -133,7 +133,7 @@ window.PA_BEGINNER = {
       "solution": "pret = 18\nbilete = 4\nprint(pret * bilete)",
       "explanation": "Înmulțește pret cu bilete.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "",
@@ -152,7 +152,7 @@ window.PA_BEGINNER = {
       "solution": "puncte = 40\npuncte += 15\nprint(puncte)",
       "explanation": "Actualizează valoarea prin puncte += 15.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "",
@@ -171,7 +171,7 @@ window.PA_BEGINNER = {
       "solution": "durata = 90\nparcurs = 35\nprint(durata - parcurs)",
       "explanation": "Scade parcurs din durata.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "",
@@ -184,25 +184,25 @@ window.PA_BEGINNER = {
     {
       "id": "intro-citire-01",
       "chapter": "intro-citire",
-      "title": "Salut personalizat",
-      "statement": "Citește un nume pe prima linie și afișează Salut, urmat de un spațiu și nume.",
-      "hint": "input() citește text. print(\"Salut,\", nume) adaugă spațiul.",
-      "solution": "nume = input()\nprint(\"Salut,\", nume)",
-      "explanation": "input() citește text. print(\"Salut,\", nume) adaugă spațiul.",
+      "title": "Identificarea utilizatorului",
+      "statement": "Citește un nume de pe o singură linie. Afișează pe o singură linie textul `User:`, un spațiu și numele citit. De exemplu, pentru Ana afișează `User: Ana`.",
+      "hint": "input() citește text. print(\"User:\", nume) adaugă spațiul.",
+      "solution": "nume = input()\nprint(\"User:\", nume)",
+      "explanation": "input() citește text. print(\"User:\", nume) adaugă spațiul.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "Ana",
-          "expected": "Salut, Ana"
+          "expected": "User: Ana"
         },
         {
           "input": "Mara",
-          "expected": "Salut, Mara"
+          "expected": "User: Mara"
         },
         {
           "input": "Alex",
-          "expected": "Salut, Alex"
+          "expected": "User: Alex"
         }
       ],
       "compare": "lines",
@@ -217,7 +217,7 @@ window.PA_BEGINNER = {
       "solution": "varsta = int(input())\nprint(varsta + 1)",
       "explanation": "Convertește rezultatul input() cu int() înainte de a aduna 1.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "20",
@@ -244,7 +244,7 @@ window.PA_BEGINNER = {
       "solution": "pret = int(input())\ncantitate = int(input())\nprint(pret * cantitate)",
       "explanation": "Ai nevoie de două apeluri int(input()) și o înmulțire.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "12\n3",
@@ -266,24 +266,24 @@ window.PA_BEGINNER = {
       "id": "intro-conditii-01",
       "chapter": "intro-conditii",
       "title": "Bilet cu reducere",
-      "statement": "Citește vârsta. Pentru vârste sub 12 ani afișează REDUCERE; altfel afișează NORMAL.",
+      "statement": "Citește o vârstă întreagă de pe o singură linie. Dacă vârsta este mai mică decât 12, afișează exact `DISCOUNT`; în caz contrar, afișează exact `STANDARD`.",
       "hint": "Folosește if varsta < 12: urmat de else.",
-      "solution": "varsta = int(input())\nif varsta < 12:\n    print(\"REDUCERE\")\nelse:\n    print(\"NORMAL\")",
+      "solution": "varsta = int(input())\nif varsta < 12:\n    print(\"DISCOUNT\")\nelse:\n    print(\"STANDARD\")",
       "explanation": "Folosește if varsta < 12: urmat de else.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "7",
-          "expected": "REDUCERE"
+          "expected": "DISCOUNT"
         },
         {
           "input": "12",
-          "expected": "NORMAL"
+          "expected": "STANDARD"
         },
         {
           "input": "25",
-          "expected": "NORMAL"
+          "expected": "STANDARD"
         }
       ],
       "compare": "lines",
@@ -293,24 +293,24 @@ window.PA_BEGINNER = {
       "id": "intro-conditii-02",
       "chapter": "intro-conditii",
       "title": "Temperatura afară",
-      "statement": "Citește temperatura întreagă. Afișează INGHET dacă temperatura este cel mult 0, altfel NU INGHET.",
+      "statement": "Citește o temperatură întreagă de pe o singură linie. Dacă temperatura este mai mică sau egală cu 0, afișează exact `FREEZING`; dacă este mai mare decât 0, afișează exact `ABOVE FREEZING`.",
       "hint": "Condiția corectă este temperatura <= 0.",
-      "solution": "temperatura = int(input())\nif temperatura <= 0:\n    print(\"INGHET\")\nelse:\n    print(\"NU INGHET\")",
+      "solution": "temperatura = int(input())\nif temperatura <= 0:\n    print(\"FREEZING\")\nelse:\n    print(\"ABOVE FREEZING\")",
       "explanation": "Condiția corectă este temperatura <= 0.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "-5",
-          "expected": "INGHET"
+          "expected": "FREEZING"
         },
         {
           "input": "0",
-          "expected": "INGHET"
+          "expected": "FREEZING"
         },
         {
           "input": "7",
-          "expected": "NU INGHET"
+          "expected": "ABOVE FREEZING"
         }
       ],
       "compare": "lines",
@@ -320,23 +320,23 @@ window.PA_BEGINNER = {
       "id": "intro-conditii-03",
       "chapter": "intro-conditii",
       "title": "Semafor simplu",
-      "statement": "Citește un text exact: verde, galben sau rosu. Afișează MERGI pentru verde, ATENTIE pentru galben și STOP pentru rosu.",
+      "statement": "Citește exact unul dintre textele `green`, `yellow` sau `red`, cu litere mici. Afișează pe o singură linie `GO` pentru `green`, `WAIT` pentru `yellow` sau `STOP` pentru `red`.",
       "hint": "Poți lega cele trei variante cu if, elif și else.",
-      "solution": "culoare = input()\nif culoare == \"verde\":\n    print(\"MERGI\")\nelif culoare == \"galben\":\n    print(\"ATENTIE\")\nelse:\n    print(\"STOP\")",
+      "solution": "culoare = input()\nif culoare == \"green\":\n    print(\"GO\")\nelif culoare == \"yellow\":\n    print(\"WAIT\")\nelse:\n    print(\"STOP\")",
       "explanation": "Poți lega cele trei variante cu if, elif și else.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
-          "input": "verde",
-          "expected": "MERGI"
+          "input": "green",
+          "expected": "GO"
         },
         {
-          "input": "galben",
-          "expected": "ATENTIE"
+          "input": "yellow",
+          "expected": "WAIT"
         },
         {
-          "input": "rosu",
+          "input": "red",
           "expected": "STOP"
         }
       ],
@@ -347,20 +347,20 @@ window.PA_BEGINNER = {
       "id": "intro-bucle-01",
       "chapter": "intro-bucle",
       "title": "Afișează de n ori",
-      "statement": "Citește întregul n între 0 și 10. Afișează mesajul Bravo! de exact n ori, fiecare pe o linie.",
+      "statement": "Citește un număr întreg n (0 ≤ n ≤ 10). Afișează exact textul `Task completed` de n ori, fiecare apariție pe o linie separată. Pentru n = 0, nu afișa niciun mesaj.",
       "hint": "for _ in range(n): repetă corpul buclei de n ori.",
-      "solution": "n = int(input())\nfor _ in range(n):\n    print(\"Bravo!\")",
+      "solution": "n = int(input())\nfor _ in range(n):\n    print(\"Task completed\")",
       "explanation": "for _ in range(n): repetă corpul buclei de n ori.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3",
-          "expected": "Bravo!\nBravo!\nBravo!"
+          "expected": "Task completed\nTask completed\nTask completed"
         },
         {
           "input": "1",
-          "expected": "Bravo!"
+          "expected": "Task completed"
         },
         {
           "input": "0",
@@ -379,7 +379,7 @@ window.PA_BEGINNER = {
       "solution": "n = int(input())\nfor i in range(1, n + 1):\n    print(i)",
       "explanation": "range(1, n + 1) include n.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3",
@@ -406,7 +406,7 @@ window.PA_BEGINNER = {
       "solution": "n = int(input())\nrezultat = \"\"\nfor _ in range(n):\n    rezultat += \"*\"\nprint(rezultat)",
       "explanation": "Începe cu rezultat = \"\", apoi adaugă \"*\" la fiecare pas.",
       "level": "Începător",
-      "starter": "# Scrie codul tău aici.\n",
+      "starter": "",
       "tests": [
         {
           "input": "3",

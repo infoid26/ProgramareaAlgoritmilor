@@ -25,7 +25,7 @@ Lista completă a completărilor și limitelor este în [site/completari.md](sit
 
 ## Editor și verificare
 
-Scrii codul în editor și apeși „Verifică” sau Ctrl + Enter. Datele de intrare ale testelor sunt furnizate automat; nu trebuie introduse manual. La exercițiile care nu citesc date, caseta de intrare nu apare. Pentru încercări proprii, deschide „Încearcă date proprii” sau „Fișierele pentru rulare” și folosește „Rulează cu aceste date”.
+Scrii codul în editor și apeși „Verifică” sau Ctrl + Enter. Datele de intrare ale testelor sunt furnizate automat; nu trebuie introduse manual. La exercițiile care nu citesc date, caseta de intrare nu apare. Rularea manuală și câmpurile de intrare pentru încercări proprii nu sunt afișate; butonul „Verifică” folosește datele testelor.
 
 Când cerința include scrierea unui modul propriu, câmpul său de cod rămâne vizibil și este folosit la toate testele. Erorile indică explicația, fișierul și linia. Modificarea codului principal sau a modulului necesită o nouă verificare. Indiciile și o posibilă rezolvare sunt disponibile separat.
 
@@ -41,7 +41,7 @@ Slide-ul Notare din prezentarea introductivă locală indică 70% examen scris �
 
 ## Progres și copii de siguranță
 
-Codul, rezultatele verificărilor, XP, nivelul și zilele consecutive se păstrează local în browser. Nu există conturi sau sincronizare între dispozitive. Ștergerea datelor browserului poate elimina progresul.
+Codul și rezultatele verificărilor se păstrează local în browser. Nu există conturi sau sincronizare între dispozitive. Ștergerea datelor browserului poate elimina progresul.
 
 La finalul traseului, deschide „Mai multe opțiuni”, apoi „Caută o problemă sau salvează progresul”. Acolo poți căuta exerciții, descărca lucrul tău și restaura un export. Identificatorii exercițiilor și cheile de salvare existente au fost păstrate.
 
@@ -67,3 +67,23 @@ python scripts/validate_constructive.py
 ```
 
 `validate_content.py` verifică exercițiile PA, `validate_runner.py` verifică și introducerea Python prin evaluator, iar `validate_constructive.py` verifică acceptarea soluțiilor alternative, respingerea celor incorecte și izolarea modulelor. Pentru modificări ale interfeței, verifică și navigarea, editorul și afișarea pe telefon în browser.
+
+## Editor Python
+
+CodeMirror 6 oferă culori, numere de linie, indentare, închiderea parantezelor și sugestii pentru cuvinte Python și identificatori din cod. `true`, `false` și `null` propun `True`, `False` și `None`; înlocuirea se face numai dacă accepți sugestia. Ctrl + Space deschide sugestiile, Enter sau Tab le acceptă, Escape le închide. Ctrl + Enter verifică exercițiul. Nu este un analizor complet de tipuri Python. Editorul funcționează fără conturi și fără serviciu AI.
+
+Bundle-ul `site/code-editor.js` este inclus în repository; licențele sunt în `site/codemirror-licenses.txt`. Pentru regenerare: `npm ci`, apoi `npx esbuild site/code-editor-source.js --bundle --minify --format=iife --outfile=site/code-editor.js`.
+
+## Cont universitar și sincronizare SQL
+
+Integrarea Microsoft este pregătită, dar dezactivată până la configurarea serviciului. Acceptă conturi universitare @s.unibuc.ro și @unibuc.ro; progresul fiecărui cont este separat. Schema PostgreSQL, restricțiile de acces și pașii de activare sunt în [backend/SETUP.md](backend/SETUP.md). Varianta de referință folosește Supabase; un alt furnizor necesită adaptarea API-ului. Fără conectare, studiul și salvarea locală rămân disponibile.
+
+Întrebările de consolidare sunt formulate pentru platformă, nu transcrieri ale întrebărilor profesorului. Cele 93 de definiții de quiz au fost revizuite pentru context și claritate; întrebările despre exemple afișează codul aferent. Verificarea structurii lor: `node scripts/validate_quizzes.cjs`. Indicii răspunsurilor corecte și identificatorii de progres au fost păstrați.
+
+Interfața afișează numai procentul general de progres, fără XP, niveluri sau zile consecutive. Procentul reprezintă întrebările de parcurs și exercițiile finalizate din totalul disponibil; se rotunjește în jos la un procent întreg. În lecții rămân cerința, exemplul, editorul, verificarea și feedbackul. Datele testelor sunt automate. Câmpurile pentru codul unui modul propriu sunt păstrate numai la exercițiile care le cer.
+
+## Fișiere pentru commit
+
+Păstrează `index.html`, `.nojekyll`, `.gitignore`, `site/`, `scripts/`, `backend/`, `package.json` și `package-lock.json`. Bundle-urile editorului și autentificării sunt necesare în site; sursele lor și licențele sunt păstrate pentru întreținere. `site/exercises.json` este folosit de validări, iar `site/exercises.js` de aplicație.
+
+`node_modules/` este o dependență locală, exclusă din Git și reinstalabilă cu `npm ci`. Materialele profesorului rămân locale și excluse din commit. Regenerare editor și autentificare: `npm run build:editors`. Verificări JavaScript: `npm run check`.

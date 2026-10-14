@@ -1,3 +1,5 @@
+const accountStorageSuffix = localStorage.getItem('pa-active-account') || '';
+const draftStorageKey = 'pa-drafts-v2' + accountStorageSuffix;
 const editor = document.querySelector('#python-code');
 const stdin = document.querySelector('#python-input');
 const result = document.querySelector('#python-output');
@@ -9,6 +11,7 @@ const exercises = window.PA_CONTENT.exercises;
 const chapters = window.PA_CONTENT.chapters;
 const beginnerExercises = window.PA_BEGINNER.exercises;
 const beginnerLessons = window.PA_BEGINNER.lessons;
+const formatStatement = value => escapeHTML(value).replace(/`([^`]+)`/g, '<code class="required-text">$1</code>');
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 let activeWorker = null;
 let cancelRun = null;
@@ -19,16 +22,16 @@ const sharedEditor = document.querySelector('#shared-editor');
 const editorHome = document.querySelector('#editor-home');
 function restoreEditor() { if (sharedEditor.parentElement !== editorHome) { if (currentExercise) { saveCode(); } editorHome.append(sharedEditor); } sharedEditor.classList.remove('inline-mode'); }
 function attachEditor(slot, id) { if (!slot) { return; } if (sharedEditor.parentElement !== slot) { if (currentExercise) { saveCode(); } slot.append(sharedEditor); } sharedEditor.classList.add('inline-mode'); if (!currentExercise || currentExercise.id !== id) { selectExercise(id); } else { updateExerciseProgress(); } }
-try { const stored = JSON.parse(localStorage.getItem('pa-drafts-v2') || '{}'); if (stored && typeof stored === 'object' && !Array.isArray(stored)) { drafts = stored; } } catch { status.textContent = 'Salvarea locală nu este disponibilă. Descarcă soluțiile.'; }
-try { const previous = localStorage.getItem('pa-python-code'); if (!drafts['baze-01'] && previous !== null) { drafts['baze-01'] = { code: previous, input: localStorage.getItem('pa-python-input') ?? exercises[0].tests[0].input }; } } catch {}
+try { const stored = JSON.parse(localStorage.getItem(draftStorageKey) || '{}'); if (stored && typeof stored === 'object' && !Array.isArray(stored)) { drafts = stored; } } catch { status.textContent = 'Salvarea locală nu este disponibilă. Descarcă soluțiile.'; }
+try { const previous = localStorage.getItem('pa-python-code'); if (!accountStorageSuffix && !drafts['baze-01'] && previous !== null) { drafts['baze-01'] = { code: previous, input: localStorage.getItem('pa-python-input') ?? exercises[0].tests[0].input }; } } catch {}
 function isPassed(exercise) { const draft = drafts[exercise.id]; if (typeof draft?.code !== 'string' || draft.code !== draft.passedCode) { return false; } if (!exercise.editableFiles) { return true; } try { const data = JSON.parse(draft.input); return JSON.stringify(Object.fromEntries(exercise.editableFiles.map(name => [name, data[name]]))) === draft.passedFiles; } catch { return false; } }
-function persistDrafts() { try { localStorage.setItem('pa-drafts-v2', JSON.stringify(drafts)); } catch { status.textContent = 'Nu se poate salva în browser. Descarcă lucrul tău din lista de exerciții.'; } }
+function persistDrafts() { try { localStorage.setItem(draftStorageKey, JSON.stringify(drafts)); window.PA_CLOUD?.changed(); } catch { status.textContent = 'Nu se poate salva în browser. Descarcă lucrul tău din lista de exerciții.'; } }
 function readInput() { if (!currentExercise?.inputFiles) { return stdin.value; } const data = { [currentExercise.inputFiles[0]]: stdin.value }; document.querySelectorAll('[data-input-file]').forEach(field => { data[field.dataset.inputFile] = field.value; }); return JSON.stringify(data); }
 function displayInput(value, item) { if (!item.inputFiles) { return value; } try { return Object.entries(JSON.parse(value)).map(([name, text]) => `${name === '_stdin' ? 'Tastatură' : name}\n${item.editableFiles?.includes(name) ? '(codul modulului tău)' : text || '(gol)'}`).join('\n\n'); } catch { return value; } }
 function referenceCode(item) { if (!item.editableFiles) { return item.solution; } const data = JSON.parse(item.tests[0].input); return item.solution + '\n\n' + item.editableFiles.map(name => '# ' + name + '\n' + data[name]).join('\n'); }
 function configureInput(value, item) { const container = document.querySelector('#additional-inputs'); container.replaceChildren(); if (!item.inputFiles) { stdin.value = value; return; } let data; try { data = JSON.parse(value); } catch { data = {}; } stdin.value = data[item.inputFiles[0]] || ''; for (const name of [...item.inputFiles.slice(1), '_stdin']) { const label = document.createElement('label'); label.textContent = name === '_stdin' ? 'Date de la tastatură' : `Conținutul ${name}`; const field = document.createElement('textarea'); field.dataset.inputFile = name; field.value = data[name] || ''; field.spellcheck = false; label.append(field); container.append(label); } }
 function saveCode() { if (!currentExercise) { return; } drafts[currentExercise.id] = { ...drafts[currentExercise.id], code: editor.value, input: readInput() }; persistDrafts(); updateExerciseProgress(); window.PA_JOURNEY?.refreshExerciseStep(currentExercise.id); }
-function updateExerciseProgress() { document.querySelector('#exercise-progress').textContent = isPassed(currentExercise) ? '✓ Codul salvat a trecut toate testele acestei probleme. Explică și metoda folosită.' : 'În lucru · verifică soluția după fiecare modificare.'; }
+function updateExerciseProgress() { document.querySelector('#exercise-progress').textContent = isPassed(currentExercise) ? '✓ Rezolvat' : ''; }
 function renderBank() {
 const query = document.querySelector('#exercise-search').value.toLocaleLowerCase('ro');
 const chapter = document.querySelector('#chapter-filter').value;
@@ -51,32 +54,33 @@ const chapter = beginner ? beginnerLessons.find(c => c.id === item.chapter) : ch
 const collection = beginner ? beginnerExercises : exercises;
 const draft = drafts[item.id];
 editor.value = typeof draft?.code === 'string' ? draft.code : item.starter;
+if (/^\s*# Scrie (?:soluția ta|codul tău) aici\.\s*$/.test(editor.value)) { editor.value = ''; }
 let initialInput = typeof draft?.input === 'string' ? draft.input : item.tests[0].input;
 if (!draft && item.fileStarters) { initialInput = JSON.stringify({ ...JSON.parse(initialInput), ...item.fileStarters }); }
 configureInput(initialInput, item);
 const customInput = document.querySelector('#custom-input');
-customInput.hidden = !item.inputFile && !item.inputFiles && item.tests.every(test => !test.input.trim());
-customInput.open = !!item.editableFiles;
-customInput.querySelector('summary').textContent = item.editableFiles ? 'Scrie modulul tău' : item.inputFiles || item.inputFile ? 'Fișierele pentru rulare' : 'Încearcă date proprii';
+customInput.hidden = !item.editableFiles;
+
+
 stdin.classList.toggle('module-code', !!item.editableFiles?.includes(item.inputFiles?.[0]));
+window.dispatchEvent(new Event('pa-module-editor'));
 document.querySelector('#module-download').hidden = !item.editableFiles;
 document.querySelector('#exercise-title').textContent = item.title;
 document.querySelector('#exercise-chapter').textContent = `${chapter.title} · ${item.level}`;
-document.querySelector('#editor-filename').textContent = `${item.id}.py`;
-document.querySelector('#exercise-brief').innerHTML = `<span class="tag">CERINȚĂ</span><p>${escapeHTML(item.statement)}</p><h3>Exemplu</h3><div class="example-pair"><div><small>${item.inputFile || 'INTRARE'}</small><pre>${escapeHTML(displayInput(item.tests[0].input, item)) || '(linie goală)'}</pre></div><div><small>${item.outputFile || 'IEȘIRE'}</small><pre>${escapeHTML(item.tests[0].expected) || '(nimic)'}</pre></div></div><p class="source-note">${item.validator ? "Sunt acceptate soluții alternative care respectă cerința; ieșirea de referință este doar un exemplu." : item.compare === 'exact' ? 'Conținutul fișierului trebuie să coincidă exact, inclusiv spațiile și liniile.' : 'Respectă ordinea și liniile cerute. Spațiile de la sfârșitul liniilor și liniile goale finale sunt ignorate.'}</p><details><summary>Un indiciu</summary><p>${escapeHTML(item.hint)}</p></details><details><summary>O posibilă rezolvare</summary><pre><code>${escapeHTML(referenceCode(item))}</code></pre><p>${escapeHTML(item.explanation)}</p><p>Închide soluția, rescrie-o singur și explică fiecare pas.</p></details>${sharedEditor.classList.contains('inline-mode') ? '' : `<p><a class="text-link" href="${beginner ? `#lectie-python/${chapter.id}/${window.PA_JOURNEY?.getExerciseStepIndex(item.id) ?? 4}` : `#capitol/${chapter.id}/${window.PA_JOURNEY?.getAlgorithmStepIndex(item.id) ?? 2}/${window.PA_JOURNEY?.getAlgorithmUnitIndex(item.id) ?? 0}`}">Înapoi la lecție →</a></p>`}<p class="source-note">${beginner ? "Exercițiu original din cursul introductiv Python." : "Exercițiu de pregătire creat sau adaptat pentru grupă. Nu este un subiect oficial de examen."}</p>`;
-document.querySelector('#editor-help').textContent = 'Ctrl + Enter verifică. Tab indentează. Codul se salvează automat.';
+document.querySelector('#exercise-brief').innerHTML = `<span class="tag">CERINȚĂ</span><p>${formatStatement(item.statement)}</p><h3>Exemplu</h3><div class="example-pair"><div><small>${item.inputFile || 'INTRARE'}</small><pre>${escapeHTML(displayInput(item.tests[0].input, item)) || '(linie goală)'}</pre></div><div><small>${item.outputFile || 'IEȘIRE'}</small><pre>${escapeHTML(item.tests[0].expected) || '(nimic)'}</pre></div></div><p class="source-note">${item.validator ? "Sunt acceptate soluții alternative care respectă cerința; ieșirea de referință este doar un exemplu." : item.compare === 'exact' ? 'Conținutul fișierului trebuie să coincidă exact, inclusiv spațiile și liniile.' : 'Respectă ordinea și liniile cerute. Spațiile de la sfârșitul liniilor și liniile goale finale sunt ignorate.'}</p><div class="exercise-help"><div class="help-buttons"><button type="button" data-help="exercise-hint" aria-controls="exercise-hint" aria-expanded="false">Indiciu</button><button type="button" data-help="exercise-solution" aria-controls="exercise-solution" aria-expanded="false">Rezolvare</button></div><div id="exercise-hint" class="help-content" hidden><p>${escapeHTML(item.hint)}</p></div><div id="exercise-solution" class="help-content" hidden><pre><code>${escapeHTML(referenceCode(item))}</code></pre><p>${escapeHTML(item.explanation)}</p><p>Închide soluția, rescrie-o singur și explică fiecare pas.</p></div></div>${sharedEditor.classList.contains('inline-mode') ? '' : `<p><a class="text-link" href="${beginner ? `#lectie-python/${chapter.id}/${window.PA_JOURNEY?.getExerciseStepIndex(item.id) ?? 4}` : `#capitol/${chapter.id}/${window.PA_JOURNEY?.getAlgorithmStepIndex(item.id) ?? 2}/${window.PA_JOURNEY?.getAlgorithmUnitIndex(item.id) ?? 0}`}">Înapoi la lecție →</a></p>`}<p class="source-note">${beginner ? "Exercițiu original din cursul introductiv Python." : "Exercițiu de pregătire creat sau adaptat pentru grupă. Nu este un subiect oficial de examen."}</p>`;
 document.querySelector('#input-label').textContent = item.inputFiles ? `CONȚINUTUL ${item.inputFiles[0]}` : item.inputFile ? `CONȚINUTUL ${item.inputFile}` : 'DATE DE INTRARE';
-document.querySelector('#input-help').textContent = item.inputFiles ? 'Fiecare fișier are propriul câmp. Datele de la tastatură sunt separate mai jos.' : item.inputFile ? `Fișierul ${item.inputFile} este creat înaintea rulării. Scrie rezultatul în ${item.outputFile}.` : 'Fiecare input() citește o linie. Pentru o ultimă linie goală, adaugă încă un Enter.';
+document.querySelector('#additional-inputs').querySelectorAll('[data-input-file]').forEach(field => { field.parentElement.hidden = !item.editableFiles?.includes(field.dataset.inputFile); });
 const index = collection.indexOf(item);
 const back = document.querySelector("#exercise-back");
 back.href = beginner ? `#lectie-python/${chapter.id}/${window.PA_JOURNEY?.getExerciseStepIndex(item.id) ?? 0}` : "#exercitii";
 back.textContent = beginner ? "← Înapoi la lecție" : "← Toate exercițiile";
 for (const [selector, offset] of [['#previous-exercise', -1], ['#next-exercise', 1]]) { const link = document.querySelector(selector); link.hidden = !collection[index + offset]; link.href = `#practica/${collection[index + offset]?.id || item.id}`; }
-result.textContent = 'Rezultatul va apărea aici.';
+result.textContent = '';
 document.querySelector('#exercise-brief .example-pair').classList.toggle('no-input-example', !item.inputFile && !item.inputFiles && item.tests.every(test => !test.input.trim()));
 document.querySelector('#test-results').replaceChildren();
 document.querySelector('#error-line').hidden = true;
-status.textContent = 'Scrie codul și apasă Verifică. Datele de test sunt pregătite automat.';
+status.classList.remove('verification-feedback', 'verification-correct', 'verification-incorrect');
+status.textContent = '';
 updateExerciseProgress();
 }
 function routePractice() {
@@ -104,7 +108,7 @@ const finish = (error) => { if (finished) { return; } finished = true; clearTime
 cancelRun = () => finish(new Error('Execuție oprită. Codul tău a fost păstrat.'));
 timeout = setTimeout(() => finish(new Error('Încărcarea Python a depășit 90 de secunde. Verifică internetul și reîncearcă.')), 90000);
 worker.onmessage = ({ data }) => {
-if (data.type === 'starting') { clearTimeout(timeout); timeout = setTimeout(() => finish(new Error(`Testul ${data.index + 1} a depășit 10 secunde. Verifică buclele și eficiența soluției.`)), 10000); status.textContent = check ? `Se verifică testul ${data.index + 1}/${exercise.tests.length}…` : 'Programul rulează…'; }
+if (data.type === 'starting') { clearTimeout(timeout); timeout = setTimeout(() => finish(new Error(`Testul ${data.index + 1} a depășit 10 secunde. Verifică buclele și eficiența soluției.`)), 10000); status.textContent = check ? 'Se verifică…' : 'Programul rulează…'; }
 if (data.type === 'result') { outputs.push(data.result); onResult(data.result, data.index); }
 if (data.type === 'done') { finish(); }
 if (data.type === 'error') { finish(new Error(data.message)); }
@@ -120,11 +124,13 @@ saveCode();
 const item = currentExercise;
 const passedBeforeCheck = isPassed(item);
 const code = editor.value;
+if (!code.split(/\r?\n/).some(line => line.trim() && !line.trimStart().startsWith('#'))) { document.querySelector('#test-results').replaceChildren(); result.textContent = ''; status.classList.remove('verification-feedback', 'verification-correct', 'verification-incorrect'); status.textContent = 'Nu există cod de verificat.'; return; }
 const inputSnapshot = readInput();
 runButton.disabled = true; checkButton.disabled = true; stopButton.disabled = false;
 editor.readOnly = true; stdin.readOnly = true;
 document.querySelectorAll('[data-input-file]').forEach(field => { field.readOnly = true; });
-status.textContent = 'Se încarcă Python… Prima pornire poate dura puțin.';
+status.classList.remove('verification-feedback', 'verification-correct', 'verification-incorrect');
+status.textContent = 'Se încarcă Python…';
 result.textContent = '';
 document.querySelector('#test-results').replaceChildren();
 document.querySelector('#error-line').hidden = true;
@@ -139,16 +145,10 @@ if (check) {
 const test = item.tests[index];
 const ok = !output.error && (item.validator ? output.correct === true : normalizeOutput(actual, item.compare) === normalizeOutput(test.expected, item.compare));
 if (ok) { passed += 1; }
-const card = document.createElement('details');
-card.className = `test-result ${ok ? 'test-pass' : 'test-fail'}`;
-card.open = !ok;
-card.innerHTML = `<summary>${ok ? '✓' : '✗'} Test ${index + 1} · ${ok ? 'Corect' : output.error ? 'Eroare de execuție' : 'Rezultat diferit'}</summary><div class="test-columns"><div ${!item.inputFile && !item.inputFiles && !test.input.trim() ? "hidden" : ""}><h4>Intrare${item.inputFile ? ' · date.in' : ''}</h4><pre>${escapeHTML(displayInput(test.input, item)) || '(gol)'}</pre></div><div><h4>Așteptat${item.outputFile ? ' · date.out' : ''}</h4><pre>${escapeHTML(test.expected) || '(gol)'}</pre></div><div><h4>Obținut</h4><pre>${escapeHTML(actual) || '(gol)'}</pre></div></div>${output.error ? `<p class="error-explanation">${escapeHTML(explainError(output.error))}</p>` : !ok ? '<p>' + escapeHTML(output.feedback || 'Compară valorile, ordinea și formatul cerut. Nu afișa mesaje suplimentare.') + '</p>' : ''}`;
-document.querySelector('#test-results').append(card);
-result.textContent = `${passed}/${index + 1} teste trecute. Detaliile sunt sub editor.`;
 } else { result.textContent = output.output + (item.outputFile ? `\n── ${item.outputFile} ──\n${output.fileOutput ?? '(fișierul nu a fost creat)'}` : '') + (output.error ? `\n${explainError(output.error)}` : ''); if (!result.textContent) { result.textContent = '(Programul nu a afișat nimic.)'; } }
-if (output.error?.line) { const button = document.querySelector('#error-line'); button.hidden = false; button.textContent = `Arată linia ${output.error.line}`; button.onclick = () => { const target = output.error.file && item.inputFiles?.includes(output.error.file) ? output.error.file === item.inputFiles[0] ? stdin : document.querySelector(`[data-input-file="${output.error.file}"]`) : editor; const offset = target.value.split('\n').slice(0, output.error.line - 1).reduce((sum, line) => sum + line.length + 1, 0); target.focus(); target.setSelectionRange(offset, target.value.indexOf('\n', offset) < 0 ? target.value.length : target.value.indexOf('\n', offset)); }; }
+if (output.error?.line) { const button = document.querySelector('#error-line'); button.hidden = check; button.textContent = `Arată linia ${output.error.line}`; button.onclick = () => { const target = output.error.file && item.inputFiles?.includes(output.error.file) ? output.error.file === item.inputFiles[0] ? stdin : document.querySelector(`[data-input-file="${output.error.file}"]`) : editor; const offset = target.value.split('\n').slice(0, output.error.line - 1).reduce((sum, line) => sum + line.length + 1, 0); target.focus(); target.setSelectionRange(offset, target.value.indexOf('\n', offset) < 0 ? target.value.length : target.value.indexOf('\n', offset)); }; }
 });
-if (check) { if (passed === item.tests.length) { drafts[item.id].passedCode = code; if (item.editableFiles) { const data = JSON.parse(inputSnapshot); drafts[item.id].passedFiles = JSON.stringify(Object.fromEntries(item.editableFiles.map(name => [name, data[name]]))); } persistDrafts(); if (!passedBeforeCheck) { window.PA_JOURNEY?.markActivity(); } window.PA_JOURNEY?.updateAll(false); window.PA_JOURNEY?.refreshExerciseStep(item.id); } status.textContent = `${passed}/${item.tests.length} teste trecute. ${passed === item.tests.length ? 'Acum explică soluția și încearcă și alte date.' : 'Deschide testele de mai jos, corectează codul și încearcă din nou.'}`; } else { status.textContent = executionError ? 'Programul s-a oprit cu o eroare. Consultă explicația din rezultat.' : 'Rulare încheiată. Consultă rezultatul; verificarea tuturor testelor este separată.'; }
+if (check) { if (passed === item.tests.length) { drafts[item.id].passedCode = code; if (item.editableFiles) { const data = JSON.parse(inputSnapshot); drafts[item.id].passedFiles = JSON.stringify(Object.fromEntries(item.editableFiles.map(name => [name, data[name]]))); } persistDrafts(); if (!passedBeforeCheck) { window.PA_JOURNEY?.markActivity(); } window.PA_JOURNEY?.updateAll(false); window.PA_JOURNEY?.refreshExerciseStep(item.id); } status.classList.add('verification-feedback'); status.classList.toggle('verification-correct', passed === item.tests.length); status.classList.toggle('verification-incorrect', passed !== item.tests.length); status.textContent = passed === item.tests.length ? 'Corect' : 'Soluția nu este corectă. Verifică codul.'; } else { status.textContent = executionError ? 'Programul s-a oprit cu o eroare. Consultă explicația din rezultat.' : 'Rulare încheiată. Consultă rezultatul; verificarea tuturor testelor este separată.'; }
 } catch (error) { if (currentExercise.id === item.id) { result.textContent += `\n${error.message}`; status.textContent = 'Execuție întreruptă. Rezultatele deja obținute sunt păstrate mai jos.'; } }
 finally { runButton.disabled = false; checkButton.disabled = false; stopButton.disabled = true; editor.readOnly = false; stdin.readOnly = false; document.querySelectorAll("[data-input-file]").forEach(field => { field.readOnly = false; }); updateExerciseProgress(); window.PA_JOURNEY?.refreshExerciseStep(item.id); }
 }
@@ -158,7 +158,7 @@ stdin.addEventListener('input', saveCode);
 document.querySelector('#additional-inputs').addEventListener('input', saveCode);
 editor.addEventListener('keydown', event => { if (event.key === 'Escape') { leaveEditor = true; } else if (event.key === 'Tab' && !leaveEditor && !editor.readOnly) { event.preventDefault(); editor.setRangeText('    ', editor.selectionStart, editor.selectionEnd, 'end'); saveCode(); } else { leaveEditor = false; } if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) { event.preventDefault(); runCode(true); } });
 runButton.addEventListener('click', () => runCode(false));
-document.querySelector('#try-input').addEventListener('click', () => runCode(false));
+
 checkButton.addEventListener('click', () => runCode(true));
 stopButton.addEventListener('click', () => { if (cancelRun) { cancelRun(); } });
 document.querySelector('#python-download').addEventListener('click', () => downloadData(editor.value, `${currentExercise.id}.py`));
@@ -185,9 +185,11 @@ routePractice();
 renderBank();
 renderCourse();
 
-window.PA_EDITOR = { attachTo: attachEditor, restore: restoreEditor, selectExercise, saveCode };
+window.PA_EDITOR = { attachTo: attachEditor, restore: restoreEditor, selectExercise, saveCode, exportState:() => JSON.parse(JSON.stringify(drafts)), replaceState:data => { drafts = {}; for (const item of [...exercises,...beginnerExercises]) { const row = data?.[item.id]; if (row && typeof row.code === 'string' && typeof row.input === 'string') { drafts[item.id] = { code:row.code,input:row.input }; if (row.passedCode === row.code) { drafts[item.id].passedCode = row.passedCode; } if (typeof row.passedFiles === 'string') { drafts[item.id].passedFiles = row.passedFiles; } } } persistDrafts(); if (currentExercise) { const selectedId = currentExercise.id; currentExercise = null; selectExercise(selectedId); } renderBank(); } };
 
 
 
 
 
+
+document.querySelector("#exercise-brief").addEventListener("click", event => { const button = event.target.closest("[data-help]"); if (!button) { return; } const panel = document.getElementById(button.dataset.help); panel.hidden = !panel.hidden; button.setAttribute("aria-expanded", String(!panel.hidden)); });
