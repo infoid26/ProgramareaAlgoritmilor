@@ -19,12 +19,12 @@ window.PA_BEGINNER = {
       "subtitle": "Numere, atribuiri și operatori aritmetici",
       "duration": "15–20 min",
       "lesson": [
-        "O variabilă este un nume asociat unei valori. Scrii pret = 12 pentru a reține numărul 12.",
+        "O variabilă este un name asociat unei valori. Scrii price = 12 pentru a reține numărul 12.",
         "Operatorii +, -, * și / fac operații aritmetice. Parantezele stabilesc ordinea calculului.",
         "În Python, = atribuie o valoare; nu înseamnă „egal matematic”. Folosește print() ca să vezi valorile calculate."
       ],
-      "example": "pret = 12\ncantitate = 3\nprint(pret * cantitate)",
-      "explain": "pret și cantitate memorează numere întregi; rezultatul este 36."
+      "example": "price = 12\nquantity = 3\nprint(price * quantity)",
+      "explain": "price și quantity memorează numere întregi; rezultatul este 36."
     },
     {
       "id": "intro-citire",
@@ -32,11 +32,11 @@ window.PA_BEGINNER = {
       "subtitle": "input(), int() și șiruri de caractere",
       "duration": "15–20 min",
       "lesson": [
-        "input() citește o linie și o returnează ca text (str). Poți salva răspunsul într-o variabilă: nume = input().",
+        "input() citește o linie și o returnează ca text (str). Poți salva răspunsul într-o variabilă: name = input().",
         "Pentru calcule cu întregi folosești int(input()). Dacă uiți int(), \"2\" + \"3\" devine \"23\", nu 5.",
         "Fiecare apel input() citește următoarea linie. La verificare, aplicația furnizează automat liniile de intrare ale exercițiului."
       ],
-      "example": "nume = input()\nprint(\"User:\", nume)",
+      "example": "name = input()\nprint(\"User:\", name)",
       "explain": "Pentru intrarea Ana, rezultatul este User: Ana. print() pune implicit un spațiu între argumente."
     },
     {
@@ -49,7 +49,7 @@ window.PA_BEGINNER = {
         "Instrucțiunile din interiorul unui if sau else trebuie indentate consecvent, de obicei cu patru spații.",
         "Folosește if/else când ai două variante. elif te ajută să verifici alternative suplimentare."
       ],
-      "example": "varsta = int(input())\nif varsta >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Minor\")",
+      "example": "age = int(input())\nif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Minor\")",
       "explain": "Pentru 18 afișează Adult, iar pentru 17 afișează Minor. Operatorul >= include valoarea 18."
     },
     {
@@ -128,10 +128,10 @@ window.PA_BEGINNER = {
       "id": "intro-variabile-01",
       "chapter": "intro-variabile",
       "title": "Bilete la film",
-      "statement": "Setează variabila pret la 18 și variabila bilete la 4. Afișează prețul total. Nu citi date.",
-      "hint": "Înmulțește pret cu bilete.",
-      "solution": "pret = 18\nbilete = 4\nprint(pret * bilete)",
-      "explanation": "Înmulțește pret cu bilete.",
+      "statement": "Setează variabila `price` la 18 și variabila `tickets` la 4. Afișează prețul total. Nu citi date.",
+      "hint": "Înmulțește price cu tickets.",
+      "solution": "price = 18\ntickets = 4\nprint(price * tickets)",
+      "explanation": "Înmulțește price cu tickets.",
       "level": "Începător",
       "starter": "",
       "tests": [
@@ -147,10 +147,10 @@ window.PA_BEGINNER = {
       "id": "intro-variabile-02",
       "chapter": "intro-variabile",
       "title": "Puncte bonus",
-      "statement": "Setează puncte = 40. Adaugă 15 puncte și afișează noua valoare. Nu citi date.",
-      "hint": "Actualizează valoarea prin puncte += 15.",
-      "solution": "puncte = 40\npuncte += 15\nprint(puncte)",
-      "explanation": "Actualizează valoarea prin puncte += 15.",
+      "statement": "Setează `points` = 40. Adaugă 15 `points` și afișează noua valoare. Nu citi date.",
+      "hint": "Actualizează valoarea prin points += 15.",
+      "solution": "points = 40\npoints += 15\nprint(points)",
+      "explanation": "Actualizează valoarea prin points += 15.",
       "level": "Începător",
       "starter": "",
       "tests": [
@@ -166,10 +166,10 @@ window.PA_BEGINNER = {
       "id": "intro-variabile-03",
       "chapter": "intro-variabile",
       "title": "Minute rămase",
-      "statement": "Ai durata = 90 și parcurs = 35. Calculează câte minute au rămas și afișează rezultatul. Nu citi date.",
-      "hint": "Scade parcurs din durata.",
-      "solution": "durata = 90\nparcurs = 35\nprint(durata - parcurs)",
-      "explanation": "Scade parcurs din durata.",
+      "statement": "Ai `duration` = 90 și `elapsed` = 35. Calculează câte minute au rămas și afișează rezultatul. Nu citi date.",
+      "hint": "Scade elapsed din duration.",
+      "solution": "duration = 90\nelapsed = 35\nprint(duration - elapsed)",
+      "explanation": "Scade elapsed din duration.",
       "level": "Începător",
       "starter": "",
       "tests": [
@@ -185,10 +185,10 @@ window.PA_BEGINNER = {
       "id": "intro-citire-01",
       "chapter": "intro-citire",
       "title": "Identificarea utilizatorului",
-      "statement": "Citește un nume de pe o singură linie. Afișează pe o singură linie textul `User:`, un spațiu și numele citit. De exemplu, pentru Ana afișează `User: Ana`.",
-      "hint": "input() citește text. print(\"User:\", nume) adaugă spațiul.",
-      "solution": "nume = input()\nprint(\"User:\", nume)",
-      "explanation": "input() citește text. print(\"User:\", nume) adaugă spațiul.",
+      "statement": "Citește un nume de pe o singură linie și păstrează-l în variabila `name`. Afișează pe o singură linie textul `User:`, un spațiu și numele citit. De exemplu, pentru Ana afișează `User: Ana`.",
+      "hint": "input() citește text. print(\"User:\", name) adaugă spațiul.",
+      "solution": "name = input()\nprint(\"User:\", name)",
+      "explanation": "input() citește text. print(\"User:\", name) adaugă spațiul.",
       "level": "Începător",
       "starter": "",
       "tests": [
@@ -214,7 +214,7 @@ window.PA_BEGINNER = {
       "title": "Anul viitor",
       "statement": "Citește o vârstă întreagă și afișează vârsta pe care o vei avea anul viitor.",
       "hint": "Convertește rezultatul input() cu int() înainte de a aduna 1.",
-      "solution": "varsta = int(input())\nprint(varsta + 1)",
+      "solution": "age = int(input())\nprint(age + 1)",
       "explanation": "Convertește rezultatul input() cu int() înainte de a aduna 1.",
       "level": "Începător",
       "starter": "",
@@ -241,7 +241,7 @@ window.PA_BEGINNER = {
       "title": "Cumpărături",
       "statement": "Citește pe două linii prețul întreg al unui produs și cantitatea întreagă. Afișează costul total.",
       "hint": "Ai nevoie de două apeluri int(input()) și o înmulțire.",
-      "solution": "pret = int(input())\ncantitate = int(input())\nprint(pret * cantitate)",
+      "solution": "price = int(input())\nquantity = int(input())\nprint(price * quantity)",
       "explanation": "Ai nevoie de două apeluri int(input()) și o înmulțire.",
       "level": "Începător",
       "starter": "",
@@ -267,9 +267,9 @@ window.PA_BEGINNER = {
       "chapter": "intro-conditii",
       "title": "Bilet cu reducere",
       "statement": "Citește o vârstă întreagă de pe o singură linie. Dacă vârsta este mai mică decât 12, afișează exact `DISCOUNT`; în caz contrar, afișează exact `STANDARD`.",
-      "hint": "Folosește if varsta < 12: urmat de else.",
-      "solution": "varsta = int(input())\nif varsta < 12:\n    print(\"DISCOUNT\")\nelse:\n    print(\"STANDARD\")",
-      "explanation": "Folosește if varsta < 12: urmat de else.",
+      "hint": "Folosește if age < 12: urmat de else.",
+      "solution": "age = int(input())\nif age < 12:\n    print(\"DISCOUNT\")\nelse:\n    print(\"STANDARD\")",
+      "explanation": "Folosește if age < 12: urmat de else.",
       "level": "Începător",
       "starter": "",
       "tests": [
@@ -293,10 +293,10 @@ window.PA_BEGINNER = {
       "id": "intro-conditii-02",
       "chapter": "intro-conditii",
       "title": "Temperatura afară",
-      "statement": "Citește o temperatură întreagă de pe o singură linie. Dacă temperatura este mai mică sau egală cu 0, afișează exact `FREEZING`; dacă este mai mare decât 0, afișează exact `ABOVE FREEZING`.",
-      "hint": "Condiția corectă este temperatura <= 0.",
-      "solution": "temperatura = int(input())\nif temperatura <= 0:\n    print(\"FREEZING\")\nelse:\n    print(\"ABOVE FREEZING\")",
-      "explanation": "Condiția corectă este temperatura <= 0.",
+      "statement": "Citește o temperatură întreagă de pe o singură linie. Dacă `temperature` este mai mică sau egală cu 0, afișează exact `FREEZING`; dacă este mai mare decât 0, afișează exact `ABOVE FREEZING`.",
+      "hint": "Condiția corectă este temperature <= 0.",
+      "solution": "temperature = int(input())\nif temperature <= 0:\n    print(\"FREEZING\")\nelse:\n    print(\"ABOVE FREEZING\")",
+      "explanation": "Condiția corectă este temperature <= 0.",
       "level": "Începător",
       "starter": "",
       "tests": [
@@ -322,7 +322,7 @@ window.PA_BEGINNER = {
       "title": "Semafor simplu",
       "statement": "Citește exact unul dintre textele `green`, `yellow` sau `red`, cu litere mici. Afișează pe o singură linie `GO` pentru `green`, `WAIT` pentru `yellow` sau `STOP` pentru `red`.",
       "hint": "Poți lega cele trei variante cu if, elif și else.",
-      "solution": "culoare = input()\nif culoare == \"green\":\n    print(\"GO\")\nelif culoare == \"yellow\":\n    print(\"WAIT\")\nelse:\n    print(\"STOP\")",
+      "solution": "color = input()\nif color == \"green\":\n    print(\"GO\")\nelif color == \"yellow\":\n    print(\"WAIT\")\nelse:\n    print(\"STOP\")",
       "explanation": "Poți lega cele trei variante cu if, elif și else.",
       "level": "Începător",
       "starter": "",

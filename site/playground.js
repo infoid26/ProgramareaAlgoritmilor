@@ -67,7 +67,7 @@ window.dispatchEvent(new Event('pa-module-editor'));
 document.querySelector('#module-download').hidden = !item.editableFiles;
 document.querySelector('#exercise-title').textContent = item.title;
 document.querySelector('#exercise-chapter').textContent = `${chapter.title} · ${item.level}`;
-document.querySelector('#exercise-brief').innerHTML = `<span class="tag">CERINȚĂ</span><p>${formatStatement(item.statement)}</p><h3>Exemplu</h3><div class="example-pair"><div><small>${item.inputFile || 'INTRARE'}</small><pre>${escapeHTML(displayInput(item.tests[0].input, item)) || '(linie goală)'}</pre></div><div><small>${item.outputFile || 'IEȘIRE'}</small><pre>${escapeHTML(item.tests[0].expected) || '(nimic)'}</pre></div></div><p class="source-note">${item.validator ? "Sunt acceptate soluții alternative care respectă cerința; ieșirea de referință este doar un exemplu." : item.compare === 'exact' ? 'Conținutul fișierului trebuie să coincidă exact, inclusiv spațiile și liniile.' : 'Respectă ordinea și liniile cerute. Spațiile de la sfârșitul liniilor și liniile goale finale sunt ignorate.'}</p><div class="exercise-help"><div class="help-buttons"><button type="button" data-help="exercise-hint" aria-controls="exercise-hint" aria-expanded="false">Indiciu</button><button type="button" data-help="exercise-solution" aria-controls="exercise-solution" aria-expanded="false">Rezolvare</button></div><div id="exercise-hint" class="help-content" hidden><p>${escapeHTML(item.hint)}</p></div><div id="exercise-solution" class="help-content" hidden><pre><code>${escapeHTML(referenceCode(item))}</code></pre><p>${escapeHTML(item.explanation)}</p><p>Închide soluția, rescrie-o singur și explică fiecare pas.</p></div></div>${sharedEditor.classList.contains('inline-mode') ? '' : `<p><a class="text-link" href="${beginner ? `#lectie-python/${chapter.id}/${window.PA_JOURNEY?.getExerciseStepIndex(item.id) ?? 4}` : `#capitol/${chapter.id}/${window.PA_JOURNEY?.getAlgorithmStepIndex(item.id) ?? 2}/${window.PA_JOURNEY?.getAlgorithmUnitIndex(item.id) ?? 0}`}">Înapoi la lecție →</a></p>`}<p class="source-note">${beginner ? "Exercițiu original din cursul introductiv Python." : "Exercițiu de pregătire creat sau adaptat pentru grupă. Nu este un subiect oficial de examen."}</p>`;
+document.querySelector('#exercise-brief').innerHTML = `<span class="tag">CERINȚĂ</span><p>${formatStatement(item.statement)}</p><div class="example-input" ${!item.inputFile && !item.inputFiles && item.tests.every(test => !test.input.trim()) ? 'hidden' : ''}><small>Intrare</small><pre id="example-input-value">${escapeHTML(displayInput(item.tests[0].input,item)) || '(gol)'}</pre></div><p class="source-note">${item.validator ? "Sunt acceptate soluții alternative care respectă cerința; ieșirea de referință este doar un exemplu." : item.compare === 'exact' ? 'Conținutul fișierului trebuie să coincidă exact, inclusiv spațiile și liniile.' : 'Respectă ordinea și liniile cerute. Spațiile de la sfârșitul liniilor și liniile goale finale sunt ignorate.'}</p><div class="exercise-help"><div class="help-buttons"><button type="button" data-help="exercise-hint" aria-controls="exercise-hint" aria-expanded="false">Indiciu</button><button type="button" data-help="exercise-solution" aria-controls="exercise-solution" aria-expanded="false">Rezolvare</button></div><div id="exercise-hint" class="help-content" hidden><p>${escapeHTML(item.hint)}</p></div><div id="exercise-solution" class="help-content" hidden><pre><code>${escapeHTML(referenceCode(item))}</code></pre><p>${escapeHTML(item.explanation)}</p><p>Închide soluția, rescrie-o singur și explică fiecare pas.</p></div></div>${sharedEditor.classList.contains('inline-mode') ? '' : `<p><a class="text-link" href="${beginner ? `#lectie-python/${chapter.id}/${window.PA_JOURNEY?.getExerciseStepIndex(item.id) ?? 4}` : `#capitol/${chapter.id}/${window.PA_JOURNEY?.getAlgorithmStepIndex(item.id) ?? 2}/${window.PA_JOURNEY?.getAlgorithmUnitIndex(item.id) ?? 0}`}">Înapoi la lecție →</a></p>`}<p class="source-note">${beginner ? "Exercițiu original din cursul introductiv Python." : "Exercițiu de pregătire creat sau adaptat pentru grupă. Nu este un subiect oficial de examen."}</p>`;
 document.querySelector('#input-label').textContent = item.inputFiles ? `CONȚINUTUL ${item.inputFiles[0]}` : item.inputFile ? `CONȚINUTUL ${item.inputFile}` : 'DATE DE INTRARE';
 document.querySelector('#additional-inputs').querySelectorAll('[data-input-file]').forEach(field => { field.parentElement.hidden = !item.editableFiles?.includes(field.dataset.inputFile); });
 const index = collection.indexOf(item);
@@ -75,12 +75,11 @@ const back = document.querySelector("#exercise-back");
 back.href = beginner ? `#lectie-python/${chapter.id}/${window.PA_JOURNEY?.getExerciseStepIndex(item.id) ?? 0}` : "#exercitii";
 back.textContent = beginner ? "← Înapoi la lecție" : "← Toate exercițiile";
 for (const [selector, offset] of [['#previous-exercise', -1], ['#next-exercise', 1]]) { const link = document.querySelector(selector); link.hidden = !collection[index + offset]; link.href = `#practica/${collection[index + offset]?.id || item.id}`; }
-result.textContent = '';
-document.querySelector('#exercise-brief .example-pair').classList.toggle('no-input-example', !item.inputFile && !item.inputFiles && item.tests.every(test => !test.input.trim()));
+resetComparison();
 document.querySelector('#test-results').replaceChildren();
-document.querySelector('#error-line').hidden = true;
 status.classList.remove('verification-feedback', 'verification-correct', 'verification-incorrect');
 status.textContent = '';
+resetComparison();
 updateExerciseProgress();
 }
 function routePractice() {
@@ -124,7 +123,7 @@ saveCode();
 const item = currentExercise;
 const passedBeforeCheck = isPassed(item);
 const code = editor.value;
-if (!code.split(/\r?\n/).some(line => line.trim() && !line.trimStart().startsWith('#'))) { document.querySelector('#test-results').replaceChildren(); result.textContent = ''; status.classList.remove('verification-feedback', 'verification-correct', 'verification-incorrect'); status.textContent = 'Nu există cod de verificat.'; return; }
+if (!code.split(/\r?\n/).some(line => line.trim() && !line.trimStart().startsWith('#'))) { resetComparison(); document.querySelector('#test-results').replaceChildren(); status.classList.remove('verification-feedback', 'verification-correct', 'verification-incorrect'); status.textContent = 'Nu există cod de verificat.'; return; }
 const inputSnapshot = readInput();
 runButton.disabled = true; checkButton.disabled = true; stopButton.disabled = false;
 editor.readOnly = true; stdin.readOnly = true;
@@ -133,10 +132,12 @@ status.classList.remove('verification-feedback', 'verification-correct', 'verifi
 status.textContent = 'Se încarcă Python…';
 result.textContent = '';
 document.querySelector('#test-results').replaceChildren();
-document.querySelector('#error-line').hidden = true;
 if (check) { delete drafts[item.id].passedCode; persistDrafts(); updateExerciseProgress(); window.PA_JOURNEY?.refreshExerciseStep(item.id); }
 let passed = 0;
 let executionError = false;
+let displayedFailure = false;
+let failureLocation = "";
+resetComparison();
 try {
 await executePython(code, inputSnapshot, item, check, (output, index) => {
 if (output.error) { executionError = true; }
@@ -145,17 +146,19 @@ if (check) {
 const test = item.tests[index];
 const ok = !output.error && (item.validator ? output.correct === true : normalizeOutput(actual, item.compare) === normalizeOutput(test.expected, item.compare));
 if (ok) { passed += 1; }
+if (index === 0 || (!ok && !displayedFailure)) { document.querySelector('#expected-output').textContent = test.expected || '(gol)'; result.textContent = output.error ? explainError(output.error) : actual.trim() ? actual : '(niciun rezultat)'; result.classList.toggle('output-correct',ok); result.classList.toggle('output-incorrect',!ok); const exampleInput = document.querySelector('#example-input-value'); if (exampleInput) { exampleInput.textContent = displayInput(test.input,item) || '(gol)'; } }
+if (!ok && !displayedFailure) { if (output.error) { failureLocation = ''; } else if (!item.validator) { failureLocation = `Prima diferență: linia ${firstDifferentOutputLine(actual, test.expected, item.compare)} din rezultat.`; } else { failureLocation = output.feedback || ''; } }
+if (!ok) { displayedFailure = true; }
 } else { result.textContent = output.output + (item.outputFile ? `\n── ${item.outputFile} ──\n${output.fileOutput ?? '(fișierul nu a fost creat)'}` : '') + (output.error ? `\n${explainError(output.error)}` : ''); if (!result.textContent) { result.textContent = '(Programul nu a afișat nimic.)'; } }
-if (output.error?.line) { const button = document.querySelector('#error-line'); button.hidden = check; button.textContent = `Arată linia ${output.error.line}`; button.onclick = () => { const target = output.error.file && item.inputFiles?.includes(output.error.file) ? output.error.file === item.inputFiles[0] ? stdin : document.querySelector(`[data-input-file="${output.error.file}"]`) : editor; const offset = target.value.split('\n').slice(0, output.error.line - 1).reduce((sum, line) => sum + line.length + 1, 0); target.focus(); target.setSelectionRange(offset, target.value.indexOf('\n', offset) < 0 ? target.value.length : target.value.indexOf('\n', offset)); }; }
 });
-if (check) { if (passed === item.tests.length) { drafts[item.id].passedCode = code; if (item.editableFiles) { const data = JSON.parse(inputSnapshot); drafts[item.id].passedFiles = JSON.stringify(Object.fromEntries(item.editableFiles.map(name => [name, data[name]]))); } persistDrafts(); if (!passedBeforeCheck) { window.PA_JOURNEY?.markActivity(); } window.PA_JOURNEY?.updateAll(false); window.PA_JOURNEY?.refreshExerciseStep(item.id); } status.classList.add('verification-feedback'); status.classList.toggle('verification-correct', passed === item.tests.length); status.classList.toggle('verification-incorrect', passed !== item.tests.length); status.textContent = passed === item.tests.length ? 'Corect' : 'Soluția nu este corectă. Verifică codul.'; } else { status.textContent = executionError ? 'Programul s-a oprit cu o eroare. Consultă explicația din rezultat.' : 'Rulare încheiată. Consultă rezultatul; verificarea tuturor testelor este separată.'; }
+if (check) { if (passed === item.tests.length) { drafts[item.id].passedCode = code; if (item.editableFiles) { const data = JSON.parse(inputSnapshot); drafts[item.id].passedFiles = JSON.stringify(Object.fromEntries(item.editableFiles.map(name => [name, data[name]]))); } persistDrafts(); if (!passedBeforeCheck) { window.PA_JOURNEY?.markActivity(); } window.PA_JOURNEY?.updateAll(false); window.PA_JOURNEY?.refreshExerciseStep(item.id); } status.classList.add('verification-feedback'); status.classList.toggle('verification-correct', passed === item.tests.length); status.classList.toggle('verification-incorrect', passed !== item.tests.length); status.textContent = passed === item.tests.length ? 'Corect' : `Soluția nu este corectă.${failureLocation ? " " + failureLocation : ""}`; } else { status.textContent = executionError ? 'Programul s-a oprit cu o eroare. Consultă explicația din rezultat.' : 'Rulare încheiată. Consultă rezultatul; verificarea tuturor testelor este separată.'; }
 } catch (error) { if (currentExercise.id === item.id) { result.textContent += `\n${error.message}`; status.textContent = 'Execuție întreruptă. Rezultatele deja obținute sunt păstrate mai jos.'; } }
 finally { runButton.disabled = false; checkButton.disabled = false; stopButton.disabled = true; editor.readOnly = false; stdin.readOnly = false; document.querySelectorAll("[data-input-file]").forEach(field => { field.readOnly = false; }); updateExerciseProgress(); window.PA_JOURNEY?.refreshExerciseStep(item.id); }
 }
 function downloadData(text, filename, type = 'text/plain;charset=utf-8') { const url = URL.createObjectURL(new Blob([text], { type })); const link = document.createElement('a'); link.href = url; link.download = filename; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
-editor.addEventListener('input', saveCode);
-stdin.addEventListener('input', saveCode);
-document.querySelector('#additional-inputs').addEventListener('input', saveCode);
+editor.addEventListener('input', () => { saveCode(); resetComparison(); });
+stdin.addEventListener('input', () => { saveCode(); resetComparison(); });
+document.querySelector('#additional-inputs').addEventListener('input', () => { saveCode(); resetComparison(); });
 editor.addEventListener('keydown', event => { if (event.key === 'Escape') { leaveEditor = true; } else if (event.key === 'Tab' && !leaveEditor && !editor.readOnly) { event.preventDefault(); editor.setRangeText('    ', editor.selectionStart, editor.selectionEnd, 'end'); saveCode(); } else { leaveEditor = false; } if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) { event.preventDefault(); runCode(true); } });
 runButton.addEventListener('click', () => runCode(false));
 
@@ -193,3 +196,7 @@ window.PA_EDITOR = { attachTo: attachEditor, restore: restoreEditor, selectExerc
 
 
 document.querySelector("#exercise-brief").addEventListener("click", event => { const button = event.target.closest("[data-help]"); if (!button) { return; } const panel = document.getElementById(button.dataset.help); panel.hidden = !panel.hidden; button.setAttribute("aria-expanded", String(!panel.hidden)); });
+
+function resetComparison() { document.querySelector("#expected-output").textContent = currentExercise?.tests[0].expected || "(gol)"; result.textContent = "—"; result.classList.remove("output-correct", "output-incorrect"); status.classList.remove("verification-feedback", "verification-correct", "verification-incorrect"); status.textContent = ""; const exampleInput = document.querySelector("#example-input-value"); if (exampleInput && currentExercise) { exampleInput.textContent = displayInput(currentExercise.tests[0].input,currentExercise) || "(gol)"; } }
+
+function firstDifferentOutputLine(actual, expected, mode) { const actualLines = normalizeOutput(actual, mode).split("\n"); const expectedLines = normalizeOutput(expected, mode).split("\n"); for (let index = 0; index < Math.max(actualLines.length, expectedLines.length); index++) { if (actualLines[index] !== expectedLines[index]) { return index + 1; } } return 1; }

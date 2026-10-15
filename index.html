@@ -6,18 +6,18 @@
 <meta name="theme-color" content="#17152f">
 <meta name="description" content="Platformă interactivă pentru a învăța Python și algoritmi: lecții, quiz-uri, exerciții și progres.">
 <title>PA · INFO ID 26</title>
-<link rel="stylesheet" href="site/style.css?v=20261014-progress">
-<script src="site/exercises.js?v=20261014-clean" defer></script>
-<script src="site/python-course.js?v=20261014-clean" defer></script>
-<script src="site/interactive-content.js?v=20261014-clean" defer></script>
-<script src="site/algorithm-quizzes.js?v=20261014-clean" defer></script>
-<script src="site/algorithm-lessons.js?v=20261014-clean" defer></script>
-<script src="site/app.js?v=20261014-clean" defer></script>
-<script src="site/playground.js?v=20261014-clean" defer></script>
-<script src="site/journey.js?v=20261014-progress" defer></script>
-<script src="site/code-editor.js?v=20261014-clean" defer></script>
-<script src="site/auth-config.js?v=20261014-clean" defer></script>
-<script src="site/account.js?v=20261014-clean" defer></script>
+<link rel="stylesheet" href="site/style.css?v=20261014-compact">
+<script src="site/exercises.js?v=20261014-outputs" defer></script>
+<script src="site/python-course.js?v=20261014-outputs" defer></script>
+<script src="site/interactive-content.js?v=20261014-outputs" defer></script>
+<script src="site/algorithm-quizzes.js?v=20261014-outputs" defer></script>
+<script src="site/algorithm-lessons.js?v=20261014-outputs" defer></script>
+<script src="site/app.js?v=20261014-outputs" defer></script>
+<script src="site/playground.js?v=20261015-errors-compact" defer></script>
+<script src="site/journey.js?v=20261015-course-progress" defer></script>
+<script src="site/code-editor.js?v=20261014-outputs" defer></script>
+<script src="site/auth-config.js?v=20261014-outputs" defer></script>
+<script src="site/account.js?v=20261014-outputs" defer></script>
 </head>
 <body>
 <a class="skip" href="#continut">Sari la conținut</a>
@@ -41,7 +41,7 @@
 <div class="exercise-nav"><a id="exercise-back" class="text-link" href="#exercitii">← Toate exercițiile</a><a id="previous-exercise" class="text-link">← Anterior</a><a id="next-exercise" class="text-link">Următorul →</a></div>
 <div class="eyebrow" id="exercise-chapter"></div><h1 class="practice-title" id="exercise-title"></h1>
 <div id="editor-home"><div id="shared-editor"><p id="exercise-progress" class="source-note"></p><div class="practice-layout"><article id="exercise-brief" class="practice-brief card"></article>
-<div class="workspace"><label class="editor-label" for="python-code">Codul tău </label><textarea id="python-code" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea><div class="workspace-actions"><button id="python-run" class="button">▷ Rulează</button><button id="python-stop" class="secondary" disabled>Oprește</button><button id="python-check" class="button">Verifică</button><button id="module-download" class="download-code" hidden>Descarcă modulul ↓</button><button id="python-download" class="download-code">Descarcă .py ↓</button></div><div class="io-grid"><div id="custom-input" hidden><label id="input-label" for="python-input">DATE DE INTRARE</label><textarea id="python-input" spellcheck="false"></textarea><div id="additional-inputs"></div></div><div><label for="python-output">REZULTAT</label><pre id="python-output" tabindex="0"></pre></div></div><p id="python-status" role="status"></p><button id="error-line" class="secondary" hidden>Arată linia cu eroarea</button></div></div>
+<div class="workspace"><label class="editor-label" for="python-code">Codul tău </label><textarea id="python-code" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea><div class="workspace-actions"><button id="python-run" class="button">▷ Rulează</button><button id="python-stop" class="secondary" disabled>Oprește</button><button id="python-check" class="button">Verifică</button><button id="module-download" class="download-code" hidden>Descarcă modulul ↓</button><button id="python-download" class="download-code">Descarcă .py ↓</button></div><div class="output-comparison"><div><label for="expected-output">Rezultat așteptat</label><pre id="expected-output"></pre></div><div><label for="python-output">Rezultat obținut</label><pre id="python-output" tabindex="0" aria-live="polite">—</pre></div></div><div class="io-grid"><div id="custom-input" hidden><label id="input-label" for="python-input">DATE DE INTRARE</label><textarea id="python-input" spellcheck="false"></textarea><div id="additional-inputs"></div></div></div><p id="python-status" role="status"></p></div></div>
 <div id="test-results" aria-label="Rezultatele verificării"></div></div></div>
 </section>
 <footer>Programarea Algoritmilor · INFO ID 26</footer>
