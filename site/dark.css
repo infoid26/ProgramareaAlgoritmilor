@@ -1,0 +1,60 @@
+/* Tema implicită pentru PA. Stilurile funcționale rămân în style.css. */
+:root { color-scheme:dark; --bg:#101218; --ink:#eeeef5; --muted:#b0b2c4; --green:#b8a8ff; --line:#343848; --soft:#28243b; --purple:#b8a8ff; --navy:#171a23; --surface:#191c26; --surface-raised:#222633; --success:#83dcac; --success-bg:#17362d; --error:#ffaaa3; --error-bg:#3c232a; }
+body { background:var(--bg); color:var(--ink); }
+::selection { background:#665292; color:#fff; }
+a,summary,.text-link,.eyebrow,.tag,.step,.question-kicker { color:var(--purple); }
+.topbar,footer,details,th,td,fieldset { border-color:var(--line); }
+.lead,.card p,.course-card p,.lesson-screen p,.chapter-learning p,.source-note,.workspace-help,.section-heading > span,.course-status,.course-card .locked-label,.lesson-illustration span,.challenge-preview div,.progress-percent-label,.example-input small { color:var(--muted); }
+.welcome-layout { background:linear-gradient(115deg,#1c1e2c,#242038); border-color:var(--line); }
+.card,.featured,.road-card,.exercise-card,.lesson,.lesson-player,.progress-panel,.chapter-trophy,.workspace,.quiz-option,.secondary,.stat-pill,.pill { background:var(--surface); color:var(--ink); border-color:var(--line); box-shadow:none; }
+.lesson-screen { background:#1d202b; border-color:var(--line); }
+.lesson-player.has-editor .lesson-screen,.inline-mode #exercise-brief { background:transparent; }
+.lesson-controls { background:rgba(25,28,38,.97); }
+.button,#python-check { color:#fff; background:#7555df; box-shadow:0 4px 0 #49318e; }
+.button:hover:not(:disabled),#python-check:hover:not(:disabled) { background:#8162eb; }
+.secondary:hover,.account-menu button:hover { background:var(--surface-raised); }
+pre,.trace,.challenge-preview,.chips span { background:#222633; color:#e2e5f0; }
+.concept-code,.chapter-learning .concept-code { background:#131620; color:#e2e5f0; }
+.concept-highlight,.notice,.check,.quiz-feedback { background:#27233b; color:#d1c6ee; border-color:#9c83ee; }
+.required-text { background:#302944; color:#dfd2ff; }
+.lesson-step-counter,.challenge-icon,.quiz-option .option-letter { background:#302944; color:#dfd2ff; }
+.meter,.path-meter,.mini-progress,.lesson-progress,.header-progress-track { background:#343447; }
+.step-dot { background:#414258; }
+.step-dot.current { background:var(--purple); }
+.step-dot.done { background:#5fcbaa; }
+.quiz-option:hover:not(:disabled) { background:#2a263e; border-color:#ad96f4; }
+.quiz-option.correct,.quiz-feedback.correct-feedback,.exercise-card.passed,.road-card.road-done,.course-card.course-done { background:var(--success-bg); color:var(--success); border-color:#3d8062; }
+.quiz-option.correct .option-letter { background:#245340; color:var(--success); }
+.quiz-option.wrong,.quiz-feedback.wrong-feedback { background:var(--error-bg); color:var(--error); border-color:#a75b59; }
+.quiz-feedback:empty { display:none; }
+input,select,textarea,.bank-toolbar input,.bank-toolbar select,#python-input,#additional-inputs textarea { background:#171a23; color:var(--ink); border-color:var(--line); }
+input::placeholder,textarea::placeholder { color:#999daf; }
+.course-card.course-locked { background:transparent; opacity:1; }
+.unified-map .course-card,.unified-map .road-card { background:var(--surface); }
+.unified-map .course-card.course-done,.unified-map .road-card.road-done { background:var(--success-bg); }
+.unified-map .course-number,.course-number { background:#7555df; color:#fff; }
+.unified-map .course-locked .course-number,.course-card.course-locked .course-number { background:#303442; color:#b3b6c6; box-shadow:0 5px 0 #222530; }
+.unified-map .unit-node { color:var(--ink); }
+.unified-map .unit-node b { background:#303442; color:#d1d3e1; box-shadow:0 5px 0 #222530; }
+.unified-map .unit-current b { background:#7555df; color:#fff; box-shadow:0 5px 0 #49318e; }
+.unified-map .unit-done b,.course-card.course-done .course-number { background:#245340; color:var(--success); box-shadow:0 5px 0 #153c2c; }
+.path-banner { background:#342a55; color:#f0eaff; }
+.progress-percent { background:var(--surface); border-color:var(--line); }
+.progress-percent-label strong,.lesson-result-progress strong { color:var(--purple); }
+.account-menu button,#account-details[open] { background:var(--surface); border-color:var(--line); color:var(--ink); }
+.editor-label,#python-code { background:#202333; color:#e1e4f1; }
+.python-codemirror .cm-editor { background:#202333 !important; color:#e1e4f1; }
+.python-codemirror .cm-gutters { background:#1a1d2a !important; color:#a4a9c0 !important; }
+.python-codemirror .cm-tooltip { background:#282c3c !important; color:#f0eff7 !important; border-color:#54546b !important; }
+.python-codemirror .cm-tooltip-autocomplete ul li[aria-selected] { background:#514078; color:#fff; }
+.output-comparison #expected-output,.output-comparison #python-output { background:#242835; color:#e2e5f0; }
+.output-comparison #python-output.output-correct { background:var(--success-bg); color:var(--success); }
+.output-comparison #python-output.output-incorrect { background:var(--error-bg); color:var(--error); }
+#python-status { background:transparent; color:var(--muted); }
+#python-status.verification-correct { color:var(--success); }
+#python-status.verification-correct::before { background:var(--success-bg); }
+#python-status.verification-incorrect { color:var(--error); }
+#python-status.verification-incorrect::before { background:var(--error-bg); }
+.help-buttons button { color:var(--purple); }
+#test-results pre { background:var(--surface-raised); }
+:focus-visible { outline-color:#c7acff; }
