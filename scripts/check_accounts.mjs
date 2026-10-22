@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {PGlite} from '@electric-sql/pglite';
-import {accountSettings,accountIdentity,createProgressStore,progressDatabaseSettings,normalizeProgress} from './accounts.mjs';
+import {accountSettings,accountIdentity,createProgressStore,progressDatabaseSettings,normalizeProgress,progressErrorDiagnostic} from './accounts.mjs';
 import {emptyProgress,mergeProgress} from './progress.mjs';
 import {createServer,courseMetadata,runtimeSettings} from './serve.mjs';
 import {inject} from './inject.mjs';
@@ -54,6 +54,21 @@ const store=createProgressStore({database:db});
 const server=createServer({env,progressStore:store});
 const headers={'X-MS-CLIENT-PRINCIPAL':principal(),'X-PA-Account':tenant+':'+object,'X-PA-Progress':'1','Content-Type':'application/json',Origin:env.AUTH_ORIGIN};
 const request=(path='/api/progress',method='GET',body,extra={})=>inject(server.listeners('request')[0],{path,method,body:body===undefined?undefined:JSON.stringify(body),headers:{...headers,...extra},timeout:15000});
+for(const [code,category] of [['ENOTFOUND','dns'],['ETIMEDOUT','timeout'],['28P01','database-auth'],['42501','database-permission'],['UNABLE_TO_VERIFY_LEAF_SIGNATURE','tls']])assert.deepEqual(progressErrorDiagnostic({code,message:'private password and student code'}),{code,category});
+assert.deepEqual(progressErrorDiagnostic({code:'private-value',message:'private-value',stack:'private-value'}),{code:'UNKNOWN',category:'unknown'});
+assert.deepEqual(progressErrorDiagnostic(new Error('Connection terminated due to connection timeout')),{code:'CLIENT_TIMEOUT',category:'timeout'});
+const diagnostics=[];
+const originalWarn=console.warn;
+try{
+console.warn=value=>diagnostics.push(value);
+const failingStore=createProgressStore({database:{query:async()=>{throw Object.assign(new Error('secret-password student-code internal-host'),{code:'42501',detail:'private-data',stack:'private-stack'});}}});
+const failingServer=createServer({env,progressStore:failingStore});
+const failed=await inject(failingServer.listeners('request')[0],{path:'/api/progress',headers});
+assert.equal(failed.status,503);
+assert.deepEqual(diagnostics.map(value=>JSON.parse(value)),[{event:'pa_progress_error',stage:'connect-or-schema',category:'database-permission',code:'42501'}]);
+assert.ok(!JSON.stringify(diagnostics).includes('secret-password'));
+assert.ok(!failed.body.includes('42501'));
+}finally{console.warn=originalWarn;}
 try{
 let r=await request('/api/account');assert.equal(r.status,200);assert.equal(JSON.parse(r.body).user.id,tenant+':'+object);assert.equal(r.headers['cache-control'],'no-store');
 r=await request();assert.deepEqual(JSON.parse(r.body),{version:0,progress:emptyProgress()});

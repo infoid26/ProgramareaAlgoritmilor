@@ -10,6 +10,26 @@ const claimNames={
 };
 const empty=()=>({version:1,drafts:{},journey:{version:1,quiz:{},activityDays:[],resume:''}});
 export const progressLimit=6000000;
+const diagnosticCodes=new Map([
+  ['ENOTFOUND','dns'],['EAI_AGAIN','dns'],
+  ['ECONNREFUSED','network'],['ECONNRESET','network'],['ETIMEDOUT','timeout'],['ENETUNREACH','network'],['EHOSTUNREACH','network'],
+  ['CERT_HAS_EXPIRED','tls'],['DEPTH_ZERO_SELF_SIGNED_CERT','tls'],['SELF_SIGNED_CERT_IN_CHAIN','tls'],['UNABLE_TO_VERIFY_LEAF_SIGNATURE','tls'],['UNABLE_TO_GET_ISSUER_CERT_LOCALLY','tls'],['ERR_TLS_CERT_ALTNAME_INVALID','tls'],
+  ['28P01','database-auth'],['28000','database-auth'],['42501','database-permission'],['3D000','database-missing'],['42P01','table-missing'],['53300','database-capacity'],['57P03','database-unavailable'],['57014','timeout'],
+  ['PA_DB_NOT_CONFIGURED','configuration'],
+]);
+export function progressErrorDiagnostic(error){
+  const code=diagnosticCodes.has(error?.code)?error.code:'UNKNOWN';
+  if(code!=='UNKNOWN')return {category:diagnosticCodes.get(code),code};
+  if(/^(Connection terminated due to connection timeout|Connection timeout|Query read timeout|timeout exceeded when trying to connect)$/i.test(error?.message||''))return {category:'timeout',code:'CLIENT_TIMEOUT'};
+  return {category:'unknown',code};
+}
+const reportedErrors=new WeakSet();
+function reportProgressError(error,stage){
+  const trackable=error!==null&&(typeof error==='object'||typeof error==='function');
+  if(trackable&&reportedErrors.has(error))return;
+  if(trackable)reportedErrors.add(error);
+  console.warn(JSON.stringify({event:'pa_progress_error',stage,...progressErrorDiagnostic(error)}));
+}
 
 export function progressDatabaseSettings(env){
   if(env.PROGRESS_DATABASE_URL){let url;try{url=new URL(env.PROGRESS_DATABASE_URL);}catch{throw new Error('Invalid progress database settings');}if(!['postgres:','postgresql:'].includes(url.protocol)||!url.hostname||(url.searchParams.has('sslmode')&&url.searchParams.get('sslmode')!=='verify-full')||url.searchParams.has('ssl'))throw new Error('Progress database requires verified TLS');return {connectionString:env.PROGRESS_DATABASE_URL,connectionOptions:{ssl:{rejectUnauthorized:true}}};}
@@ -61,14 +81,17 @@ export function accountIdentity(headers,settings){
 
 export function createProgressStore({connectionString,connectionOptions,database}={}){
   let pool=database,initializing;
+  async function query(stage,...args){
+    try{return await pool.query(...args);}catch(error){reportProgressError(error,stage);throw error;}
+  }
   async function ready(){
     if(!pool){
-      if(!connectionString&&!connectionOptions)throw new Error('Progress database is not configured');
+      if(!connectionString&&!connectionOptions)throw Object.assign(new Error('Progress database is not configured'),{code:'PA_DB_NOT_CONFIGURED'});
       pool=new Pool({...connectionOptions,...(connectionString?{connectionString}:{}),max:4,connectionTimeoutMillis:5000,idleTimeoutMillis:30000,query_timeout:7000,statement_timeout:5000});
       // Never log connection strings or student code on a database error.
-      pool.on('error',()=>console.warn('Progress database connection unavailable.'));
+      pool.on('error',error=>reportProgressError(error,'idle-connection'));
     }
-    initializing??=pool.query(`CREATE TABLE IF NOT EXISTS public.pa_account_progress (
+    initializing??=query('connect-or-schema',`CREATE TABLE IF NOT EXISTS public.pa_account_progress (
       tenant_id uuid NOT NULL, object_id uuid NOT NULL,
       version integer NOT NULL CHECK (version > 0), progress jsonb NOT NULL,
       updated_at timestamptz NOT NULL DEFAULT now(),
@@ -80,17 +103,17 @@ export function createProgressStore({connectionString,connectionOptions,database
   const convert=row=>row?{version:Number(row.version),progress:row.progress}:{version:0,progress:empty()};
   return {
     async read(user){
-      const db=await ready();
-      const result=await db.query('SELECT version, progress FROM public.pa_account_progress WHERE tenant_id=$1 AND object_id=$2',[user.tenant,user.object]);
+      await ready();
+      const result=await query('read','SELECT version, progress FROM public.pa_account_progress WHERE tenant_id=$1 AND object_id=$2',[user.tenant,user.object]);
       return convert(result.rows[0]);
     },
     async write(user,version,progress){
-      const db=await ready();
+      await ready();
       const values=[user.tenant,user.object,JSON.stringify(progress)];
       // Compare-and-swap prevents an old tab/device overwriting newer progress.
       const result=version===0
-        ?await db.query('INSERT INTO public.pa_account_progress (tenant_id,object_id,version,progress) VALUES ($1,$2,1,$3::jsonb) ON CONFLICT DO NOTHING RETURNING version,progress',values)
-        :await db.query('UPDATE public.pa_account_progress SET version=version+1,progress=$3::jsonb,updated_at=now() WHERE tenant_id=$1 AND object_id=$2 AND version=$4 RETURNING version,progress',[...values,version]);
+        ?await query('write','INSERT INTO public.pa_account_progress (tenant_id,object_id,version,progress) VALUES ($1,$2,1,$3::jsonb) ON CONFLICT DO NOTHING RETURNING version,progress',values)
+        :await query('write','UPDATE public.pa_account_progress SET version=version+1,progress=$3::jsonb,updated_at=now() WHERE tenant_id=$1 AND object_id=$2 AND version=$4 RETURNING version,progress',[...values,version]);
       return result.rows[0]?convert(result.rows[0]):null;
     },
     async close(){if(pool&&!database)await pool.end();},
@@ -132,7 +155,7 @@ export function createAccountHandler({env,lessons,store}){
       const saved=await store.write(user,input.version,progress);
       if(!saved){json(res,409,{error:'Progresul s-a schimbat pe alt dispozitiv.',...await store.read(user)});return true;}
       json(res,200,saved);
-    }catch{json(res,503,{error:'Progresul nu a putut fi sincronizat. Copia locală este păstrată.'});}
+    }catch(error){reportProgressError(error,req.method==='GET'?'read-request':'write-request');json(res,503,{error:'Progresul nu a putut fi sincronizat. Copia locală este păstrată.'});}
     return true;
   };
 }
