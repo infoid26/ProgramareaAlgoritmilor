@@ -1,4 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# ZIP deployment: https://learn.microsoft.com/azure/app-service/deploy-zip
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy Node.js app to Azure Web App - infoid26-pa
@@ -25,15 +25,20 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm ci
+          npm run check
+          npm run build:editors
+
+      - name: Package application
+        run: |
+          zip -qr "$RUNNER_TEMP/pa-app.zip" index.html site scripts package.json package-lock.json node_modules
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v7.0.2
         with:
           name: node-app
-          path: .
+          path: ${{ runner.temp }}/pa-app.zip
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,8 +62,11 @@ jobs:
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3.0.8
-        with:
-          app-name: 'infoid26-pa'
-          slot-name: 'Production'
-          package: .
+        run: |
+          az webapp deploy \
+            --resource-group infoid_group \
+            --name infoid26-pa \
+            --src-path pa-app.zip \
+            --type zip \
+            --restart true \
+            --track-status true
