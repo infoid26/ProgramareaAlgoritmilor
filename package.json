@@ -6,13 +6,22 @@
     "@codemirror/language": "^6.13.1",
     "@codemirror/state": "^6.7.6",
     "@codemirror/view": "^6.43.14",
-    "@supabase/supabase-js": "^2.117.3",
     "codemirror": "^6.0.2",
-    "esbuild": "^0.28.2"
+    "esbuild": "^0.28.2",
+    "pg": "^8.23.1"
   },
   "private": true,
   "scripts": {
     "build:editors": "esbuild site/code-editor-source.js --bundle --minify --format=iife --outfile=site/code-editor.js && esbuild site/account-source.js --bundle --minify --format=iife --outfile=site/account.js",
-    "check": "node --check site/app.js && node --check site/playground.js && node --check site/journey.js && node scripts/validate_quizzes.cjs && node scripts/validate_account.cjs"
+    "check": "node --check site/app.js && node --check site/playground.js && node --check site/journey.js && node scripts/validate_quizzes.cjs && node scripts/validate_account.cjs && node scripts/check_accounts.mjs",
+    "start": "node scripts/serve.mjs",
+    "check:accounts": "node scripts/check_accounts.mjs && node scripts/validate_account.cjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.11"
+  },
+  "name": "programarea-algoritmilor-infoid26",
+  "engines": {
+    "node": "24.x"
   }
 }

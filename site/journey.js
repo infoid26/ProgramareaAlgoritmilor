@@ -42,7 +42,7 @@ unifiedHome.append(unifiedMap);
 document.querySelectorAll('#traseu > .notice').forEach(note => unifiedHome.append(note));
 const unifiedExtras = document.createElement('details');
 unifiedExtras.className = 'path-extras';
-unifiedExtras.innerHTML = '<summary>Mai multe opțiuni</summary><a class="text-link" href="#exercitii">Caută o problemă sau salvează progresul →</a>';
+unifiedExtras.innerHTML = '<summary>Mai multe opțiuni</summary><a class="text-link" href="#exercitii">Caută o problemă →</a>';
 unifiedHome.append(unifiedExtras);
 function courseProgressPercent() { const s = journeyStats(); const progressTotal = beginnerExercises.length + exercises.length + beginnerLessons.reduce((sum, lesson) => sum + questionsForLesson(lesson.id).length, 0) + chapters.reduce((sum, chapter) => sum + algorithmUnits(chapter.id).length, 0); const progressDone = s.beginnerDone + s.subjectDone + s.correct + s.algoCorrect; return Math.floor(progressDone / progressTotal * 100); }
 function renderDashboard() {

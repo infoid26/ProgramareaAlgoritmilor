@@ -41,7 +41,7 @@ Slide-ul Notare din prezentarea introductivă locală indică 70% examen scris �
 
 ## Progres și copii de siguranță
 
-Codul și rezultatele verificărilor se păstrează local în browser. Nu există conturi sau sincronizare între dispozitive. Ștergerea datelor browserului poate elimina progresul.
+Codul și rezultatele verificărilor se păstrează local în browser. Fără conectare, progresul nu se sincronizează între dispozitive. Ștergerea datelor browserului poate elimina progresul.
 
 La finalul traseului, deschide „Mai multe opțiuni”, apoi „Caută o problemă sau salvează progresul”. Acolo poți căuta exerciții, descărca lucrul tău și restaura un export. Identificatorii exercițiilor și cheile de salvare existente au fost păstrate.
 
@@ -49,11 +49,15 @@ La finalul traseului, deschide „Mai multe opțiuni”, apoi „Caută o proble
 
 Aplicația va fi disponibilă la [pa.infoid26.ro](https://pa.infoid26.ro/). Se folosește direct în browser, fără instalare sau server local.
 
-## Publicare pe GitHub Pages
+## Găzduire
 
-Aplicația este statică și nu necesită un server Python în producție. Publică `index.html`, folderul `site/` și `.nojekyll`, păstrând structura fișierelor. Folderul `site/` include și fișierele Python folosite de evaluator. Scripturile de generare pot rămâne în repository pentru întreținere.
+Pentru autentificare Microsoft și salvarea SQL, aplicația folosește backendul Node pornit prin `npm start`, pe Azure App Service cu Easy Auth, ca proiectul Tehnici Web. În dreapta sus apar numele contului și Logout. Conturile sunt autorizate numai pentru domeniile universitare și tenant-urile configurate. Documentația este în [backend/SETUP.md](backend/SETUP.md).
 
-Materialele originale din `Curs/`, `Laborator/` și extragerile din `.audit/` sunt excluse prin `.gitignore`; nu le încărca manual. Această documentație nu confirmă că aplicația a fost publicată sau că un domeniu a fost configurat.
+Progresul PA poate folosi aceeași bază PostgreSQL ca Tehnici Web, dar este păstrat în tabela separată `pa_account_progress`. Setările bazei sunt exclusiv pe server. Nu sunt necesare chei sau tokenuri Microsoft în JavaScript.
+
+GitHub Pages poate servi în continuare varianta anonimă statică, dar nu poate executa backendul de autentificare și SQL. Pentru activare este necesară găzduirea backendului și configurarea Microsoft; publicarea fișierelor singură nu activează logarea.
+
+Nu publica fișiere `.env`, materiale originale din `Curs/` sau `Laborator/` ori extrageri din `.audit/`. Nu publica PA peste App Service-ul care găzduiește TW fără configurarea explicită a rutării celor două aplicații.
 
 ## Întreținere și verificare
 
@@ -76,7 +80,10 @@ Bundle-ul `site/code-editor.js` este inclus în repository; licențele sunt în 
 
 ## Cont universitar și sincronizare SQL
 
-Integrarea Microsoft este pregătită, dar dezactivată până la configurarea serviciului. Acceptă conturi universitare @s.unibuc.ro și @unibuc.ro; progresul fiecărui cont este separat. Schema PostgreSQL, restricțiile de acces și pașii de activare sunt în [backend/SETUP.md](backend/SETUP.md). Varianta de referință folosește Supabase; un alt furnizor necesită adaptarea API-ului. Fără conectare, studiul și salvarea locală rămân disponibile.
+Integrarea folosește Azure Easy Auth și PostgreSQL, după implementarea locală Tehnici Web. Autentificarea și conexiunea bazei se activează prin setările App Service. Acceptă doar conturile Microsoft universitare cu domeniul exact `s.unibuc.ro` sau `unibuc.ro`, în tenant-urile configurate. Numele apare sus, alături de Logout. Progresul fiecărui cont și al fiecărei materii este separat; varianta anonimă rămâne disponibilă.
+
+Vezi [backend/SETUP.md](backend/SETUP.md). `npm run check:accounts` verifică accesul la date, conflictele și interfața folosind PostgreSQL local și răspunsuri simulate, fără conturi sau date Azure reale.
+
 
 Întrebările de consolidare sunt formulate pentru platformă, nu transcrieri ale întrebărilor profesorului. Cele 93 de definiții de quiz au fost revizuite pentru context și claritate; întrebările despre exemple afișează codul aferent. Verificarea structurii lor: `node scripts/validate_quizzes.cjs`. Indicii răspunsurilor corecte și identificatorii de progres au fost păstrați.
 
@@ -86,4 +93,4 @@ Interfața afișează numai procentul general de progres, fără XP, niveluri sa
 
 Păstrează `index.html`, `.nojekyll`, `.gitignore`, `site/`, `scripts/`, `backend/`, `package.json` și `package-lock.json`. Bundle-urile editorului și autentificării sunt necesare în site; sursele lor și licențele sunt păstrate pentru întreținere. `site/exercises.json` este folosit de validări, iar `site/exercises.js` de aplicație.
 
-`node_modules/` este o dependență locală, exclusă din Git și reinstalabilă cu `npm ci`. Materialele profesorului rămân locale și excluse din commit. Regenerare editor și autentificare: `npm run build:editors`. Verificări JavaScript: `npm run check`.
+`node_modules/` este o dependență locală, exclusă din Git și reinstalabilă cu `npm ci`. Materialele profesorului rămân locale și excluse din commit. Regenerare editor și autentificare: `npm run build:editors`. Verificări JavaScript și SQL local: `npm run check`. Pornirea serverului: `npm start`.

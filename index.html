@@ -7,8 +7,8 @@
 <meta name="color-scheme" content="dark">
 <meta name="description" content="Platformă interactivă pentru a învăța Python și algoritmi: lecții, quiz-uri, exerciții și progres.">
 <title>PA · INFO ID 26</title>
-<link rel="stylesheet" href="site/style.css?v=20261014-compact">
-<link rel="stylesheet" href="site/dark.css?v=20261021-1">
+<link rel="stylesheet" href="site/style.css?v=20261022-accounts">
+<link rel="stylesheet" href="site/dark.css?v=20261022-accounts">
 <script src="site/exercises.js?v=20261014-outputs" defer></script>
 <script src="site/python-course.js?v=20261014-outputs" defer></script>
 <script src="site/interactive-content.js?v=20261014-outputs" defer></script>
@@ -18,14 +18,14 @@
 <script src="site/playground.js?v=20261015-errors-compact" defer></script>
 <script src="site/journey.js?v=20261015-course-progress" defer></script>
 <script src="site/code-editor.js?v=20261014-outputs" defer></script>
-<script src="site/auth-config.js?v=20261014-outputs" defer></script>
-<script src="site/account.js?v=20261014-outputs" defer></script>
+<script src="site/account.js?v=20261022-azure" defer></script>
 </head>
 <body>
 <a class="skip" href="#continut">Sari la conținut</a>
 
 <main id="continut">
-<header class="topbar"><a class="header-brand" href="#acasa" aria-label="PA — înapoi la traseu"><strong>PA<span>.</span></strong><small>INFO ID 26</small></a><div class="topbar-stats"><div class="progress-percent" title="Întrebări și exerciții finalizate"><div class="progress-percent-label"><span>Progres total</span><strong id="header-progress">0%</strong></div><div class="header-progress-track" role="progressbar" aria-label="Progres total" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="header-progress-bar"></span></div></div><div class="account-menu"><button id="account-login" class="secondary" type="button">Conectare Microsoft</button><details id="account-details" hidden><summary id="account-name">Contul meu</summary><p id="account-email"></p><button id="account-sync" type="button">Sincronizează</button><button id="account-import-local" type="button">Copiază progresul local în cont</button><button id="account-remote" type="button" hidden>Încarcă versiunea din cloud</button><button id="account-logout" type="button">Deconectare</button></details><small id="account-status" role="status"></small></div></div></header>
+<header class="topbar"><a class="header-brand" href="#acasa" aria-label="PA — înapoi la traseu"><strong>PA<span>.</span></strong><small>INFO ID 26</small></a><div class="topbar-stats"><div class="progress-percent" title="Întrebări și exerciții finalizate"><div class="progress-percent-label"><span>Progres total</span><strong id="header-progress">0%</strong></div><div class="header-progress-track" role="progressbar" aria-label="Progres total" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="header-progress-bar"></span></div></div><div id="account-controls" class="account-controls" aria-label="Cont Microsoft"><button class="secondary" type="button" disabled title="Disponibil după configurarea autentificării Microsoft">Conectare cu Microsoft</button></div></div></header>
+<section id="account-panel" class="account-panel" aria-label="Cont și sincronizare"><p id="account-status" role="status"></p><div id="account-actions" class="account-actions"></div></section>
 <section id="acasa" class="view dashboard-view">
 <div class="welcome-layout"><div class="welcome-copy"><h1>Programarea Algoritmilor</h1><p class="lead">Material de studiu pentru INFO ID 26, organizat după cursurile și laboratoarele profesorului Ceaușescu Ciprian.</p><a class="button start-learning" id="resume-learning" href="#curs-python">Continuă lecția →</a></div></div>
 <div class="section-heading"><h2>Lecții și capitole</h2></div>
@@ -36,7 +36,7 @@
 <section id="exercitii" class="view" hidden>
 <div id="curriculum-summary" class="eyebrow">EXERSEAZĂ ÎN RITMUL TĂU</div><h1>Înțelege.<br><em>Scrie. Verifică.</em></h1><p class="lead">Începe cu bazele și avansează spre probleme complete. Fiecare exercițiu are exemple, indicii și o rezolvare pe care o poți consulta.</p>
 <div class="bank-toolbar"><label>Capitol<select id="chapter-filter"><option value="">Toate capitolele</option></select></label><label>Dificultate<select id="level-filter"><option value="">Toate nivelurile</option><option>Bază</option><option>Aplicare</option><option>Aprofundare</option></select></label><label>Caută un exercițiu<input id="exercise-search" type="search" placeholder="De exemplu: matrice, rucsac, fișiere"></label><label>Progres<select id="progress-filter"><option value="">Toate exercițiile</option><option value="todo">De rezolvat</option><option value="done">Teste trecute</option></select></label></div>
-<div class="section-heading"><p id="bank-count" role="status"></p><button id="progress-export" class="secondary">Descarcă lucrul meu ↓</button></div><p class="source-note">Progresul se păstrează în acest browser. Exportul conține codul și rezultatele tale. <label class="text-link">Restaurează un export <input type="file" id="progress-import" accept="application/json,.json"></label></p><p id="backup-status" role="status"></p><div id="exercise-list" class="exercise-grid"></div>
+<div class="section-heading"><p id="bank-count" role="status"></p></div><div id="exercise-list" class="exercise-grid"></div>
 </section>
 <section id="capitol" class="view" hidden><a class="text-link" href="#traseu">← Capitole</a><div id="chapter-content"></div></section>
 <section id="practica" class="view" hidden>

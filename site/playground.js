@@ -168,20 +168,6 @@ document.querySelector('#python-download').addEventListener('click', () => downl
 document.querySelector('#module-download').addEventListener('click', () => { const name = currentExercise.editableFiles?.[0]; if (name) { downloadData(JSON.parse(readInput())[name], name); } });
 document.querySelector('#chapter-filter').insertAdjacentHTML('beforeend', chapters.map(item => `<option value="${item.id}">${escapeHTML(item.title)}</option>`).join(''));
 for (const id of ['chapter-filter', 'level-filter', 'exercise-search', 'progress-filter']) { document.getElementById(id).addEventListener('input', renderBank); }
-document.querySelector('#progress-export').addEventListener('click', () => downloadData(JSON.stringify({ version: 2, drafts, journey: window.PA_JOURNEY?.exportState() || null }, null, 2), 'progres-pa.json', 'application/json'));
-document.querySelector('#progress-import').addEventListener('change', async event => {
-const file = event.target.files[0];
-if (!file) { return; }
-try {
-if (file.size > 5000000) { throw new Error('Fișier prea mare (maximum 5 MB).'); }
-const data = JSON.parse(await file.text());
-if (data.version !== 2 || !data.drafts || typeof data.drafts !== 'object') { throw new Error('Acesta nu este un export PA valid.'); }
-let restored = 0;
-for (const item of [...exercises, ...beginnerExercises]) { const draft = data.drafts[item.id]; if (draft && typeof draft.code === 'string' && typeof draft.input === 'string' && !drafts[item.id]) { drafts[item.id] = { code: draft.code, input: draft.input }; restored += 1; } }
-persistDrafts(); window.PA_JOURNEY?.importState(data.journey); renderBank(); renderCourse(); window.PA_JOURNEY?.updateAll(); document.querySelector('#backup-status').textContent = `${restored} soluții restaurate. Soluțiile existente au fost păstrate. Rulează verificarea pentru confirmarea progresului.`;
-} catch (error) { document.querySelector('#backup-status').textContent = error.message; }
-event.target.value = '';
-});
 window.addEventListener('hashchange', routePractice);
 if (!location.hash.startsWith('#practica')) { selectExercise(exercises[0].id); }
 routePractice();

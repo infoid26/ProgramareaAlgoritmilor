@@ -12,7 +12,7 @@ a,summary,.text-link,.eyebrow,.tag,.step,.question-kicker { color:var(--purple);
 .lesson-controls { background:rgba(25,28,38,.97); }
 .button,#python-check { color:#fff; background:#7555df; box-shadow:0 4px 0 #49318e; }
 .button:hover:not(:disabled),#python-check:hover:not(:disabled) { background:#8162eb; }
-.secondary:hover,.account-menu button:hover { background:var(--surface-raised); }
+.secondary:hover { background:var(--surface-raised); }
 pre,.trace,.challenge-preview,.chips span { background:#222633; color:#e2e5f0; }
 .concept-code,.chapter-learning .concept-code { background:#131620; color:#e2e5f0; }
 .concept-highlight,.notice,.check,.quiz-feedback { background:#27233b; color:#d1c6ee; border-color:#9c83ee; }
@@ -41,7 +41,6 @@ input::placeholder,textarea::placeholder { color:#999daf; }
 .path-banner { background:#342a55; color:#f0eaff; }
 .progress-percent { background:var(--surface); border-color:var(--line); }
 .progress-percent-label strong,.lesson-result-progress strong { color:var(--purple); }
-.account-menu button,#account-details[open] { background:var(--surface); border-color:var(--line); color:var(--ink); }
 .editor-label,#python-code { background:#202333; color:#e1e4f1; }
 .python-codemirror .cm-editor { background:#202333 !important; color:#e1e4f1; }
 .python-codemirror .cm-gutters { background:#1a1d2a !important; color:#a4a9c0 !important; }

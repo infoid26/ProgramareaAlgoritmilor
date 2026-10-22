@@ -1,60 +1,61 @@
-# Activarea conturilor Microsoft și salvării SQL
+# Logare Microsoft și progres PA în aceeași bază ca Tehnici Web
 
-Codul este pregătit, dar autentificarea este dezactivată implicit. Nu a fost creat un proiect extern, o aplicație Microsoft sau o bază de date. Site-ul poate rămâne pe GitHub Pages.
+Integrarea folosește același model din `TehniciWeb/scripts/accounts.mjs`: Azure App Service Authentication (Easy Auth) + PostgreSQL. Supabase nu mai este utilizat. Au fost pregătite codul și verificările locale; această modificare nu configurează și nu publică resurse Azure.
 
-Implementarea de referință folosește Supabase Auth + PostgreSQL. Dacă viitorul serviciu SQL este diferit, `schema.sql` nu este portabil fără modificări: folosește `auth.users`, `auth.identities`, RLS și RPC Supabase. Va fi necesar un API care validează tokenurile Microsoft; browserul nu se conectează direct la SQL cu o parolă.
+## Interfață
 
-## 1. Microsoft Entra
+În dreapta sus apare „Conectare cu Microsoft”. După conectare, apare numele din identitatea confirmată de Microsoft și „Logout”. Adresa este disponibilă la trecerea peste nume. Browserul nu cere și nu stochează parola universitară sau tokenurile Microsoft; sesiunea este gestionată de Azure.
 
-Obține de la administratorul universității Tenant ID-ul și dreptul de a înregistra o aplicație. Nu presupune că cele două domenii aparțin aceluiași tenant: administratorul trebuie să confirme. Dacă au tenant-uri diferite, integrarea trebuie adaptată înainte de activare.
+Site-ul poate fi folosit fără cont, cu progres local. Dacă autentificarea nu este activată pe server, controlul este dezactivat. Pe o găzduire statică fără API, cursul rămâne utilizabil, dar logarea și salvarea SQL nu funcționează.
 
-Înregistrează aplicația pentru tenant-ul universitar confirmat. În această variantă restricția tenant-ului este obligatorie. Nu activa folosind `common` sau `consumers`.
+## Găzduirea
 
-Configurează redirect URI de tip Web: `https://PROJECT_REF.supabase.co/auth/v1/callback`. Creează Client Secret; valoarea secretului se introduce numai în providerul Azure din Supabase, niciodată în GitHub sau `auth-config.js`. Notează expirarea secretului.
+GitHub Pages nu poate executa backendul Node necesar. Pentru logare activă, `pa.infoid26.ro` trebuie servit de App Service sau de un proxy către acest backend pe aceeași origine. Nu trimite API-ul de progres către alt domeniu din JavaScript.
 
-În manifest păstrează claims existente și adaugă `email` și `xms_edov` la ID token conform documentației Supabase. Nu permite domenii de email neverificate. Restricția de domeniu singură nu înlocuiește verificarea identității de Microsoft și limitarea tenant-ului. Politicile universității pot solicita aprobarea administratorului pentru autentificare.
+Nu publica pachetul PA peste aplicația App Service care servește deja Tehnici Web. Folosește o aplicație PA separată sau pregătește explicit un router pentru cele două domenii. Conexiunea PostgreSQL poate fi aceeași, fără mutarea și fără ștergerea datelor Tehnici Web.
 
-Sursă: https://supabase.com/docs/guides/auth/social-login/auth-azure
+Pornirea este `npm ci` și `npm start`, cu Node 24. În Azure sunt respectate `PORT` și bind-ul `0.0.0.0`; local, portul implicit este 8010 și autentificarea este oprită. Pentru un alt port local: `PORT=8011 node scripts/serve.mjs` într-un shell compatibil sau setează variabila de mediu în PowerShell. Health check: `/api/health`.
 
-## 2. Supabase și PostgreSQL
+## Microsoft Entra / Easy Auth
 
-1. Creează proiectul în regiunea potrivită. Verifică planul, limitele și condițiile serviciului înainte de activare.
-2. Execută `backend/schema.sql` în SQL Editor. Scriptul nu șterge progresul existent; recreează numai politica specifică aplicației.
-3. În Authentication → Hooks, activează **Before User Created** cu funcția `public.pa_before_user_created`. Fără acest pas, filtrarea creării contului nu este activă, chiar dacă accesul SQL rămâne restricționat.
-4. Dezactivează email/parolă, anonymous sign-in, ceilalți provideri și identity linking manual. Activează numai Azure/Microsoft.
-5. Introdu Client ID, Client Secret și Azure Tenant URL: `https://login.microsoftonline.com/TENANT_ID_CONFIRMAT`.
-6. Setează Site URL `https://pa.infoid26.ro/` și redirect allowlist exact `https://pa.infoid26.ro/`. Pentru testare adaugă separat URL-ul local, fără wildcard-uri de producție.
+1. Activează Authentication → Microsoft pe aplicația PA, folosind aceleași reguli universitare ca în Tehnici Web. Păstrează accesul anonim la curs; accesul la salvarea progresului rămâne restricționat pe server.
+2. Poți reutiliza înregistrarea Entra existentă dacă administratorul permite, adăugând callback-ul exact `https://pa.infoid26.ro/.auth/login/aad/callback`. Păstrează callback-ul Tehnici Web; nu îl înlocui. Secretul se configurează numai în Azure.
+3. Păstrează verificarea issuer-ului, audienței, nonce și HTTPS. Configurează același tenant universitar verificat pentru TW. `AUTH_UNIVERSITY_TENANT_IDS` este o listă explicită de GUID-uri; domeniul de email singur nu autorizează accesul.
+4. Asigură claim-urile `tid`, `oid`, `preferred_username` sau `upn`, plus `name` pentru afișare. Sunt acceptate doar domeniile exacte `s.unibuc.ro` și `unibuc.ro`. Invitații cu `#EXT#`, alte tenant-uri și alte tipuri de identitate sunt respinși.
+5. Node trebuie expus exclusiv prin intrarea App Service cu Easy Auth activ. Nu activa un bypass local și nu simula antetele `X-MS-CLIENT-PRINCIPAL`. `WEBSITE_INSTANCE_ID` și `WEBSITE_AUTH_ENABLED` provin din platformă.
 
-Sursa hook: https://supabase.com/docs/guides/auth/auth-hooks/before-user-created-hook
-Sursa RLS: https://supabase.com/docs/guides/database/postgres/row-level-security
+Metoda de autentificare și antetele injectate de platformă sunt descrise de Microsoft: https://learn.microsoft.com/en-us/azure/app-service/configure-authentication-user-identities
 
-## 3. Configurația site-ului
+## Setările aplicației PA
 
-Completează `site/auth-config.js` cu URL-ul proiectului și cheia **publishable** (sau legacy anon), apoi `enabled:true`. Cheia publică este destinată browserului; accesul este limitat de RLS și RPC. Nu introduce `service_role`, chei secret sau parola SQL. Configurația Microsoft și secretul rămân exclusiv la serviciul Auth.
+| Nume | Valoare |
+| --- | --- |
+| `AUTH_ENABLED` | `true`, numai după activarea Easy Auth |
+| `AUTH_ORIGIN` | `https://pa.infoid26.ro` |
+| `AUTH_UNIVERSITY_TENANT_IDS` | Aceleași ID-uri universitare verificate folosite pentru TW |
+| `PROGRESS_USE_AZURE_POSTGRESQL` | `true` pentru reutilizarea setărilor Azure existente |
+| `AZURE_POSTGRESQL_HOST` | Același server ca în TW |
+| `AZURE_POSTGRESQL_PORT` | Același port, implicit 5432 |
+| `AZURE_POSTGRESQL_USER` | Cont SQL cu acces la tabela PA |
+| `AZURE_POSTGRESQL_PASSWORD` | Secretul, numai în setările Azure |
+| `AZURE_POSTGRESQL_DATABASE` | Aceeași bază de progres ca în TW (`infoid-db` în documentația sa locală) |
 
-Bundle-ul `site/account.js` trebuie publicat cu celelalte fișiere. Pentru regenerare: `npm ci`, apoi `npx esbuild site/account-source.js --bundle --minify --format=iife --outfile=site/account.js`.
+Alternativ, `PROGRESS_DATABASE_URL` are prioritate. Conexiunea impune verificarea certificatului TLS; pentru connection string sunt permise `sslmode=verify-full` sau lipsa parametrului, caz în care driverul primește explicit verificarea certificatului. Nu folosi `sslmode=require`, `no-verify`, `disable` sau `rejectUnauthorized:false`. Nu copia secrete în repository, în HTML, în JavaScript sau în exemplele de configurație.
 
-## Comportament și izolare
+Serverul creează `public.pa_account_progress` la prima accesare validă. Poți executa în prealabil `backend/schema.sql`, fără să atingi `tw_account_progress`. Contul SQL trebuie să aibă permisiunile necesare pentru tabela PA; nu sunt necesare privilegii pentru ștergerea sau schimbarea tabelului TW.
 
-Butonul Microsoft apare în dreapta sus. Fără configurare explică faptul că serviciul nu este activat. Utilizatorii pot continua studiul local fără conectare. Microsoft confirmă identitatea; hook-ul respinge alte domenii la crearea contului. SQL verifică identitatea Azure confirmată, domeniul exact și ID-ul autentificat la fiecare acces. `user_metadata` nu autorizează accesul.
+## Date și sincronizare
 
-Fiecare utilizator are propriul rând de progres și propria copie locală. Codul, rezultatele, întrebările și zilele de activitate se sincronizează. Progresul anonim poate fi copiat explicit în cont; codul existent în cont are prioritate. La deconectare revine copia anonimă, fără ștergerea acesteia. Nu există listă publică de emailuri sau progres.
+- Identitatea progresului: perechea Microsoft tenant ID + object ID, nu emailul trimis de browser.
+- PA: `public.pa_account_progress`. Tehnici Web: `tw_account_progress`. Nu se suprascriu.
+- Fiecare utilizator are propriile coduri, fișiere, verificări, răspunsuri și poziție în curs. Copia locală este separată pe cont.
+- Progresul anonim din browser este importat o singură dată, în primul cont care îl preia; codul existent în cont are prioritate. Nu este atribuit automat celui de-al doilea cont de pe același calculator.
+- Salvările sunt parametrizate și condiționate de versiune. Modificările din exerciții diferite pot fi reunite automat; modificările incompatibile ale aceluiași exercițiu opresc sincronizarea și oferă export local înainte de încărcarea copiei din cont.
+- O filă deschisă cu alt cont este refuzată de API. La deconectare, datele contului rămân în copia lui locală, dar la reîncărcare se revine la progresul anonim. Pe un calculator comun, șterge datele site-ului după export dacă nu vrei să rămână copia locală.
+- Rezultatele sunt progres de autoevaluare; nu sunt note oficiale sau dovadă că o anumită metodă algoritmică a fost folosită.
 
-Salvarea folosește o versiune verificată atomic. Dacă alt dispozitiv a salvat o versiune nouă, aplicația nu o suprascrie automat. Utilizatorul poate exporta lucrul local și încărca versiunea din cloud. La pierderea conexiunii, codul rămâne local și poate fi sincronizat ulterior. Nu este sincronizare colaborativă în timp real.
+## Verificări
 
-Marcajele de exerciții rezolvate sunt autoevaluare, nu note oficiale: studentul își poate modifica starea în propriul browser. SQL stochează progresul, nu certifică rezultatele Python. Pe un calculator comun, deconectează-te și șterge datele site-ului după export: copia locală a contului rămâne în browser.
+`npm run check:accounts` execută verificări ale restricțiilor Microsoft, API-ului și SQL-ului pe PostgreSQL local prin PGlite, plus teste simulate ale interfeței și sincronizării. Testele verifică faptul că datele TW existente nu sunt modificate.
 
-## Verificări obligatorii înainte de activare
-
-- Cont real `@s.unibuc.ro` și cont real `@unibuc.ro`: autentificare, salvare, reîncărcare pe alt browser.
-- Alt domeniu, inclusiv `@unibuc.ro.example.com`: respins la creare și acces SQL.
-- Utilizatorul A nu poate citi sau modifica rândul lui B, nici schimbând `user_id` sau metadata.
-- Token expirat, utilizator neconectat, provider diferit: fără acces SQL.
-- Două dispozitive care salvează simultan: conflict explicit, fără suprascriere.
-- Modul propriu și cod principal: import, editare, reverificare și restaurare.
-- Deconectare și conectare cu alt cont pe același browser: fără amestecarea progresului.
-- Configurație absentă, conexiune căzută și callback OAuth cu eroare: aplicația rămâne utilizabilă local.
-
-Aceste verificări cu identități reale și SQL necesită serviciul configurat; nu pot fi confirmate numai din proiectul local.
-
-Testele locale cu răspunsuri simulate se rulează cu `node scripts/validate_account.cjs`. Ele verifică configurația dezactivată, restaurarea și salvarea progresului și conflictele de versiune; nu înlocuiesc testele OAuth și SQL de mai sus. Licențele SDK sunt în `site/account-licenses.txt`.
+După configurarea Azure trebuie testate efectiv: un cont student și unul cadru didactic, un cont extern refuzat, numele afișat, Logout, două conturi pe același browser și recuperarea progresului pe alt dispozitiv. Aceste teste OAuth și conectarea la baza Azure nu pot fi confirmate din testele locale.

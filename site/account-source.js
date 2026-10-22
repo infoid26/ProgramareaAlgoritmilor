@@ -1,61 +1,92 @@
-import { createClient } from '@supabase/supabase-js';
-const config = window.PA_AUTH_CONFIG;
-const login = document.querySelector('#account-login');
-const details = document.querySelector('#account-details');
-const message = document.querySelector('#account-status');
-let client;
-let user;
-let loading = true;
-let busy = false;
-let timer;
-let conflict = false;
-let revision = 0;
-let epoch = 0;
-const state = () => ({ version:1,drafts:window.PA_EDITOR.exportState(),journey:window.PA_JOURNEY.exportState() });
-const metaKey = () => 'pa-cloud-meta:' + user.id;
-const meta = () => { try { return JSON.parse(localStorage.getItem(metaKey()) || '{}'); } catch { return {}; } };
-const putMeta = data => localStorage.setItem(metaKey(),JSON.stringify(data));
-function changed() { if (loading || !user) { return; } epoch++; putMeta({ ...meta(),dirty:true }); clearTimeout(timer); timer = setTimeout(sync,1600); message.textContent = 'Modificări salvate local; sincronizare în așteptare.'; }
-function apply(data) { loading = true; window.PA_EDITOR.replaceState(data?.drafts || {}); window.PA_JOURNEY.replaceState(data?.journey || { version:1,quiz:{},activityDays:[] }); window.PA_JOURNEY.updateAll(); loading = false; }
-async function readRemote() { const { data,error } = await client.from('pa_progress').select('revision,payload').eq('user_id',user.id).maybeSingle(); if (error) { throw error; } return data; }
-async function sync() {
-if (!user || busy || loading || conflict) { return; }
-busy = true;
-const startEpoch = epoch;
-const snapshot = state();
-try { const { data,error } = await client.rpc('pa_save_progress',{ p_expected_revision:revision,p_payload:snapshot }); if (error) { if (error.code === '40001') { conflict = true; document.querySelector('#account-remote').hidden = false; throw new Error('Alt dispozitiv a salvat o versiune nouă. Exportă lucrul local înainte de a încărca versiunea din cloud.'); } throw error; } revision = data; putMeta({ revision,dirty:epoch !== startEpoch }); message.textContent = epoch === startEpoch ? 'Progres sincronizat.' : 'Se salvează modificările noi…'; }
-catch (error) { message.textContent = conflict ? error.message : 'Sincronizarea nu a reușit. Lucrul rămâne salvat local. Apasă Sincronizează pentru a reîncerca.'; }
-finally { busy = false; if (!conflict && epoch !== startEpoch) { timer = setTimeout(sync,1600); } }
+import {emptyProgress,buildProgressMetadata,normalizeProgress,mergeProgress} from '../scripts/progress.mjs';
+const metadata=buildProgressMetadata(window.PA_CONTENT,window.PA_BEGINNER,window.PA_INTERACTIVE);
+const normalize=value=>normalizeProgress(value,metadata);
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const clone=value=>JSON.parse(JSON.stringify(value));
+const controls=document.querySelector('#account-controls');
+const actions=document.querySelector('#account-actions');
+const message=document.querySelector('#account-status');
+let user=null,base=emptyProgress(),revision=0,ready=false,applying=false,stopped=false,timer,retry=2000,conflict=null,imported=false,pending;
+const state=()=>normalize({version:1,drafts:window.PA_EDITOR.exportState(),journey:window.PA_JOURNEY.exportState()});
+const metaKey=()=> 'pa-cloud-meta:'+user.id;
+const tell=text=>{message.textContent=text;};
+function remember(){if(!user)return;try{localStorage.setItem(metaKey(),JSON.stringify({revision,base,dirty:!same(state(),base),imported}));}catch{tell('Salvarea locală nu este disponibilă. Descarcă progresul.');}}
+function apply(data){applying=true;try{window.PA_EDITOR.replaceState(data.drafts);window.PA_JOURNEY.replaceState(data.journey);window.PA_JOURNEY.updateAll();}finally{applying=false;}}
+function schedule(delay=1200){clearTimeout(timer);if(user&&ready&&!stopped)timer=setTimeout(()=>void sync(),delay);}
+function changed(){if(applying||!user)return;remember();if(ready){tell('Se sincronizează…');schedule();}}
+function button(label,fn){const el=document.createElement('button');el.type='button';el.className='secondary';el.textContent=label;el.addEventListener('click',fn);actions.append(el);return el;}
+function downloadLocal(){const value=JSON.stringify({version:2,drafts:state().drafts,journey:state().journey},null,2);const url=URL.createObjectURL(new Blob([value],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='PA-progres-local.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function render(){
+controls.replaceChildren();
+if(user){const label=document.createElement('span');label.className='account-name';label.textContent=user.name||user.email;label.title=user.email;controls.append(label);const link=document.createElement('a');link.className='secondary';link.href='/.auth/logout?post_logout_redirect_uri=/';link.textContent='Logout';link.addEventListener('click',async event=>{event.preventDefault();window.PA_EDITOR.saveCode();await sync();window.location.assign(link.href);});controls.append(link);}
+else{const link=document.createElement('a');link.className='secondary';link.href='/.auth/login/aad?post_login_redirect_uri=/';link.textContent='Conectare cu Microsoft';link.addEventListener('click',()=>window.PA_EDITOR.saveCode());controls.append(link);}
 }
-async function connect() {
-try {
-const { data,error } = await client.auth.getUser();
-if (error) { throw error; }
-if (!data.user) { loading = false; if (accountStorageSuffix) { localStorage.removeItem('pa-active-account'); location.reload(); } return; }
-user = data.user;
-if (!/^[^@\s]+@(s\.unibuc\.ro|unibuc\.ro)$/i.test(user.email || '') || !user.identities?.some(identity => identity.provider === 'azure')) { await client.auth.signOut(); user = null; message.textContent = 'Sunt acceptate numai conturile Microsoft @s.unibuc.ro sau @unibuc.ro.'; loading = false; return; }
-const suffix = ':' + user.id;
-if (accountStorageSuffix !== suffix) { localStorage.setItem('pa-active-account',suffix); location.reload(); return; }
-login.hidden = true; details.hidden = false;
-document.querySelector('#account-name').textContent = 'Contul meu';
-document.querySelector('#account-email').textContent = user.email;
-const remote = await readRemote();
-const saved = meta();
-revision = remote?.revision || 0;
-if (saved.dirty && (saved.revision || 0) !== revision) { conflict = true; message.textContent = 'Există modificări locale și o versiune nouă în cloud. Exportă lucrul local înainte de a încărca versiunea din cloud.'; document.querySelector('#account-remote').hidden = false; loading = false; return; }
-if (!saved.dirty && remote) { apply(remote.payload); }
-loading = false;
-putMeta({ revision,dirty:!!saved.dirty });
-message.textContent = remote ? 'Progres încărcat din cont.' : 'Cont conectat. Poți copia progresul local în cont.';
-if (saved.dirty) { sync(); }
-} catch { loading = false; message.textContent = 'Contul nu poate fi verificat acum. Progresul local este păstrat.'; }
+async function request(path,options={}){const response=await fetch(path,{credentials:'same-origin',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(10000),...options});let value;try{value=await response.json();}catch{throw new Error('Account API unavailable');}if(!response.ok){const error=new Error(value.error||'Sincronizarea nu este disponibilă.');error.status=response.status;error.value=value;throw error;}return value;}
+const headers=()=>({'X-PA-Account':user.id});
+function showConflict(value){
+conflict=value;stopped=true;clearTimeout(timer);actions.replaceChildren();
+button('Descarcă varianta locală',downloadLocal);
+button('Încarcă varianta din cont',()=>{if(!confirm('Descarc o copie a variantei locale, apoi încarc progresul din cont. Continui?'))return;downloadLocal();apply(normalize(conflict.progress));base=clone(state());revision=conflict.version;conflict=null;stopped=false;remember();actions.replaceChildren();tell('Progresul din cont a fost încărcat.');});
+tell('Același exercițiu a fost modificat pe alt dispozitiv. Am păstrat copia locală și am oprit sincronizarea.');
 }
-window.PA_CLOUD = { changed };
-login.addEventListener('click',async () => { if (!client) { message.textContent = 'Autentificarea nu este încă activată. Continuă local până la configurarea serviciului.'; return; } window.PA_EDITOR.saveCode(); const { error } = await client.auth.signInWithOAuth({ provider:'azure',options:{ scopes:'email',redirectTo:config.redirectUrl,queryParams:{ prompt:'select_account' } } }); if (error) { message.textContent = 'Conectarea Microsoft nu a putut începe.'; } });
-document.querySelector('#account-sync').addEventListener('click',sync);
-document.querySelector('#account-import-local').addEventListener('click',() => { if (!user || busy || conflict) { return; } if (!confirm('Copiază progresul anonim din acest browser în cont? Codul deja existent în cont va fi păstrat.')) { return; } try { const local = JSON.parse(localStorage.getItem('pa-drafts-v2') || '{}'); const snapshot = state(); snapshot.drafts = { ...local,...snapshot.drafts }; apply(snapshot); window.PA_JOURNEY.importState(JSON.parse(localStorage.getItem('pa-journey-v1') || '{}')); changed(); sync(); } catch { message.textContent = 'Progresul local nu poate fi importat.'; } });
-document.querySelector('#account-remote').addEventListener('click',async () => { if (busy || !confirm('Înlocuiește copia locală a acestui cont cu versiunea din cloud? Exportă mai întâi codul local dacă vrei să îl păstrezi.')) { return; } try { const remote = await readRemote(); revision = remote?.revision || 0; apply(remote?.payload); conflict = false; putMeta({ revision,dirty:false }); document.querySelector('#account-remote').hidden = true; message.textContent = 'Versiunea din cloud a fost încărcată.'; } catch { message.textContent = 'Nu am putut încărca progresul.'; } });
-document.querySelector('#account-logout').addEventListener('click',async () => { if (busy) { message.textContent = 'Așteaptă terminarea sincronizării.'; return; } clearTimeout(timer); await client.auth.signOut(); localStorage.removeItem('pa-active-account'); location.reload(); });
-if (config?.enabled && /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(config.supabaseUrl) && config.publishableKey) { client = createClient(config.supabaseUrl,config.publishableKey,{ auth:{ flowType:'pkce',detectSessionInUrl:true,persistSession:true,autoRefreshToken:true } }); client.auth.onAuthStateChange((event,session) => { if (event === 'SIGNED_OUT' && accountStorageSuffix) { localStorage.removeItem('pa-active-account'); location.reload(); } if (event === 'SIGNED_IN' && session && accountStorageSuffix !== ':' + session.user.id) { localStorage.setItem('pa-active-account',':' + session.user.id); location.reload(); } }); connect(); } else { loading = false; login.title = 'Pregătit pentru activare după configurarea Microsoft și SQL'; }
-window.addEventListener('online',sync);
-window.addEventListener('storage',event => { if (event.key === 'pa-active-account') { location.reload(); } });
+function acceptRemote(value){
+if(!Number.isSafeInteger(value.version)||value.version<0)throw new Error('Invalid progress revision');
+const remote=normalize(value.progress);
+const merged=mergeProgress(base,state(),remote);
+if(merged.conflicts.length){showConflict({version:value.version,progress:remote});return false;}
+base=clone(remote);revision=value.version;
+if(!same(merged.progress,state()))apply(merged.progress);
+remember();return true;
+}
+function importAnonymous(){
+if(imported)return;
+try{
+const owner=localStorage.getItem('pa-anonymous-owner');
+if(owner&&owner!==user.id){imported=true;remember();return;}
+const guest=normalize({version:1,drafts:JSON.parse(localStorage.getItem('pa-drafts-v2')||'{}'),journey:JSON.parse(localStorage.getItem('pa-journey-v1')||'{"version":1,"quiz":{},"activityDays":[]}')});
+const current=state();
+for(const [id,row] of Object.entries(guest.drafts))if(!Object.hasOwn(current.drafts,id))current.drafts[id]=row;
+current.journey.quiz={...guest.journey.quiz,...current.journey.quiz};
+current.journey.activityDays=[...new Set([...guest.journey.activityDays,...current.journey.activityDays])].sort().slice(-365);
+if(!current.journey.resume)current.journey.resume=guest.journey.resume;
+if(Object.keys(guest.drafts).length||Object.keys(guest.journey.quiz).length)localStorage.setItem('pa-anonymous-owner',user.id);
+apply(current);imported=true;remember();
+}catch{tell('Progresul local nu a putut fi importat. Poți păstra o copie prin export.');}
+}
+async function performSync(){
+if(!user||stopped)return;
+try{
+if(!ready){if(!acceptRemote(await request('/api/progress',{headers:headers()})))return;ready=true;importAnonymous();}
+if(same(state(),base)){tell('Progres sincronizat.');return;}
+const snapshot=state();
+const saved=await request('/api/progress',{method:'PUT',headers:{...headers(),'Content-Type':'application/json','X-PA-Progress':'1'},body:JSON.stringify({version:revision,progress:snapshot})});
+if(!Number.isSafeInteger(saved.version)||saved.version<=revision)throw new Error('Invalid saved revision');
+base=normalize(saved.progress);revision=saved.version;retry=2000;remember();
+if(same(state(),base))tell('Progres sincronizat.');else schedule();
+}catch(error){
+if(error.status===409&&error.value?.code!=='account-changed'){if(acceptRemote(error.value))schedule(100);}
+else if([401,403,409].includes(error.status)){stopped=true;tell('Contul nu mai este disponibil. Copia locală este păstrată. Reîncarcă pagina.');}
+else if([400,413,415].includes(error.status)){stopped=true;tell(error.message);actions.replaceChildren();button('Descarcă progresul',downloadLocal);}
+else{tell('Sincronizarea nu este disponibilă. Progresul este păstrat local.');clearTimeout(timer);timer=setTimeout(()=>void sync(),retry);retry=Math.min(retry*2,60000);}
+}
+}
+async function sync(){if(pending){await pending;if(user&&ready&&!stopped&&!same(state(),base))return sync();return;}pending=performSync();try{await pending;}finally{pending=null;}}
+function switchStorage(suffix){if(accountStorageSuffix===suffix)return false;if(suffix)localStorage.setItem('pa-active-account',suffix);else localStorage.removeItem('pa-active-account');window.location.reload();return true;}
+async function connect(){
+try{
+const account=await request('/api/account');
+if(!account.enabled){if(switchStorage(''))return;tell('Progres salvat în acest browser.');return;}
+if(!account.user){if(switchStorage(''))return;render();tell('Conectare disponibilă pentru @s.unibuc.ro și @unibuc.ro.');return;}
+if(!/^[0-9a-f-]{36}:[0-9a-f-]{36}$/i.test(account.user.id)||! /^[^\s@#]+@(?:s\.unibuc\.ro|unibuc\.ro)$/i.test(account.user.email))throw new Error('Invalid account response');
+if(switchStorage(':'+account.user.id))return;
+user=account.user;render();
+let saved;try{saved=JSON.parse(localStorage.getItem(metaKey())||'null');}catch{}
+if(saved&&Number.isSafeInteger(saved.revision)&&saved.revision>=0){try{base=normalize(saved.base);revision=saved.revision;imported=saved.imported===true;}catch{base=emptyProgress();revision=0;}}
+await sync();
+}catch(error){if(error.status===403){controls.replaceChildren();const link=document.createElement('a');link.className='secondary';link.href='/.auth/logout?post_logout_redirect_uri=/';link.textContent='Schimbă contul Microsoft';controls.append(link);tell('Sunt acceptate numai conturile universitare @s.unibuc.ro și @unibuc.ro.');}else tell('Conectarea nu este disponibilă momentan. Progresul rămâne local.');}
+}
+window.PA_CLOUD={changed,sync};
+window.addEventListener('online',()=>{if(user&&!stopped)void sync();});
+window.addEventListener('storage',event=>{if(event.key==='pa-active-account')window.location.reload();});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')void sync();});
+connect();
