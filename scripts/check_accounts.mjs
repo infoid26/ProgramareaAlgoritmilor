@@ -70,6 +70,12 @@ assert.ok(!JSON.stringify(diagnostics).includes('secret-password'));
 assert.ok(!failed.body.includes('42501'));
 }finally{console.warn=originalWarn;}
 try{
+let logout=await request('/account/logout');assert.equal(logout.status,405);
+logout=await request('/account/logout','POST',undefined,{Origin:'https://evil.example'});assert.equal(logout.status,403);
+logout=await request('/account/logout','POST',undefined,{'Sec-Fetch-Site':'cross-site'});assert.equal(logout.status,403);
+logout=await request('/account/logout','POST',undefined,{Cookie:'AppServiceAuthSession=secret; AppServiceAuthSession2=secret; unrelated=keep'});
+assert.equal(logout.status,303);assert.equal(logout.headers.location,'/');
+const cleared=logout.headers['set-cookie'];assert.equal(cleared.length,3);assert.ok(cleared.every(value=>value.includes('Max-Age=0')&&value.includes('HttpOnly; Secure')));assert.ok(!cleared.some(value=>value.startsWith('unrelated=')));
 let r=await request('/api/account');assert.equal(r.status,200);assert.equal(JSON.parse(r.body).user.id,tenant+':'+object);assert.equal(r.headers['cache-control'],'no-store');
 r=await request();assert.deepEqual(JSON.parse(r.body),{version:0,progress:emptyProgress()});
 r=await request('/api/progress','PUT',{version:0,progress});assert.equal(r.status,200);assert.equal(JSON.parse(r.body).version,1);

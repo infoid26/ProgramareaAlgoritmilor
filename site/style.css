@@ -102,11 +102,8 @@ h2,h3 { letter-spacing:-.5px; }
 .course-number { width:58px; height:58px; border-radius:17px; background:#f0ebff; color:#7654d8; display:grid; place-items:center; font-size:22px; flex-shrink:0; }
 .course-card.course-done { border-color:#b4e7cd; }
 .course-card.course-done .course-number { color:#108766; background:#e4f9ed; }
-.course-card.course-locked { background:#f8f8fc; opacity:.7; }
-.course-card.course-locked .course-number { background:#ededf3; }
 .course-status { position:absolute; top:14px; right:17px; font-size:10px; color:#9590aa; font-weight:700; }
 .course-card .mini-progress { margin:9px 0 15px; height:6px; }
-.course-card .locked-label { display:block; font-size:11px; color:#827d97; }
 .road-card { border-radius:15px; }
 .road-card .road-number { color:var(--purple); }
 .road-card.road-done { border-color:#b0e7c9; background:#f7fffa; }
@@ -237,7 +234,6 @@ main { margin-left:190px; }
 .unified-map .course-lesson-list { grid-template-columns:1fr; gap:12px; }
 .unified-map .course-card { max-width:550px; margin:0 auto; width:100%; border:0; background:transparent; box-shadow:none; }
 .unified-map .course-number { width:68px; height:68px; border-radius:50%; background:var(--purple); color:white; box-shadow:0 6px 0 #4936a3; }
-.unified-map .course-locked .course-number { background:#dedbe8; color:#858099; box-shadow:0 6px 0 #c1bdce; }
 .unified-map .course-card:nth-child(even) { padding-left:60px; }
 .unified-map .course-card .mini-progress,.unified-map .course-status { display:none; }
 .unified-map .road-card { margin:20px 0; padding:22px; grid-template-columns:40px 1fr; box-shadow:none; }
@@ -310,3 +306,157 @@ main { margin:0 auto; width:100%; max-width:1160px; padding:0 32px; }
 .workspace-actions { padding:12px 0 8px; } .output-comparison { padding:12px 0; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:stretch; } .output-comparison > div { display:flex; flex-direction:column; } .output-comparison #expected-output,.output-comparison #python-output { flex:1; width:100%; min-height:72px; max-height:260px; padding:14px; margin:0; font-size:14px; line-height:1.6; border:0; border-radius:9px; box-sizing:border-box; } #python-status.verification-feedback { padding-left:0; padding-right:0; } @media(max-width:480px) { .output-comparison { padding:12px 0; } .output-comparison #expected-output,.output-comparison #python-output { padding:10px; font-size:12px; } }
 .output-comparison #expected-output,.output-comparison #python-output { display:flex; align-items:center; min-height:48px; padding:10px 14px; }
 .account-controls { display:flex; align-items:center; gap:12px; flex-wrap:wrap; } .account-name { font-size:13px; font-weight:600; max-width:220px; overflow-wrap:anywhere; color:var(--ink); letter-spacing:0; } .account-controls .secondary { text-decoration:none; font-size:12px; padding:8px 12px; } .account-panel { padding:8px 0; } .account-panel p { margin:0; font-size:12px; color:var(--muted); } .account-actions { display:flex; flex-wrap:wrap; gap:10px; } .account-actions:not(:empty) { margin-top:10px; } .account-actions button { font-size:12px; } @media(max-width:720px) { .account-controls { justify-content:flex-end; gap:8px; } .account-name { max-width:180px; } }
+
+/* Header aligned with Tehnici Web. */
+/* Compact account group with equal cards and a shared caption. */
+.topbar {
+  display:grid;
+  grid-template-columns:minmax(180px,1fr) minmax(0,420px);
+  align-items:center;
+  gap:24px;
+  min-height:82px;
+  padding-block:14px 12px;
+}
+.topbar .header-brand { min-width:0; min-height:56px; align-self:start; }
+.topbar-stats {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:minmax(56px,auto);
+  gap:10px 12px;
+  width:100%;
+  max-width:420px;
+  justify-self:end;
+  align-items:stretch;
+}
+.topbar-stats > .progress-percent {
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  width:100%;
+  min-height:56px;
+  padding:10px 16px;
+  border-radius:12px;
+}
+.topbar-stats > .account-controls {
+  display:flex;
+  align-items:stretch;
+  align-content:center;
+  width:100%;
+  min-width:0;
+  gap:8px;
+}
+.account-controls .account-signin {
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  min-height:56px;
+  margin:0;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#171c29;
+  color:var(--ink);
+  font-size:12px;
+  font-weight:600;
+  line-height:1.4;
+  text-align:center;
+  box-shadow:none;
+}
+.account-controls .account-signin::before {
+  content:"";
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  background:
+    linear-gradient(#f25022 0 0) top left/8px 8px no-repeat,
+    linear-gradient(#7fba00 0 0) top right/8px 8px no-repeat,
+    linear-gradient(#00a4ef 0 0) bottom left/8px 8px no-repeat,
+    linear-gradient(#ffb900 0 0) bottom right/8px 8px no-repeat;
+}
+.account-controls .account-signin:disabled { opacity:1; cursor:default; }
+.signin-hint {
+  max-width:420px;
+  margin:10px 0 0 auto;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+  text-align:center;
+}
+@media(max-width:720px) {
+  .topbar { grid-template-columns:1fr; gap:18px; }
+  .topbar-stats { justify-self:start; max-width:100%; }
+  .signin-hint { max-width:100%; }
+}
+@media(max-width:380px) {
+  .topbar-stats { column-gap:8px; }
+  .topbar-stats > .progress-percent { padding:10px; }
+  .account-controls .account-signin { padding:10px 8px; gap:8px; font-size:11px; }
+}
+.topbar .header-brand strong {
+  font-size:52px;
+  line-height:1;
+  letter-spacing:-4px;
+}
+.topbar .brand-meta {
+  font-size:12px;
+  line-height:1.65;
+  letter-spacing:1.6px;
+}
+.topbar .brand-meta b {
+  display:inline;
+  font-size:12px;
+  letter-spacing:0;
+}
+/* Keep the signed-in account in one card, including the logout action. */
+.account-controls .account-signout {
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  width:100%;
+  min-width:0;
+  min-height:56px;
+  margin:0;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#171c29;
+  color:var(--ink);
+  line-height:1.4;
+  text-decoration:none;
+}
+.account-signout .account-name {
+  display:block;
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:12px;
+  font-weight:600;
+  text-align:center;
+}
+.account-signout-label { color:#b3a2ff; font-size:11px; }
+.account-controls .account-signout:hover { border-color:#b3a2ff; }
+.account-panel { padding:10px 0 0; text-align:right; }
+.account-panel p { margin:0; }
+.account-panel .account-actions { justify-content:flex-end; }
+.account-signout-form { display:flex; width:100%; min-width:0; margin:0; }
+
+
+.topbar { font-family:Inter,"Segoe UI",Arial,sans-serif; letter-spacing:0; }
+.topbar .header-brand { gap:17px; }
+.header-brand .brand-meta { color:var(--muted); font-weight:400; }
+.header-brand .brand-meta b { font-weight:500; }
+.topbar-stats { align-items:stretch; }
+.topbar-stats .progress-percent { margin:0; border:1px solid var(--line); background:#171c29; box-shadow:none; }
+.progress-percent-label { font-size:11px; font-weight:400; letter-spacing:0; }
+.topbar-stats .progress-percent-label strong { font-size:13px; color:#b3a2ff; }
+.account-controls .secondary { letter-spacing:0; text-decoration:none; box-shadow:none; }
+.topbar .header-brand strong span { color:#b3a2ff; }

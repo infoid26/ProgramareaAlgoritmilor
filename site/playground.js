@@ -25,22 +25,13 @@ function attachEditor(slot, id) { if (!slot) { return; } if (sharedEditor.parent
 try { const stored = JSON.parse(localStorage.getItem(draftStorageKey) || '{}'); if (stored && typeof stored === 'object' && !Array.isArray(stored)) { drafts = stored; } } catch { status.textContent = 'Salvarea locală nu este disponibilă. Descarcă soluțiile.'; }
 try { const previous = localStorage.getItem('pa-python-code'); if (!accountStorageSuffix && !drafts['baze-01'] && previous !== null) { drafts['baze-01'] = { code: previous, input: localStorage.getItem('pa-python-input') ?? exercises[0].tests[0].input }; } } catch {}
 function isPassed(exercise) { const draft = drafts[exercise.id]; if (typeof draft?.code !== 'string' || draft.code !== draft.passedCode) { return false; } if (!exercise.editableFiles) { return true; } try { const data = JSON.parse(draft.input); return JSON.stringify(Object.fromEntries(exercise.editableFiles.map(name => [name, data[name]]))) === draft.passedFiles; } catch { return false; } }
-function persistDrafts() { try { localStorage.setItem(draftStorageKey, JSON.stringify(drafts)); window.PA_CLOUD?.changed(); } catch { status.textContent = 'Nu se poate salva în browser. Descarcă lucrul tău din lista de exerciții.'; } }
+function persistDrafts() { try { localStorage.setItem(draftStorageKey, JSON.stringify(drafts)); window.PA_CLOUD?.changed(); } catch { status.textContent = 'Nu se poate salva în browser. Verifică spațiul disponibil în browser.'; } }
 function readInput() { if (!currentExercise?.inputFiles) { return stdin.value; } const data = { [currentExercise.inputFiles[0]]: stdin.value }; document.querySelectorAll('[data-input-file]').forEach(field => { data[field.dataset.inputFile] = field.value; }); return JSON.stringify(data); }
 function displayInput(value, item) { if (!item.inputFiles) { return value; } try { return Object.entries(JSON.parse(value)).map(([name, text]) => `${name === '_stdin' ? 'Tastatură' : name}\n${item.editableFiles?.includes(name) ? '(codul modulului tău)' : text || '(gol)'}`).join('\n\n'); } catch { return value; } }
 function referenceCode(item) { if (!item.editableFiles) { return item.solution; } const data = JSON.parse(item.tests[0].input); return item.solution + '\n\n' + item.editableFiles.map(name => '# ' + name + '\n' + data[name]).join('\n'); }
 function configureInput(value, item) { const container = document.querySelector('#additional-inputs'); container.replaceChildren(); if (!item.inputFiles) { stdin.value = value; return; } let data; try { data = JSON.parse(value); } catch { data = {}; } stdin.value = data[item.inputFiles[0]] || ''; for (const name of [...item.inputFiles.slice(1), '_stdin']) { const label = document.createElement('label'); label.textContent = name === '_stdin' ? 'Date de la tastatură' : `Conținutul ${name}`; const field = document.createElement('textarea'); field.dataset.inputFile = name; field.value = data[name] || ''; field.spellcheck = false; label.append(field); container.append(label); } }
 function saveCode() { if (!currentExercise) { return; } drafts[currentExercise.id] = { ...drafts[currentExercise.id], code: editor.value, input: readInput() }; persistDrafts(); updateExerciseProgress(); window.PA_JOURNEY?.refreshExerciseStep(currentExercise.id); }
 function updateExerciseProgress() { document.querySelector('#exercise-progress').textContent = isPassed(currentExercise) ? '✓ Rezolvat' : ''; }
-function renderBank() {
-const query = document.querySelector('#exercise-search').value.toLocaleLowerCase('ro');
-const chapter = document.querySelector('#chapter-filter').value;
-const level = document.querySelector('#level-filter').value;
-const progress = document.querySelector('#progress-filter').value;
-const visible = exercises.filter(item => (!chapter || item.chapter === chapter) && (!level || item.level === level) && (!progress || isPassed(item) === (progress === 'done')) && `${item.title} ${item.statement} ${chapters.find(c => c.id === item.chapter).title}`.toLocaleLowerCase('ro').includes(query));
-document.querySelector('#bank-count').textContent = `${visible.length} exerciții afișate · ${exercises.filter(isPassed).length}/${exercises.length} cu testele trecute`;
-document.querySelector('#exercise-list').innerHTML = visible.map(item => `<a class="exercise-card ${isPassed(item) ? 'passed' : ''}" href="#practica/${item.id}"><span class="tag">${escapeHTML(item.level)}${item.supplemental || chapters.find(c => c.id === item.chapter).supplemental ? " · suplimentar" : ""} · ${item.tests.length} teste</span><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(chapters.find(c => c.id === item.chapter).title)}</p><span class="text-link">${isPassed(item) ? '✓ Teste trecute' : drafts[item.id]?.code ? 'Continuă →' : 'Începe →'}</span></a>`).join('') || '<p>Nu există exerciții pentru filtrele alese. Schimbă filtrul sau textul căutat.</p>';
-}
 function renderCourse() { window.PA_JOURNEY?.renderCourse(); }
 function renderCourseLesson(id) { window.PA_JOURNEY?.renderLesson(id); }
 function renderChapter(id) { window.PA_JOURNEY?.renderChapter(id); }
@@ -72,8 +63,8 @@ document.querySelector('#input-label').textContent = item.inputFiles ? `CONȚINU
 document.querySelector('#additional-inputs').querySelectorAll('[data-input-file]').forEach(field => { field.parentElement.hidden = !item.editableFiles?.includes(field.dataset.inputFile); });
 const index = collection.indexOf(item);
 const back = document.querySelector("#exercise-back");
-back.href = beginner ? `#lectie-python/${chapter.id}/${window.PA_JOURNEY?.getExerciseStepIndex(item.id) ?? 0}` : "#exercitii";
-back.textContent = beginner ? "← Înapoi la lecție" : "← Toate exercițiile";
+back.href = beginner ? `#lectie-python/${chapter.id}/${window.PA_JOURNEY?.getExerciseStepIndex(item.id) ?? 0}` : `#capitol/${chapter.id}`;
+back.textContent = beginner ? "← Înapoi la lecție" : "← Înapoi la capitol";
 for (const [selector, offset] of [['#previous-exercise', -1], ['#next-exercise', 1]]) { const link = document.querySelector(selector); link.hidden = !collection[index + offset]; link.href = `#practica/${collection[index + offset]?.id || item.id}`; }
 resetComparison();
 document.querySelector('#test-results').replaceChildren();
@@ -86,7 +77,6 @@ function routePractice() {
 const [page, id] = location.hash.slice(1).split('/');
 if (page !== 'practica' && cancelRun) { cancelRun(); }
 if (page === 'practica') { restoreEditor(); selectExercise(id); } else if (page !== 'lectie-python' && page !== 'capitol') { restoreEditor(); }
-if (page === 'exercitii') { renderBank(); }
 if (page === 'curs-python') { renderCourse(); }
 if (page === 'lectie-python') { renderCourseLesson(id); }
 if (page === 'capitol') { renderChapter(id); }
@@ -166,15 +156,13 @@ checkButton.addEventListener('click', () => runCode(true));
 stopButton.addEventListener('click', () => { if (cancelRun) { cancelRun(); } });
 document.querySelector('#python-download').addEventListener('click', () => downloadData(editor.value, `${currentExercise.id}.py`));
 document.querySelector('#module-download').addEventListener('click', () => { const name = currentExercise.editableFiles?.[0]; if (name) { downloadData(JSON.parse(readInput())[name], name); } });
-document.querySelector('#chapter-filter').insertAdjacentHTML('beforeend', chapters.map(item => `<option value="${item.id}">${escapeHTML(item.title)}</option>`).join(''));
-for (const id of ['chapter-filter', 'level-filter', 'exercise-search', 'progress-filter']) { document.getElementById(id).addEventListener('input', renderBank); }
 window.addEventListener('hashchange', routePractice);
 if (!location.hash.startsWith('#practica')) { selectExercise(exercises[0].id); }
 routePractice();
-renderBank();
+
 renderCourse();
 
-window.PA_EDITOR = { attachTo: attachEditor, restore: restoreEditor, selectExercise, saveCode, exportState:() => JSON.parse(JSON.stringify(drafts)), replaceState:data => { drafts = {}; for (const item of [...exercises,...beginnerExercises]) { const row = data?.[item.id]; if (row && typeof row.code === 'string' && typeof row.input === 'string') { drafts[item.id] = { code:row.code,input:row.input }; if (row.passedCode === row.code) { drafts[item.id].passedCode = row.passedCode; } if (typeof row.passedFiles === 'string') { drafts[item.id].passedFiles = row.passedFiles; } } } persistDrafts(); if (currentExercise) { const selectedId = currentExercise.id; currentExercise = null; selectExercise(selectedId); } renderBank(); } };
+window.PA_EDITOR = { attachTo: attachEditor, restore: restoreEditor, selectExercise, saveCode, exportState:() => JSON.parse(JSON.stringify(drafts)), replaceState:data => { drafts = {}; for (const item of [...exercises,...beginnerExercises]) { const row = data?.[item.id]; if (row && typeof row.code === 'string' && typeof row.input === 'string') { drafts[item.id] = { code:row.code,input:row.input }; if (row.passedCode === row.code) { drafts[item.id].passedCode = row.passedCode; } if (typeof row.passedFiles === 'string') { drafts[item.id].passedFiles = row.passedFiles; } } } persistDrafts(); if (currentExercise) { const selectedId = currentExercise.id; currentExercise = null; selectExercise(selectedId); }  } };
 
 
 

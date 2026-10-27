@@ -127,14 +127,31 @@ export function createAccountHandler({env,lessons,store}){
     res.writeHead(status);res.end(JSON.stringify(value));
   };
   return async(req,res,pathname)=>{
+    if(pathname==='/account/logout'){
+      // End only this host's Easy Auth browser session; do not call the IdP logout.
+      if(req.method!=='POST'){
+        res.setHeader('Allow','POST');json(res,405,{error:'Este necesara o cerere POST.'});return true;
+      }
+      if(!settings||req.headers.origin!==settings.origin||req.headers['sec-fetch-site']==='cross-site'){
+        json(res,403,{error:'Deconectarea trebuie initiata de pe site.'});return true;
+      }
+      const names=new Set(['AppServiceAuthSession','AppServiceAuthSession1']);
+      for(const cookie of (req.headers.cookie||'').split(';')){
+        const name=cookie.split('=',1)[0].trim();
+        if(/^AppServiceAuthSession\d{0,3}$/.test(name))names.add(name);
+      }
+      res.setHeader('Set-Cookie',[...names].map(name=>`${name}=; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=None`));
+      res.writeHead(303,{'Location':'/','Cache-Control':'no-store','Vary':'Cookie','Referrer-Policy':'no-referrer'});
+      res.end();return true;
+    }
     if(!['/api/account','/api/progress'].includes(pathname))return false;
     try{
       if(!settings){json(res,pathname==='/api/account'?200:503,{enabled:false,user:null,error:'Sincronizarea conturilor nu este încă activată.'});return true;}
       let user;
-      try{user=accountIdentity(req.headers,settings);}catch{json(res,403,{enabled:true,user:null,error:'Conectarea este permisă numai conturilor universitare @s.unibuc.ro și @unibuc.ro.',logoutUrl:'/.auth/logout?post_logout_redirect_uri=/'});return true;}
+      try{user=accountIdentity(req.headers,settings);}catch{json(res,403,{enabled:true,user:null,error:'Conectarea este permisă numai conturilor universitare @s.unibuc.ro și @unibuc.ro.',logoutUrl:'/account/logout'});return true;}
       if(pathname==='/api/account'){
         if(req.method!=='GET'){json(res,405,{error:'Metodă nepermisă.'});return true;}
-        json(res,200,{enabled:true,user:user?{id:user.id,email:user.email,name:user.name}:null,loginUrl:'/.auth/login/aad?post_login_redirect_uri=/',logoutUrl:'/.auth/logout?post_logout_redirect_uri=/'});return true;
+        json(res,200,{enabled:true,user:user?{id:user.id,email:user.email,name:user.name}:null,loginUrl:'/.auth/login/aad?post_login_redirect_uri=/',logoutUrl:'/account/logout'});return true;
       }
       if(!user){json(res,401,{error:'Conectează-te pentru sincronizarea progresului.'});return true;}
       if(req.headers['x-pa-account']!==user.id){json(res,409,{code:'account-changed',error:'Contul conectat s-a schimbat. Reîncarcă pagina; copia locală este păstrată.'});return true;}

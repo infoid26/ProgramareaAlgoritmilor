@@ -16,10 +16,39 @@ function schedule(delay=1200){clearTimeout(timer);if(user&&ready&&!stopped)timer
 function changed(){if(applying||!user)return;remember();if(ready){tell('Se sincronizează…');schedule();}}
 function button(label,fn){const el=document.createElement('button');el.type='button';el.className='secondary';el.textContent=label;el.addEventListener('click',fn);actions.append(el);return el;}
 function downloadLocal(){const value=JSON.stringify({version:2,drafts:state().drafts,journey:state().journey},null,2);const url=URL.createObjectURL(new Blob([value],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='PA-progres-local.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function clearAccountCache(){
+for(const key of ['pa-drafts-v2:'+user.id,'pa-journey-v1:'+user.id,metaKey(),'pa-active-account'])localStorage.removeItem(key);
+if(localStorage.getItem('pa-anonymous-owner')===user.id){
+for(const key of ['pa-drafts-v2','pa-journey-v1','pa-anonymous-owner','pa-python-code','pa-python-input'])localStorage.removeItem(key);
+}
+}
+function signOutControl(label){
+const form=document.createElement('form');form.method='post';form.action='/account/logout';form.className='account-signout-form';
+const submit=document.createElement('button');submit.type='submit';submit.className='secondary account-signout';
+if(user){
+submit.title=user.email;submit.ariaLabel='Logout: '+(user.name||user.email);
+const name=document.createElement('span');name.className='account-name';name.textContent=user.name||user.email;
+const action=document.createElement('span');action.className='account-signout-label';action.textContent='Logout';submit.append(name,action);
+}else submit.textContent=label;
+let leaving=false;
+form.addEventListener('submit',async event=>{
+if(leaving)return;
+event.preventDefault();submit.disabled=true;
+try{
+if(user){
+window.PA_EDITOR.saveCode();await sync();
+if(!ready||stopped||!same(state(),base)){tell('Progresul nu a fost sincronizat. Încearcă din nou înainte de Logout.');submit.disabled=false;return;}
+stopped=true;clearTimeout(timer);clearAccountCache();
+}
+leaving=true;form.requestSubmit();
+}catch{submit.disabled=false;tell('Deconectarea nu a putut fi finalizată. Copia locală este păstrată.');}
+});
+form.append(submit);controls.append(form);
+}
 function render(){
 controls.replaceChildren();
-if(user){const label=document.createElement('span');label.className='account-name';label.textContent=user.name||user.email;label.title=user.email;controls.append(label);const link=document.createElement('a');link.className='secondary';link.href='/.auth/logout?post_logout_redirect_uri=/';link.textContent='Logout';link.addEventListener('click',async event=>{event.preventDefault();window.PA_EDITOR.saveCode();await sync();window.location.assign(link.href);});controls.append(link);}
-else{const link=document.createElement('a');link.className='secondary';link.href='/.auth/login/aad?post_login_redirect_uri=/';link.textContent='Conectare cu Microsoft';link.addEventListener('click',()=>window.PA_EDITOR.saveCode());controls.append(link);}
+if(user)signOutControl();
+else{const link=document.createElement('a');link.className='secondary account-signin';link.href='/.auth/login/aad?post_login_redirect_uri=/';link.textContent='Conectare cu Microsoft';link.addEventListener('click',()=>window.PA_EDITOR.saveCode());controls.append(link);}
 }
 async function request(path,options={}){const response=await fetch(path,{credentials:'same-origin',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(10000),...options});let value;try{value=await response.json();}catch{throw new Error('Account API unavailable');}if(!response.ok){const error=new Error(value.error||'Sincronizarea nu este disponibilă.');error.status=response.status;error.value=value;throw error;}return value;}
 const headers=()=>({'X-PA-Account':user.id});
@@ -83,7 +112,7 @@ user=account.user;render();
 let saved;try{saved=JSON.parse(localStorage.getItem(metaKey())||'null');}catch{}
 if(saved&&Number.isSafeInteger(saved.revision)&&saved.revision>=0){try{base=normalize(saved.base);revision=saved.revision;imported=saved.imported===true;}catch{base=emptyProgress();revision=0;}}
 await sync();
-}catch(error){if(error.status===403){controls.replaceChildren();const link=document.createElement('a');link.className='secondary';link.href='/.auth/logout?post_logout_redirect_uri=/';link.textContent='Schimbă contul Microsoft';controls.append(link);tell('Sunt acceptate numai conturile universitare @s.unibuc.ro și @unibuc.ro.');}else tell('Conectarea nu este disponibilă momentan. Progresul rămâne local.');}
+}catch(error){if(error.status===403){controls.replaceChildren();signOutControl('Schimbă contul Microsoft');tell('Sunt acceptate numai conturile universitare @s.unibuc.ro și @unibuc.ro.');}else tell('Conectarea nu este disponibilă momentan. Progresul rămâne local.');}
 }
 window.PA_CLOUD={changed,sync};
 window.addEventListener('online',()=>{if(user&&!stopped)void sync();});
