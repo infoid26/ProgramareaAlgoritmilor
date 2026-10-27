@@ -1,11 +1,4 @@
-const stages = window.PA_CONTENT.chapters;
 const roadmap = document.querySelector('#roadmap');
-stages.forEach((stage, index) => {
-const card = document.createElement('article');
-card.className = 'road-card';
-card.innerHTML = `<span class="road-number">${String(index + 1).padStart(2, '0')}</span><div><h2>${stage.title.slice(5)}</h2><p>${stage.lesson[0]}</p><small>${window.PA_CONTENT.exercises.filter(item => item.chapter === stage.id).length} exerciții · recapitulare · exemple</small></div><a class="text-link" href="#capitol/${stage.id}">Deschide →</a>`;
-roadmap.append(card);
-});
 function navigate() {
 let id = ['acasa', 'curs-python', 'lectie-python', 'traseu', 'practica', 'capitol'].includes(location.hash.slice(1).split('/')[0]) ? location.hash.slice(1).split('/')[0] : 'acasa';
 if (id === 'traseu' || id === 'curs-python') { id = 'acasa'; }

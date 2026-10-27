@@ -31,18 +31,16 @@ const unifiedIntro = document.querySelector('#course-lesson-list');
 const unifiedPath = document.querySelector('#roadmap');
 const unifiedMap = document.createElement('div');
 unifiedMap.className = 'unified-map';
-unifiedMap.innerHTML = '<div class="path-banner"><h2>Introducere în Python</h2><p>5 lecții · 15 exerciții</p></div>';
 unifiedMap.append(unifiedIntro);
-const unifiedDivider = document.createElement('div');
-unifiedDivider.className = 'path-banner';
-unifiedDivider.innerHTML = '<h2>Capitole PA</h2><p>14 capitole principale + 2 suplimentare · 245 de exerciții</p>';
-unifiedMap.append(unifiedDivider, unifiedPath);
+unifiedMap.append(unifiedPath);
 unifiedHome.append(unifiedMap);
 document.querySelectorAll('#traseu > .notice').forEach(note => unifiedHome.append(note));
 function courseProgressPercent() { const s = journeyStats(); const progressTotal = beginnerExercises.length + exercises.length + beginnerLessons.reduce((sum, lesson) => sum + questionsForLesson(lesson.id).length, 0) + chapters.reduce((sum, chapter) => sum + algorithmUnits(chapter.id).length, 0); const progressDone = s.beginnerDone + s.subjectDone + s.correct + s.algoCorrect; return Math.floor(progressDone / progressTotal * 100); }
 function renderDashboard() {
 const s = journeyStats();
 const progressPercent = courseProgressPercent();
+const lessonCount=beginnerLessons.length+chapters.reduce((total,chapter)=>total+algorithmUnits(chapter.id).length,0);
+setText('#course-totals', `${chapters.length+1} capitole · ${lessonCount} lecții · ${beginnerExercises.length+exercises.length} exerciții`);
 setText('#header-progress', `${progressPercent}%`);
 const progressIndicator = document.querySelector('#header-progress-bar');
 progressIndicator.style.width = `${progressPercent}%`;
@@ -50,11 +48,25 @@ progressIndicator.parentElement.setAttribute('aria-valuenow', String(progressPer
 const lesson = nextLesson(); const finished = beginnerLessons.every(lessonIsCompleted); const link = `#lectie-python/${lesson.id}/${firstPendingStep(lesson)}`;
 const resume = document.querySelector('#resume-learning'); if (resume) { resume.href = finished ? '#traseu' : link; resume.innerHTML = finished ? 'Exersează algoritmi <span>→</span>' : 'Continuă lecția <span>→</span>'; }
 if (typeof journey.resume === "string" && /^#(capitol|lectie-python)\/[a-z-]+\/\d+(\/\d+)?$/.test(journey.resume)) { const id = journey.resume.split("/")[1]; const selected = chapters.find(item => item.id === id) || beginnerLessons.find(item => item.id === id); if (selected) { if (resume) { resume.href = journey.resume; } } }
-roadmap.querySelectorAll('.road-card').forEach((card, index) => { const chapter = chapters[index]; const passed = exercises.filter(item => item.chapter === chapter.id && isPassed(item)).length; const all = exercises.filter(item => item.chapter === chapter.id).length; const label = card.querySelector('small'); if (label) { label.textContent = `${passed}/${all} exerciții · ${algorithmUnits(chapter.id).length} ${algorithmUnits(chapter.id).length === 1 ? 'lecție scurtă' : 'lecții scurte'}${chapter.supplemental ? ' · suplimentar' : ''}`; } card.classList.toggle('road-done', algorithmCompleted(chapter)); const resume = card.querySelector('a'); if (resume) { resume.href = `#capitol/${chapter.id}/${firstPendingAlgorithmStep(chapter)}/${firstPendingAlgorithmUnit(chapter)}`; resume.textContent = algorithmCompleted(chapter) ? 'Recapitulează →' : 'Continuă →'; } let path = card.querySelector('.unit-path'); if (!path) { path = document.createElement('details'); path.className = 'unit-path'; card.append(path); } path.innerHTML = '<summary>Alege o lecție scurtă</summary><div class="unit-nodes">' + algorithmUnits(chapter.id).map((items, i) => `<a class="unit-node ${algorithmUnitDone(chapter, i) ? 'unit-done' : i === firstPendingAlgorithmUnit(chapter) ? 'unit-current' : ''}" href="#capitol/${chapter.id}/0/${i}"><b>${algorithmUnitDone(chapter, i) ? '✓' : i + 1}</b><span>${escapeHTML(items[0].title)}<small>${items.length} exerciții · 1 întrebare</small></span></a>`).join('') + '</div>'; });
+renderAlgorithmPath();
+}
+function pathChapter({id,index,title,subtitle,rows,current}) {
+const count=rows.filter(row=>row.done).length;
+const next=rows.find(row=>!row.done)||rows[0];
+const previous=document.querySelector(`[data-path="${id}"]`);
+const open=previous?previous.open:current;
+return `<article class="path-chapter ${current?'current-chapter':''}"><header class="chapter-banner"><div class="chapter-number">${String(index).padStart(2,'0')}</div><div><div class="eyebrow">${index===1?'PYTHON':'CAPITOLUL '+(index-1)}</div><h3>${escapeHTML(title)}</h3><p>${escapeHTML(subtitle)}</p><small>${count} / ${rows.length} lecții finalizate</small><progress aria-label="Progres ${escapeHTML(title)}" max="${rows.length}" value="${count}"></progress></div><a class="button" href="${next.href}">${count===rows.length?'Recapitulează':'Continuă'} →</a></header><details data-path="${id}" ${open?'open':''}><summary>Traseul capitolului <span>${rows.length} lecții</span></summary><div class="unit-path">${rows.map((row,i)=>`${i%5===0?`<div class="unit-divider"><span>UNITATEA ${Math.floor(i/5)+1}</span><strong>${escapeHTML(row.title)}</strong></div>`:''}<a class="path-node ${row.done?'path-done':row===next?'path-current':'path-future'}" href="${row.href}" ${row===next&&!row.done?'aria-current="step"':''}><span class="node-bubble" aria-hidden="true">${row.done?'✓':i+1}</span><span class="node-label">${escapeHTML(row.title)}<small>${escapeHTML(row.subtitle)}</small></span>${row===next&&!row.done?'<span class="start-tag">CONTINUĂ AICI</span>':''}</a>`).join('')}</div></details></article>`;
 }
 function renderCourse() {
-
-document.querySelector('#course-lesson-list').innerHTML = beginnerLessons.map((lesson, index) => { const tasks = exercisesForLesson(lesson.id); const count = tasks.filter(isPassed).length; const done = lessonIsCompleted(lesson); const href = `#lectie-python/${lesson.id}/${firstPendingStep(lesson)}`; return `<article class="course-card ${done ? 'course-done' : ''}"><div class="course-number">${done ? '✓' : String(index + 1).padStart(2, '0')}</div><div class="course-card-content"><div class="eyebrow">${escapeHTML(lesson.duration)} · ${count}/${tasks.length} exerciții</div><h2>${escapeHTML(lesson.title)}</h2><p>${escapeHTML(lesson.subtitle)}</p><div class="mini-progress"><span style="width:${count / tasks.length * 100}%"></span></div><a class="text-link" href="${href}">${done ? 'Revezi lecția ↗' : index === 0 ? 'Începe lecția →' : 'Continuă →'}</a></div><span class="course-status">${done ? 'Completă' : 'Disponibilă'}</span></article>`; }).join('');
+const rows=beginnerLessons.map(lesson=>({title:lesson.title.replace(/^\d+\s*[·.-]\s*/,''),subtitle:lesson.duration+' · explicație + exerciții',done:lessonIsCompleted(lesson),href:`#lectie-python/${lesson.id}/${firstPendingStep(lesson)}`}));
+unifiedIntro.innerHTML=pathChapter({id:'python',index:1,title:'Introducere în Python',subtitle:'De la primele instrucțiuni la date de intrare, condiții și repetări.',rows,current:rows.some(row=>!row.done)});
+}
+function renderAlgorithmPath() {
+const active=beginnerLessons.every(lessonIsCompleted)?chapters.find(chapter=>!algorithmCompleted(chapter)):null;
+roadmap.innerHTML=chapters.map((chapter,index)=>{
+const rows=algorithmUnits(chapter.id).map((items,unit)=>({title:items[0].title,subtitle:items.length+' exerciții · 1 întrebare',done:algorithmUnitDone(chapter,unit),href:`#capitol/${chapter.id}/${firstPendingAlgorithmStep(chapter,unit)}/${unit}`}));
+return pathChapter({id:chapter.id,index:index+2,title:chapter.title.slice(5),subtitle:chapter.lesson[0],rows,current:chapter===active});
+}).join('');
 }
 function resolveStep(lesson, requested) { return Number.isInteger(requested) && requested >= 0 && requested <= 7 ? requested : firstPendingStep(lesson); }
 function resolveAlgorithmStep(chapter, requested, unit) { const last = algorithmUnits(chapter.id)[unit].length + 2; return Number.isInteger(requested) && requested >= 0 && requested <= last ? requested : firstPendingAlgorithmStep(chapter, unit); }
