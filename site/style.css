@@ -458,8 +458,8 @@ main { margin:0 auto; width:100%; max-width:1240px; padding:0 40px; }
 .header-brand .brand-meta b { font-weight:500; }
 .topbar-stats { align-items:stretch; }
 .topbar-stats .progress-percent { margin:0; border:1px solid var(--line); background:#171c29; box-shadow:none; }
-.progress-percent-label { font-size:11px; font-weight:400; letter-spacing:0; }
-.topbar-stats .progress-percent-label strong { font-size:13px; color:#b3a2ff; }
+.progress-percent-label { font-size:13px; font-weight:400; letter-spacing:0; }
+.topbar-stats .progress-percent-label strong { font-size:inherit; color:#b3a2ff; }
 .account-controls .secondary { letter-spacing:0; text-decoration:none; box-shadow:none; }
 .topbar .header-brand strong span { color:#b3a2ff; }
 
