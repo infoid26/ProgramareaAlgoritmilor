@@ -6,10 +6,12 @@ const clone=value=>JSON.parse(JSON.stringify(value));
 const controls=document.querySelector('#account-controls');
 const actions=document.querySelector('#account-actions');
 const message=document.querySelector('#account-status');
+const signinHint=document.querySelector('#account-signin-hint');
+const panel=document.querySelector('#account-panel');
 let user=null,base=emptyProgress(),revision=0,ready=false,applying=false,stopped=false,timer,retry=2000,conflict=null,imported=false,pending;
 const state=()=>normalize({version:1,drafts:window.PA_EDITOR.exportState(),journey:window.PA_JOURNEY.exportState()});
 const metaKey=()=> 'pa-cloud-meta:'+user.id;
-const tell=text=>{message.textContent=text;};
+const tell=text=>{message.textContent=text;if(panel)panel.hidden=!text&&!actions.children.length;};
 function remember(){if(!user)return;try{localStorage.setItem(metaKey(),JSON.stringify({revision,base,dirty:!same(state(),base),imported}));}catch{tell('Salvarea locală nu este disponibilă. Descarcă progresul.');}}
 function apply(data){applying=true;try{window.PA_EDITOR.replaceState(data.drafts);window.PA_JOURNEY.replaceState(data.journey);window.PA_JOURNEY.updateAll();}finally{applying=false;}}
 function schedule(delay=1200){clearTimeout(timer);if(user&&ready&&!stopped)timer=setTimeout(()=>void sync(),delay);}
@@ -47,6 +49,8 @@ form.append(submit);controls.append(form);
 }
 function render(){
 controls.replaceChildren();
+if(panel)panel.hidden=!user;
+if(signinHint)signinHint.hidden=Boolean(user);
 if(user)signOutControl();
 else{const link=document.createElement('a');link.className='secondary account-signin';link.href='/.auth/login/aad?post_login_redirect_uri=/';link.textContent='Conectare cu Microsoft';link.addEventListener('click',()=>window.PA_EDITOR.saveCode());controls.append(link);}
 }
@@ -105,7 +109,7 @@ async function connect(){
 try{
 const account=await request('/api/account');
 if(!account.enabled){if(switchStorage(''))return;tell('Progres salvat în acest browser.');return;}
-if(!account.user){if(switchStorage(''))return;render();tell('Conectare disponibilă pentru @s.unibuc.ro și @unibuc.ro.');return;}
+if(!account.user){if(switchStorage(''))return;render();tell('');return;}
 if(!/^[0-9a-f-]{36}:[0-9a-f-]{36}$/i.test(account.user.id)||! /^[^\s@#]+@(?:s\.unibuc\.ro|unibuc\.ro)$/i.test(account.user.email))throw new Error('Invalid account response');
 if(switchStorage(':'+account.user.id))return;
 user=account.user;render();
