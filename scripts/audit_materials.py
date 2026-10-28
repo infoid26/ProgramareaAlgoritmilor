@@ -1,4 +1,4 @@
-"""Extract local study material for a private curriculum audit; never modifies originals."""
+"""Extract text from study documents without modifying the source files."""
 import json
 import re
 import xml.etree.ElementTree as ET

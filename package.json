@@ -13,7 +13,7 @@
   "private": true,
   "scripts": {
     "build:editors": "esbuild site/code-editor-source.js --bundle --minify --format=iife --outfile=site/code-editor.js && esbuild site/account-source.js --bundle --minify --format=iife --outfile=site/account.js",
-    "check": "node --check site/app.js && node --check site/playground.js && node --check site/journey.js && node scripts/validate_quizzes.cjs && node scripts/validate_account.cjs && node scripts/check_accounts.mjs",
+    "check": "node --check site/app.js && node --check site/playground.js && node --check site/journey.js && node scripts/validate_quizzes.cjs && node scripts/check_lesson_flow.cjs && node scripts/validate_account.cjs && node scripts/check_accounts.mjs",
     "start": "node scripts/serve.mjs",
     "check:accounts": "node scripts/check_accounts.mjs && node scripts/validate_account.cjs"
   },

@@ -1,5 +1,4 @@
-/* Runs the real Node/Express request handler with Node HTTP message objects.
-   No TCP socket or listening port is needed by the training evaluator. */
+/* Executes HTTP request handlers without opening a listening socket. */
 import {IncomingMessage,ServerResponse} from 'node:http';
 import {Duplex} from 'node:stream';
 export function inject(handler, options={}) {

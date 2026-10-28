@@ -1,4 +1,4 @@
-"""Original learning tasks that complete the local curriculum audit."""
+"""Learning tasks for the algorithm curriculum."""
 import json
 
 def bundle(**files):

@@ -14,7 +14,7 @@ return buildProgressMetadata(context.window.PA_CONTENT,context.window.PA_BEGINNE
 }
 export function runtimeSettings(env=process.env){
 const production=env.NODE_ENV==='production'||Boolean(env.WEBSITE_INSTANCE_ID);
-const port=Number(env.PORT||8010);
+const port=Number(env.PORT||8080);
 if(!Number.isInteger(port)||port<0||port>65535)throw new Error('Invalid PORT');
 return {production,port,host:env.HOST||(production?'0.0.0.0':'127.0.0.1')};
 }
@@ -26,7 +26,7 @@ const lessons=()=>metadata??=courseMetadata();
 const accounts=createAccountHandler({env,lessons,store});
 const server=http.createServer(async(req,res)=>{
 try{
-const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
+const pathname=decodeURIComponent(new URL(req.url,'https://application.invalid').pathname);
 if(await accounts(req,res,pathname))return;
 if(pathname==='/api/health'&&req.method==='GET'){res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify({status:'ok',service:'programarea-algoritmilor',accounts:env.AUTH_ENABLED==='true'}));return;}
 if(!['GET','HEAD'].includes(req.method)){res.writeHead(405,{'Allow':'GET, HEAD'});res.end();return;}

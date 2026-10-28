@@ -1,4 +1,4 @@
-/* Home path mirrors Tehnici Web; lesson screens are unaffected. */
+/* Course path. */
 .unified-map { max-width:840px; margin:28px auto 0; font-family:Inter,"Segoe UI",Arial,sans-serif; }
 .unified-map #course-lesson-list,.unified-map #roadmap { display:grid; gap:38px; width:100%; margin:0; }
 .unified-map #roadmap { margin-top:38px; }
@@ -58,7 +58,7 @@
  .unified-map .start-tag { left:39px; top:-11px; font-size:8px; }
 }
 
-/* Borderless introduction and Python preview, matching the TW hero. */
+/* Introduction and Python preview. */
 #acasa .welcome-layout { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); max-width:1000px; margin:0 auto 30px; gap:60px; align-items:center; min-height:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; }
 #acasa .welcome-copy h1 { font-size:clamp(34px,4.2vw,52px); letter-spacing:-1.6px; line-height:1.14; margin:16px 0 20px; }
 #acasa .welcome-copy .lead { font-size:17px; line-height:1.8; margin:0 0 24px; }
@@ -83,7 +83,7 @@
  .python-hero { justify-self:center; }
 }
 
-/* Course notes align with the path, like the TW tools section. */
+/* Course notes. */
 #acasa > .notice { width:100%; max-width:840px; margin:24px auto 0; padding:20px 0 0; border:0; border-top:1px solid var(--line); border-radius:0; background:transparent; color:var(--muted); font-size:12px; line-height:1.7; }
 #acasa > details.notice { margin-top:24px; padding:20px 0 0; }
 #acasa > details.notice > summary { padding:0; color:var(--muted); font-size:13px; font-weight:400; }

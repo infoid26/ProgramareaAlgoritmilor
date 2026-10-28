@@ -1,8 +1,8 @@
 # PA — acoperire tematică
 
-14 capitole principale și 2 capitole suplimentare. Lecțiile și exercițiile sunt create/adaptate pentru grupă; materialele originale ale profesorului rămân locale.
+14 capitole principale și 2 capitole suplimentare, cu lecții, exerciții și întrebări de consolidare.
 
-Prezentarea introductivă locală indică 70% examen scris și 30% proiect. Structura exactă a subiectelor nu este precizată în acel slide.
+Exercițiile sunt materiale de studiu și nu reprezintă subiecte oficiale de examen.
 
 | Capitol | Exerciții | Cazuri de test | Lecții scurte |
 | --- | ---: | ---: | ---: |

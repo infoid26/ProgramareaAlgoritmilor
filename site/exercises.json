@@ -1120,7 +1120,6 @@
           "expected": "-7 12"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1148,7 +1147,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1176,7 +1174,6 @@
           "expected": "24 20"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1204,7 +1201,6 @@
           "expected": "4 0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1232,7 +1228,6 @@
           "expected": "25 0 0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1260,7 +1255,6 @@
           "expected": "1.33"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1288,7 +1282,6 @@
           "expected": "4 4"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1316,7 +1309,6 @@
           "expected": "6 6 0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1344,7 +1336,6 @@
           "expected": "5 1.00 c 5 1.00 d"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1372,7 +1363,6 @@
           "expected": "True True True False"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1400,7 +1390,6 @@
           "expected": "PAR"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1428,7 +1417,6 @@
           "expected": "POZITIV"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1456,7 +1444,6 @@
           "expected": "4"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1488,7 +1475,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1516,7 +1502,6 @@
           "expected": "DA"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1548,7 +1533,6 @@
           "expected": "INVALID"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1580,7 +1564,6 @@
           "expected": "INVALID"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1608,7 +1591,6 @@
           "expected": "1.1.2027"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1636,7 +1618,6 @@
           "expected": "5050"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1664,7 +1645,6 @@
           "expected": "1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1692,7 +1672,6 @@
           "expected": "27"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1720,7 +1699,6 @@
           "expected": "DA"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1748,7 +1726,6 @@
           "expected": "1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1780,7 +1757,6 @@
           "expected": "DA"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1808,7 +1784,6 @@
           "expected": "-3"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1836,7 +1811,6 @@
           "expected": "15 1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1864,7 +1838,6 @@
           "expected": "-1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1892,7 +1865,6 @@
           "expected": "1 2"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1920,7 +1892,6 @@
           "expected": "3 2.333 0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1948,7 +1919,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -1976,7 +1946,6 @@
           "expected": "1\n1 2"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2004,7 +1973,6 @@
           "expected": "7 7"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2032,7 +2000,6 @@
           "expected": "5 1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2060,7 +2027,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2088,7 +2054,6 @@
           "expected": "6"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2116,7 +2081,6 @@
           "expected": "2"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2144,7 +2108,6 @@
           "expected": "24"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2172,7 +2135,6 @@
           "expected": "2 2"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2200,7 +2162,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2228,7 +2189,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2256,7 +2216,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2284,7 +2243,6 @@
           "expected": "DA"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2312,7 +2270,6 @@
           "expected": "-1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2340,7 +2297,6 @@
           "expected": "ana"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2368,7 +2324,6 @@
           "expected": "python"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2396,7 +2351,6 @@
           "expected": "xyz"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2424,7 +2378,6 @@
           "expected": "a1b1a1b1a1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2453,7 +2406,6 @@
         }
       ],
       "compare": "exact",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului."
     },
     {
@@ -2480,7 +2432,6 @@
           "expected": "-1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2508,7 +2459,6 @@
           "expected": "xx\nOK"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2536,7 +2486,6 @@
           "expected": "y  xx"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2564,7 +2513,6 @@
           "expected": "Z"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2592,7 +2540,6 @@
           "expected": "xyz"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2620,7 +2567,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2648,7 +2594,6 @@
           "expected": "-2"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2676,7 +2621,6 @@
           "expected": "7"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2704,7 +2648,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2732,7 +2675,6 @@
           "expected": "6"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2760,7 +2702,6 @@
           "expected": "1 2"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2788,7 +2729,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2816,7 +2756,6 @@
           "expected": "-1 0\n4 0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2844,7 +2783,6 @@
           "expected": "Ana 9"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2872,7 +2810,6 @@
           "expected": "1 2 0.00"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2900,7 +2837,6 @@
           "expected": "DA"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2928,7 +2864,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2956,7 +2891,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -2984,7 +2918,6 @@
           "expected": "2"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3012,7 +2945,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3040,7 +2972,6 @@
           "expected": "1\n1 1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3068,7 +2999,6 @@
           "expected": "1 2\n0 0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3096,7 +3026,6 @@
           "expected": "1 2 3"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3124,7 +3053,6 @@
           "expected": "0 -1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3152,7 +3080,6 @@
           "expected": "\n"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3180,7 +3107,6 @@
           "expected": "1 3\n3"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3208,7 +3134,6 @@
           "expected": "-1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3236,7 +3161,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3264,7 +3188,6 @@
           "expected": "2 3"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3292,7 +3215,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3320,7 +3242,6 @@
           "expected": "DA"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3348,7 +3269,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3376,7 +3296,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3404,7 +3323,6 @@
           "expected": "2 11 11"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3432,7 +3350,6 @@
           "expected": "x 2\ny 1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3460,7 +3377,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3488,7 +3404,6 @@
           "expected": "7"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3516,7 +3431,6 @@
           "expected": "\n"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3544,7 +3458,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3572,7 +3485,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3600,7 +3512,6 @@
           "expected": "aa 1\na 1\nb 1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3628,7 +3539,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3656,7 +3566,6 @@
           "expected": "\n1 0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3685,7 +3594,6 @@
         }
       ],
       "requiredFunction": "patrat",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3714,7 +3622,6 @@
         }
       ],
       "requiredFunction": "factorial",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3743,7 +3650,6 @@
         }
       ],
       "requiredFunction": "putere",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3772,7 +3678,6 @@
         }
       ],
       "requiredFunction": "suma",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3801,7 +3706,6 @@
         }
       ],
       "requiredFunction": "pare",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3829,7 +3733,6 @@
           "expected": "1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3858,7 +3761,6 @@
         }
       ],
       "requiredFunction": "suma_cifre",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3887,7 +3789,6 @@
         }
       ],
       "requiredFunction": "contor",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3916,7 +3817,6 @@
         }
       ],
       "requiredFunction": "descriere",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3945,7 +3845,6 @@
         }
       ],
       "requiredFunction": "modifica",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -3974,7 +3873,6 @@
         }
       ],
       "requiredFunction": "schimba",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4003,7 +3901,6 @@
         }
       ],
       "requiredFunction": "filtreaza",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4032,7 +3929,6 @@
         }
       ],
       "requiredFunction": "generator",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4061,7 +3957,6 @@
         }
       ],
       "requiredFunction": "concat_max",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4093,7 +3988,6 @@
         "sterge_ore",
         "cinema_film"
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4125,7 +4019,6 @@
         "actualizeaza_preturi",
         "filtreaza_produse"
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4154,7 +4047,6 @@
         }
       ],
       "requiredFunction": "aplica",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4183,7 +4075,6 @@
         }
       ],
       "requiredFunction": "adauga",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4213,7 +4104,6 @@
       ],
       "inputFile": "date.in",
       "outputFile": "date.out",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4244,7 +4134,6 @@
       "inputFile": "date.in",
       "outputFile": "date.out",
       "compare": "exact",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului."
     },
     {
@@ -4273,7 +4162,6 @@
       ],
       "inputFile": "date.in",
       "outputFile": "date.out",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4303,7 +4191,6 @@
       ],
       "inputFile": "date.in",
       "outputFile": "date.out",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4333,7 +4220,6 @@
       ],
       "inputFile": "date.in",
       "outputFile": "date.out",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4363,7 +4249,6 @@
       ],
       "inputFile": "date.in",
       "outputFile": "date.out",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4394,7 +4279,6 @@
       "inputFile": "date.in",
       "outputFile": "date.out",
       "compare": "exact",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului."
     },
     {
@@ -4423,7 +4307,6 @@
       ],
       "inputFile": "date.in",
       "outputFile": "date.out",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4453,7 +4336,6 @@
       ],
       "inputFile": "date.in",
       "outputFile": "date.out",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4486,7 +4368,6 @@
         "text2.in"
       ],
       "outputFile": "date.out",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4520,7 +4401,6 @@
       ],
       "outputFile": "date.out",
       "requiredFunction": "cautare_cuvant",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4550,7 +4430,6 @@
       ],
       "inputFile": "date.in",
       "outputFile": "date.out",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4578,7 +4457,6 @@
           "expected": "a  b"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4606,7 +4484,6 @@
           "expected": "1 2"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4638,7 +4515,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4666,7 +4542,6 @@
           "expected": "2023-03-01"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4694,7 +4569,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4722,7 +4596,6 @@
           "expected": "2024-02-29 00:00"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4754,7 +4627,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4782,7 +4654,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4810,7 +4681,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4838,7 +4708,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4866,7 +4735,6 @@
           "expected": "Z 7 0 3"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4894,7 +4762,6 @@
           "expected": "[SUMA] lei\n0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4922,7 +4789,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4950,7 +4816,6 @@
           "expected": "alt src"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -4980,7 +4845,6 @@
       ],
       "validator": "codes",
       "requiredFunction": "genereaza_cod",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5008,7 +4872,6 @@
           "expected": "3"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5036,7 +4899,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5064,7 +4926,6 @@
           "expected": "-1 0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5092,7 +4953,6 @@
           "expected": "2"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5120,7 +4980,6 @@
           "expected": ""
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5148,7 +5007,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5180,7 +5038,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5208,7 +5065,6 @@
           "expected": "1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5236,7 +5092,6 @@
           "expected": "-1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5265,7 +5120,6 @@
         }
       ],
       "requiredFunction": "nr_aparitii",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5297,7 +5151,6 @@
           "expected": "3"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5325,7 +5178,6 @@
           "expected": "-8"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5353,7 +5205,6 @@
           "expected": "-2 -1 0 3"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5381,7 +5232,6 @@
           "expected": "-5 -1 0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5413,7 +5263,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5445,7 +5294,6 @@
           "expected": "1000000"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5474,7 +5322,6 @@
         }
       ],
       "requiredFunction": "maxim",
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5502,7 +5349,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5531,7 +5377,6 @@
         }
       ],
       "requiredFunction": "bfprt",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5559,7 +5404,6 @@
           "expected": "2.00"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5587,7 +5431,6 @@
           "expected": "7"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5615,7 +5458,6 @@
           "expected": "11 9 3 1\n10 12 2 4\n7 5 15 13\n6 8 14 16"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5644,7 +5486,6 @@
         }
       ],
       "validator": "tromino",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5673,7 +5514,6 @@
         }
       ],
       "validator": "rectangle",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5701,7 +5541,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5731,7 +5570,6 @@
       ],
       "requiredFunction": "karatsuba",
       "supplemental": true,
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5760,7 +5598,6 @@
         }
       ],
       "supplemental": true,
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5789,7 +5626,6 @@
         }
       ],
       "supplemental": true,
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5817,7 +5653,6 @@
           "expected": "4"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5845,7 +5680,6 @@
           "expected": "1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5873,7 +5707,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5901,7 +5734,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5933,7 +5765,6 @@
           "expected": "9"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5961,7 +5792,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -5989,7 +5819,6 @@
           "expected": "1.50"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6017,7 +5846,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6049,7 +5877,6 @@
           "expected": "4 3"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6078,7 +5905,6 @@
         }
       ],
       "validator": "activities",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6107,7 +5933,6 @@
         }
       ],
       "validator": "rooms",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6136,7 +5961,6 @@
         }
       ],
       "validator": "points",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6165,7 +5989,6 @@
         }
       ],
       "validator": "cubes",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6193,7 +6016,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6222,7 +6044,6 @@
         }
       ],
       "validator": "weighted",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6251,7 +6072,6 @@
         }
       ],
       "validator": "jobs",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6279,7 +6099,6 @@
           "expected": "0\n"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6308,7 +6127,6 @@
         }
       ],
       "validator": "jobs",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6336,7 +6154,6 @@
           "expected": "5 1\nS"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6365,7 +6182,6 @@
         }
       ],
       "validator": "rooms-closed",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6394,7 +6210,6 @@
         }
       ],
       "validator": "activities-closed",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6422,7 +6237,6 @@
           "expected": "55"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6450,7 +6264,6 @@
           "expected": "8"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6478,7 +6291,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6506,7 +6318,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6534,7 +6345,6 @@
           "expected": "6"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6562,7 +6372,6 @@
           "expected": "-3"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6590,7 +6399,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6618,7 +6426,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6650,7 +6457,6 @@
           "expected": "6"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6682,7 +6488,6 @@
           "expected": "3"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6711,7 +6516,6 @@
         }
       ],
       "validator": "robot",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6739,7 +6543,6 @@
           "expected": "0 1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6768,7 +6571,6 @@
         }
       ],
       "validator": "triangle",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6797,7 +6599,6 @@
         }
       ],
       "validator": "lnds",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6826,7 +6627,6 @@
         }
       ],
       "validator": "lis",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6855,7 +6655,6 @@
         }
       ],
       "validator": "wordchain",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6884,7 +6683,6 @@
         }
       ],
       "validator": "coins",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6913,7 +6711,6 @@
         }
       ],
       "validator": "knapsack",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6942,7 +6739,6 @@
         }
       ],
       "validator": "segment",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6970,7 +6766,6 @@
           "expected": "DA"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -6999,7 +6794,6 @@
         }
       ],
       "validator": "partition",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7027,7 +6821,6 @@
           "expected": "0 1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7055,7 +6848,6 @@
           "expected": "6"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7083,7 +6875,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7111,7 +6902,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7139,7 +6929,6 @@
           "expected": "0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7167,7 +6956,6 @@
           "expected": "DA"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7199,7 +6987,6 @@
       "inputFile": "date.in",
       "outputFile": "date.out",
       "externalSource": "https://www.infoarena.ro/problema/text3",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7228,7 +7015,6 @@
         }
       ],
       "validator": "subset",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7257,7 +7043,6 @@
         }
       ],
       "validator": "vectors",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7286,7 +7071,6 @@
         }
       ],
       "validator": "wordchain",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7314,7 +7098,6 @@
           "expected": "000\n001\n010\n011\n100\n101\n110\n111"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7342,7 +7125,6 @@
           "expected": "1 2 3\n1 3 2\n2 1 3\n2 3 1\n3 1 2\n3 2 1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7370,7 +7152,6 @@
           "expected": "1\n2"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7398,7 +7179,6 @@
           "expected": "000\n001\n010\n100\n101"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7426,7 +7206,6 @@
           "expected": "2"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7458,7 +7237,6 @@
           "expected": "92"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7486,7 +7264,6 @@
           "expected": "1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7514,7 +7291,6 @@
           "expected": "((()))\n(()())\n(())()\n()(())\n()()()"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7542,7 +7318,6 @@
           "expected": "1"
         }
       ],
-      "addedInExpansion": false,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7571,7 +7346,6 @@
         }
       ],
       "validator": "set-lines",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7600,7 +7374,6 @@
         }
       ],
       "validator": "set-lines",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7628,7 +7401,6 @@
           "expected": "ab\nba"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7657,7 +7429,6 @@
         }
       ],
       "validator": "set-lines",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7685,7 +7456,6 @@
           "expected": "9"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7714,7 +7484,6 @@
         }
       ],
       "validator": "set-lines",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7743,7 +7512,6 @@
         }
       ],
       "validator": "set-lines",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7772,7 +7540,6 @@
         }
       ],
       "validator": "set-lines",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7800,7 +7567,6 @@
           "expected": "2 1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7829,7 +7595,6 @@
         }
       ],
       "validator": "set-lines",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7858,7 +7623,6 @@
         }
       ],
       "validator": "set-lines",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7886,7 +7650,6 @@
           "expected": "1"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7914,7 +7677,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7951,7 +7713,6 @@
       "fileStarters": {
         "algoritmi_elementari.py": "def nr_cifre(n):\n    pass\n\ndef invers(n):\n    pass\n\ndef cmmdc(a, b):\n    pass\n"
       },
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -7980,7 +7741,6 @@
         }
       ],
       "requiredFunction": "normalizare",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -8009,7 +7769,6 @@
         }
       ],
       "requiredFunction": "numara",
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -8038,7 +7797,6 @@
         }
       ],
       "supplemental": true,
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -8066,7 +7824,6 @@
           "expected": "True 0"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -8094,7 +7851,6 @@
           "expected": "10.00 0.00"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     },
@@ -8122,7 +7878,6 @@
           "expected": "NU"
         }
       ],
-      "addedInExpansion": true,
       "origin": "Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.",
       "compare": "lines"
     }

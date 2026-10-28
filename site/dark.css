@@ -56,7 +56,7 @@ input::placeholder,textarea::placeholder { color:#999daf; }
 #test-results pre { background:var(--surface-raised); }
 :focus-visible { outline-color:#c7acff; }
 
-/* Header and course path use the same palette as Tehnici Web. */
+/* Header and course palette. */
 .topbar-stats .progress-percent,.account-controls .account-signin,.account-controls .account-signout { background:var(--paper); }
 .topbar .header-brand strong span,.topbar-stats .progress-percent-label strong,.account-signout-label { color:var(--accent); }
 .account-controls .account-signout:hover { border-color:var(--accent); }

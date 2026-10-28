@@ -1,4 +1,4 @@
-/* Progres local, lecții pe pași, întrebări și experiență. Nu modifică evaluatorul Python. */
+/* Lecții, întrebări și progres. */
 const journeyStorageKey = 'pa-journey-v1' + accountStorageSuffix;
 let journey = { quiz: {}, activityDays: [] };
 try { const stored = JSON.parse(localStorage.getItem(journeyStorageKey) || 'null'); if (stored && typeof stored === 'object' && !Array.isArray(stored)) { journey.quiz = typeof stored.quiz === 'object' && stored.quiz && !Array.isArray(stored.quiz) ? stored.quiz : {}; journey.activityDays = Array.isArray(stored.activityDays) ? stored.activityDays.filter(day => /^\d{4}-\d{2}-\d{2}$/.test(day)).slice(-365) : []; } } catch {}
@@ -68,10 +68,33 @@ const rows=algorithmUnits(chapter.id).map((items,unit)=>({title:items[0].title,s
 return pathChapter({id:chapter.id,index:index+2,title:chapter.title.slice(5),subtitle:chapter.lesson[0],rows,current:chapter===active});
 }).join('');
 }
-function resolveStep(lesson, requested) { return Number.isInteger(requested) && requested >= 0 && requested <= 7 ? requested : firstPendingStep(lesson); }
-function resolveAlgorithmStep(chapter, requested, unit) { const last = algorithmUnits(chapter.id)[unit].length + 2; return Number.isInteger(requested) && requested >= 0 && requested <= last ? requested : firstPendingAlgorithmStep(chapter, unit); }
+function stepAvailable(lesson,step) {
+if(step<=1)return true;
+if(!quizPassed(lesson.id,0))return false;
+if(step<=3)return true;
+return quizPassed(lesson.id,1)&&exercisesForLesson(lesson.id).slice(0,step-4).every(isPassed);
+}
+function resolveStep(lesson,requested) {
+const step=Number.isInteger(requested)&&requested>=0&&requested<=7?requested:firstPendingStep(lesson);
+if(stepAvailable(lesson,step))return step;
+for(let current=0;current<7;current++)if(!stepAvailable(lesson,current+1))return current;
+return 0;
+}
+function algorithmStepAvailable(chapter,step,unit) {
+return step<=1||(quizPassed(chapter.id,unit)&&algorithmUnits(chapter.id)[unit].slice(0,step-2).every(isPassed));
+}
+function resolveAlgorithmStep(chapter,requested,unit) {
+const last=algorithmUnits(chapter.id)[unit].length+2;
+const step=Number.isInteger(requested)&&requested>=0&&requested<=last?requested:firstPendingAlgorithmStep(chapter,unit);
+if(algorithmStepAvailable(chapter,step,unit))return step;
+for(let current=0;current<last;current++)if(!algorithmStepAvailable(chapter,current+1,unit))return current;
+return 0;
+}
 function renderQuiz(question, key, quizIndex, algorithm = false) { const passed = quizPassed(key, quizIndex); const choices = question.options.map((option, i) => `<button class="quiz-option ${passed && i === question.correct ? 'correct' : ''}" type="button" ${algorithm ? `data-algo-question="${quizIndex}" data-algo-answer="${i}"` : `data-question="${quizIndex}" data-answer="${i}"`} ${passed ? 'disabled' : ''}><span class="option-letter">${String.fromCharCode(65 + i)}</span><span>${escapeHTML(option)}</span>${passed && i === question.correct ? '<span class="option-check">✓</span>' : ''}</button>`).join(''); const feedbackId = algorithm ? 'algo-quiz-feedback' : 'quiz-feedback'; return `<span class="question-kicker">ALEGE RĂSPUNSUL</span><h2>${escapeHTML(question.question)}</h2>${question.code ? `<pre class="concept-code"><code>${escapeHTML(question.code)}</code></pre>` : ""}<div class="quiz-options" role="group" aria-label="Răspunsuri posibile">${choices}</div><div id="${feedbackId}" class="quiz-feedback ${passed ? 'correct-feedback' : ''}" role="status">${passed ? `✓ Corect! ${escapeHTML(question.explanation)}` : ''}</div>`; }
-function playerControls(prev, next, step, last, canContinue, kind, finishText) { return `<div class="lesson-controls"><a class="secondary step-back" href="${prev}">← Înapoi</a><a class="button" data-step-next href="${next}">${step === last ? finishText : "Continuă"} →</a></div>`; }
+function playerControls(prev,next,step,last,canContinue,kind,finishText) {
+const forward=canContinue?`<a class="button" data-step-next href="${next}">${step===last?finishText:'Continuă'} →</a>`:'<span data-step-next hidden></span>';
+return `<div class="lesson-controls"><a class="secondary step-back" href="${prev}">← Înapoi</a>${forward}</div>`;
+}
 
 function renderLesson(id) {
 window.PA_EDITOR?.restore();
@@ -130,7 +153,7 @@ if (Number(button.dataset.algoAnswer) !== question.correct) { document.querySele
 journey.quiz[quizKey(id, index)] = true;
 markActivity(); persistJourney(); renderChapter(id); updateAll(false);
 }
-function refreshExerciseStep(id) { const active = document.querySelector('.view:not([hidden]) .lesson-player.has-editor'); if (!active || !currentExercise || currentExercise.id !== id) { return; } const passed = isPassed(currentExercise); const current = active.querySelector('[data-step-next]'); const href = current?.getAttribute('href') || (location.hash.startsWith('#lectie-python') ? `#lectie-python/${currentExercise.chapter}/${practiceStep(id) + 1}` : `#capitol/${currentExercise.chapter}/${algorithmStep(id) + 1}/${algorithmUnit(id)}`); if (current) { current.outerHTML = `<a class="button" data-step-next href="${href}">Continuă →</a>`; } const message = active.querySelector('#inline-completion'); if (message) { message.textContent = passed ? '✓ Exercițiu rezolvat! Apasă „Continuă” pentru a trece la următorul.' : ''; message.className = `quiz-feedback ${passed ? 'correct-feedback' : ''}`; } }
+function refreshExerciseStep(id) { const active = document.querySelector('.view:not([hidden]) .lesson-player.has-editor'); if (!active || !currentExercise || currentExercise.id !== id) { return; } const passed = isPassed(currentExercise); const current = active.querySelector('[data-step-next]'); const href = current?.getAttribute('href') || (location.hash.startsWith('#lectie-python') ? `#lectie-python/${currentExercise.chapter}/${practiceStep(id) + 1}` : `#capitol/${currentExercise.chapter}/${algorithmStep(id) + 1}/${algorithmUnit(id)}`); if (current) { current.outerHTML = passed ? `<a class="button" data-step-next href="${href}">Continuă →</a>` : '<span data-step-next hidden></span>'; } const message = active.querySelector('#inline-completion'); if (message) { message.textContent = passed ? '✓ Exercițiu rezolvat! Apasă „Continuă” pentru a trece la următorul.' : ''; message.className = `quiz-feedback ${passed ? 'correct-feedback' : ''}`; } }
 function exportJourney() { return { version: 1, quiz: journey.quiz, activityDays: journey.activityDays, resume:journey.resume }; }
 function importJourney(data) { if (!data || typeof data !== 'object' || data.version !== 1) { return; } const allowed = new Set([...beginnerLessons.flatMap(lesson => questionsForLesson(lesson.id).map((_, index) => quizKey(lesson.id, index))), ...chapters.flatMap(chapter => algorithmUnits(chapter.id).map((_, index) => quizKey(chapter.id, index)))]); if (data.quiz && typeof data.quiz === 'object') { for (const [key, value] of Object.entries(data.quiz)) { if (allowed.has(key) && value === true) { journey.quiz[key] = true; } } } if (Array.isArray(data.activityDays)) { journey.activityDays = [...new Set([...journey.activityDays, ...data.activityDays.filter(day => typeof day === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(day))])].sort().slice(-365); } persistJourney(); updateAll(); }
 function updateAll(refreshCurrent = true) { renderDashboard(); renderCourse(); if (refreshCurrent && location.hash.startsWith('#lectie-python/')) { renderLesson(location.hash.split('/')[1]); } if (refreshCurrent && location.hash.startsWith('#capitol/')) { renderChapter(location.hash.split('/')[1]); } }

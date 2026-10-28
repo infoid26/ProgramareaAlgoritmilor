@@ -48,8 +48,8 @@ const conflicting=structuredClone(progress);conflicting.drafts['baze-01'].code='
 assert.deepEqual(mergeProgress(progress,local,conflicting).conflicts,['baze-01']);
 const db=new PGlite();
 await db.waitReady;
-await db.query('CREATE TABLE tw_account_progress (marker text)');
-await db.query("INSERT INTO tw_account_progress VALUES ('keep TW data')");
+await db.query('CREATE TABLE unrelated_records (marker text)');
+await db.query("INSERT INTO unrelated_records VALUES ('unrelated data')");
 const store=createProgressStore({database:db});
 const server=createServer({env,progressStore:store});
 const headers={'X-MS-CLIENT-PRINCIPAL':principal(),'X-PA-Account':tenant+':'+object,'X-PA-Progress':'1','Content-Type':'application/json',Origin:env.AUTH_ORIGIN};
@@ -94,7 +94,7 @@ const second=Buffer.from(JSON.stringify({auth_typ:'aad',claims:[{typ:'tid',val:t
 r=await request('/api/progress','GET',undefined,{'X-MS-CLIENT-PRINCIPAL':second,'X-PA-Account':tenant+':'+other});assert.equal(JSON.parse(r.body).version,0);
 r=await request('/api/progress','PUT',{version:0,progress:emptyProgress()},{'X-MS-CLIENT-PRINCIPAL':second,'X-PA-Account':tenant+':'+other});assert.equal(r.status,200);
 assert.equal((await db.query('SELECT count(*)::int AS count FROM pa_account_progress')).rows[0].count,2);
-assert.equal((await db.query('SELECT marker FROM tw_account_progress')).rows[0].marker,'keep TW data');
+assert.equal((await db.query('SELECT marker FROM unrelated_records')).rows[0].marker,'unrelated data');
 for(const path of ['/backend/schema.sql','/scripts/accounts.mjs','/.env','/package.json','/site/../../backend/schema.sql','/site/%2e%2e%2fbackend/schema.sql'])assert.equal((await request(path)).status,404,path);
 assert.equal((await request('/')).status,200);
 assert.equal((await request('/site/runner.py')).status,200);
@@ -102,5 +102,5 @@ assert.equal((await request('/site/dark.css')).status,200);
 const disabled=createServer({env:{},progressStore:store});const response=await inject(disabled.listeners('request')[0],{path:'/api/account'});assert.equal(JSON.parse(response.body).enabled,false);
 assert.equal(runtimeSettings({NODE_ENV:'production'}).host,'0.0.0.0');
 assert.equal(runtimeSettings({}).host,'127.0.0.1');
-console.log('Account security, SQL isolation/CAS, shared TW database preservation, progress merge and static server checks passed.');
+console.log('Account security, SQL isolation/CAS, unrelated table preservation, progress merge and static server checks passed.');
 }finally{await db.close();}

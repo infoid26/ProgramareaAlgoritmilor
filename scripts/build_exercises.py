@@ -171,7 +171,6 @@ from bkt_content import add_bkt
 from extra_content import add_extra
 from study_cards import add_study_cards
 from finishing_content import add_finishing
-original_ids = {item['id'] for item in exercises}
 extend_content(chapters, exercises, add)
 add_advanced(add)
 add_dp(add)
@@ -181,9 +180,7 @@ add_finishing(add)
 add_study_cards(chapters)
 exercises.sort(key=lambda item: next(index for index, c in enumerate(chapters) if c['id'] == item['chapter']))
 for item in exercises:
-    item['addedInExpansion'] = item['id'] not in original_ids
     item['solution'] = item['solution'].replace('"\n"', '"\\n"')
-    # Referințele la fișierele profesorului nu sunt incluse în platforma publică.
     item['origin'] = 'Exercițiu de studiu creat sau adaptat pentru platformă; formatul de intrare/ieșire este cel de mai jos. Nu este o transcriere integrală a laboratorului.'
     item['compare'] = item.get('compare', 'lines')
     item['explanation'] = item['hint'] + ' Urmărește soluția pe exemplu, apoi verifică și cazurile-limită. Explică de ce fiecare pas păstrează rezultatul corect.'
@@ -197,20 +194,13 @@ for item in exercises:
 payload = dict(chapters=chapters, exercises=exercises)
 (ROOT / 'site/exercises.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
 (ROOT / 'site/exercises.js').write_text('window.PA_CONTENT = ' + json.dumps(payload, ensure_ascii=False) + ';\n', encoding='utf-8')
-coverage = ['# PA — acoperire tematică', '', '14 capitole principale și 2 capitole suplimentare. Lecțiile și exercițiile sunt create/adaptate pentru grupă; materialele originale ale profesorului rămân locale.', '', 'Prezentarea introductivă locală indică 70% examen scris și 30% proiect. Structura exactă a subiectelor nu este precizată în acel slide.', '', '| Capitol | Exerciții | Cazuri de test | Lecții scurte |', '| --- | ---: | ---: | ---: |']
+coverage = ['# PA — acoperire tematică', '', '14 capitole principale și 2 capitole suplimentare, cu lecții, exerciții și întrebări de consolidare.', '', 'Exercițiile sunt materiale de studiu și nu reprezintă subiecte oficiale de examen.', '', '| Capitol | Exerciții | Cazuri de test | Lecții scurte |', '| --- | ---: | ---: | ---: |']
 for item in chapters:
     selected = [e for e in exercises if e['chapter'] == item['id']]
     coverage.append(f'| {item["title"]}{" (suplimentar)" if item.get("supplemental") else ""} | {len(selected)} | {sum(len(e["tests"]) for e in selected)} | {(len(selected) + 2) // 3} |')
 coverage.extend(['', 'Fișele sunt recapitulări originale. Testele nu demonstrează complexitatea și nu verifică folosirea metodei indicate.', ''])
 (ROOT / 'site/coverage.md').write_text('\n'.join(coverage), encoding='utf-8')
-added = [item for item in exercises if item['addedInExpansion']]
-report = ['# Completările aplicației PA', '', f'Banca de materie are {len(exercises)} exerciții, dintre care {len(added)} adăugate după audit. Include {sum(len(e["tests"]) for e in exercises)} cazuri, {sum(len(c["studyCards"]) for c in chapters)} fișe de concepte și {sum((sum(e["chapter"] == c["id"] for e in exercises) + 2) // 3 for c in chapters)} lecții scurte. Cursul introductiv are separat 15 exerciții.', '', 'Completările urmăresc temele și diferențele identificate în materialele locale. Formatele de intrare/ieșire și limitele sunt adaptate pentru învățare în browser. Nu este o transcriere a fiecărui laborator și nici o promisiune privind subiectele examenului.', '', '## Exerciții adăugate', '', '| Capitol | Exercițiu | Identificator | Verificare |', '| --- | --- | --- | --- |']
-for item in added:
-    report.append(f'| {item["chapter"]} | {item["title"]} | {item["id"]} | {"Soluții alternative valide" if item.get("validator") else "Ieșire și erori de execuție"} |')
-report.extend(['', '## Recapitulări extinse', ''])
-for chapter in chapters:
-    report.append(f'- {chapter["title"]}: ' + '; '.join(card['title'] for card in chapter['studyCards']) + '.')
-report.extend(['', '## Limitele verificării', '', 'Testele de rezultat nu demonstrează metoda, complexitatea sau explicația scrisă. Pentru acestea există fișe, exemple și întrebări; studentul trebuie să poată justifica soluția. Problemele constructive verifică fezabilitatea și valoarea optimă cunoscută pentru fiecare caz, fără a impune traseul sau selecția rezolvării de referință.', '', 'Lucrul cu mai multe fișiere are câmpuri separate. Modulul Python scris de student este folosit la toate testele și este reîncărcat separat; modificarea lui retrage marcajul de rezolvare.', '', 'Text3 este o variantă adaptată, cu limite reduse și credit către [enunțul Infoarena](https://www.infoarena.ro/problema/text3). Materialele externe recomandate doar prin link în laborator au cerințele și limitele proprii; banca nu este o copie integrală a acelor arhive.', ''])
+report = ['# Conținut și limite', '', f'Materia PA include {len(exercises)} exerciții, {sum(len(e["tests"]) for e in exercises)} cazuri de test, {sum(len(c["studyCards"]) for c in chapters)} fișe de concepte și {sum((sum(e["chapter"] == c["id"] for e in exercises) + 2) // 3 for c in chapters)} lecții scurte. Introducerea în Python cuprinde separat 5 lecții și 15 exerciții.', '', 'Capitolele acoperă sintaxa Python, colecții, funcții, fișiere, complexitate, Divide et Impera, Greedy, programare dinamică și Backtracking. Modulele, testarea și obiectele sunt teme suplimentare.', '', '## Verificarea soluțiilor', '', 'Testele verifică rezultatele pentru cazurile incluse. Ele nu demonstrează complexitatea, folosirea metodei cerute sau corectitudinea pentru orice intrare. Soluția trebuie justificată prin raționament și analiza cazurilor-limită.', '', 'Problemele constructive acceptă soluții alternative care respectă restricțiile și valoarea optimă a cazului. La exercițiile cu module, modificarea codului necesită o nouă verificare.', '', '## Surse', '', 'Text3 este o variantă adaptată, cu limite reduse, după [enunțul Infoarena](https://www.infoarena.ro/problema/text3). Exercițiile platformei sunt materiale de pregătire și nu constituie subiecte oficiale de examen.', '']
 (ROOT / 'site/completari.md').write_text('\n'.join(report), encoding='utf-8')
 print(f'{len(chapters)} capitole, {len(exercises)} exercitii, {sum(len(e["tests"]) for e in exercises)} teste.')
 
